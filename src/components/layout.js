@@ -10,7 +10,9 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./layout.css"
+import { Container } from 'reactstrap';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,7 +28,8 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div
+      <Container
+        className="h-100"
         style={{
           margin: `0 auto`,
           maxWidth: 960,
@@ -34,12 +37,11 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      </Container>
+      <footer className="d-flex justify-content-center">
+        © {new Date().getFullYear()}, Made by
+        <a className="ml-1" href="https://www.gatsbyjs.org">Muhammad Ali</a>
+      </footer>
     </>
   )
 }
