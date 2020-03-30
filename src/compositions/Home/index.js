@@ -6,6 +6,7 @@ const Home = () => (
     <div>
         <Stats />
         <Charts />
+        <div>Hello</div>
     </div>
 );
 

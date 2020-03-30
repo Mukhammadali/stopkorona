@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react';
-import { ResponsiveChoropleth,  } from '@nivo/geo'
+import { ResponsiveChoropleth  } from '@nivo/geo'
 import { useQuery } from 'react-query';
 import moize from 'moize'
-import { isMobileOnly, isTablet } from 'react-device-detect';
+import { isMobileOnly } from 'react-device-detect';
 import styled, {css } from 'styled-components';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchAllCountries } from 'src/lib/api';
 import worldCountries from 'src/assets/data/world_countries.json'
-import Flag from "react-flags";
 import getCountryISO2 from 'src/lib/utils/getCountryISO2';
-// import 'flag--css/css/flag-css.css'
 import 'flag-icon-css/css/flag-icon.min.css'
 
 const memoizedData = moize(arr => {
@@ -103,7 +101,6 @@ const Wrapper = styled.div`
   .map-tooltip {
     background-color: black;
     padding: 1.2rem;
-    /* width: 11rem; */
     border-radius: 2px;
     color: white;
   }
@@ -111,8 +108,6 @@ const Wrapper = styled.div`
     border-radius: 2px;
   }
   path:hover {
-    /* stroke: rgba(0,0,0,0.5); */
     stroke-width: 3;
-    /* opacity: 0.6; */
   }
 `;

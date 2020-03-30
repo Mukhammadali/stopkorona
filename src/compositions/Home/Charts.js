@@ -1,7 +1,6 @@
 import React from 'react'
 import WorldMap from 'src/components/WorldMap'
 import { Row } from 'reactstrap'
-import WorldMap2 from 'src/components/WorldMap2'
 
 const Charts = () => {
   return (
