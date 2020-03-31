@@ -35,6 +35,7 @@
     "react-icons": "^3.9.0",
     "react-jvectormap": "^0.0.16",
     "react-query": "^1.0.33",
+    "react-table": "^7.0.0",
     "reactstrap": "^8.4.1",
     "styled-components": "^5.0.1",
     "yarn": "^1.22.4"

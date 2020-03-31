@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'flag-icon-css/css/flag-icon.min.css'
 import "./layout.css"
 import { Container } from 'reactstrap';
 

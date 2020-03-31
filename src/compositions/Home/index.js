@@ -1,12 +1,13 @@
 import React from 'react'
 import Stats from './Stats'
 import Charts from './Charts'
+import CountriesTable from './CountriesTable'
 
 const Home = () => (
     <div>
         <Stats />
         <Charts />
-        <div>Hello</div>
+        <CountriesTable />
     </div>
 );
 

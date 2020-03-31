@@ -8,7 +8,6 @@ import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchAllCountries } from 'src/lib/api';
 import worldCountries from 'src/assets/data/world_countries.json'
 import getCountryISO2 from 'src/lib/utils/getCountryISO2';
-import 'flag-icon-css/css/flag-icon.min.css'
 
 const memoizedData = moize(arr => {
   if(!Array.isArray(arr)) return [];
