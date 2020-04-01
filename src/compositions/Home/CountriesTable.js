@@ -5,6 +5,7 @@ import Table from 'src/components/Table';
 import { useQuery } from 'react-query';
 import moize from 'moize';
 import {GoSearch} from 'react-icons/go';
+import {IoMdClose} from 'react-icons/io';
 import debounce from 'lodash/debounce';
 import { numberWithCommas } from 'src/lib/utils';
 import styled from 'styled-components';
@@ -17,6 +18,22 @@ const renderCustomCell = ({row}) => (
 )
 
 const renderRow = ({row, column}) => {
+  if(column?.id === 'cases' && row?.original?.todayCases) {
+    return (
+      <div className="stat-cell d-flex align-items-center">
+        <span>{numberWithCommas(row?.original?.[column?.id])}</span>
+        <span className="text-danger ml-1 today-stat">+{row?.original?.todayCases}</span>
+      </div>
+    )
+  }
+  if(column?.id === 'deaths' && row?.original?.todayDeaths) {
+    return (
+      <div className="stat-cell d-flex align-items-center">
+        <span>{numberWithCommas(row?.original?.[column?.id])}</span>
+        <span className="text-danger ml-1 today-stat">+{row?.original?.todayDeaths}</span>
+      </div>
+    )
+  }
   return (
     <span className="stat-cell">{numberWithCommas(row?.original?.[column?.id])}</span>
   )
@@ -54,6 +71,12 @@ const TableColumns = [
     sortDescFirst: true,
     Cell: renderRow
   },
+  {
+    Header: 'Jiddiy ahvolda',
+    accessor: 'critical',
+    sortDescFirst: true,
+    Cell: renderRow
+  },
 ];
 
 
@@ -73,10 +96,14 @@ const CountriesTable = () => {
   return (
     <Styled>
       <div className="table-toolbox mb-2">
-        <div/>
+        <div>
+          <span className="font-weight-bold">Koronavirus aniqlangan davlatlar soni: </span>
+          <span>{data?.length}</span>
+        </div>
         <div className="table-search">
           <GoSearch className="mx-2"/>
           <input placeholder="Qidiruv"  onChange={({target}) => onChange(target?.value)} />
+          {/* <IoMdClose /> */}
         </div>
       </div>
       <Table columns={TableColumns} data={searchResult || []} initialState={{
@@ -103,7 +130,7 @@ const Styled = styled.div`
     justify-content: space-between;
     .table-search {
       border-radius: 5px;
-      min-width: 200px;
+      min-width: 300px;
       border: 1px solid #cecece;
       padding: 2px;
       input {

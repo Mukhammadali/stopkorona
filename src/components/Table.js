@@ -91,11 +91,11 @@ const Styles = styled.div`
       transition: 0.2s all ease-in;
       
       td:first-child{
-        /* width: 25%; */
+        width: 25%;
       }
-      td:not(:first-child){
+      /* td:not(:first-child){
         width: 160px;
-      }
+      } */
       &:first-child {
         font-size: 1.015rem;
       }
@@ -121,9 +121,13 @@ const Styles = styled.div`
       height: 2.5rem;
       .stat-cell {
         padding:0 1rem !important;
-        height: 50px;
+        /* height: 50px; */
         font-weight: 600;
         font-size: 1.10rem;
+        .today-stat {
+          font-size: 0.95rem;
+          font-weight: normal;
+        }
       }
       .country-cell {
         height: 100%;
