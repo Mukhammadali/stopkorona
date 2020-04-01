@@ -40,7 +40,6 @@ function Table({ columns, data, initialState }) {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => {
-                console.log('column:', column)
                 return(
                 // Add the sorting props to control sorting. For this example
                 // we can add them into the header props
@@ -81,13 +80,22 @@ function Table({ columns, data, initialState }) {
 export default Table
 
 const Styles = styled.div`
-  padding: 1rem;
+  overflow-y: scroll;
+  max-height: 500px;
+  border-bottom: 1px solid #e2e8f0;
   table {
     border-spacing: 0;
     border-radius: 5px;
     width: 100%;
     tr {
       transition: 0.2s all ease-in;
+      
+      td:first-child{
+        /* width: 25%; */
+      }
+      td:not(:first-child){
+        width: 160px;
+      }
       &:first-child {
         font-size: 1.015rem;
       }
@@ -98,7 +106,7 @@ const Styles = styled.div`
       }
       :last-child {
         td {
-          border-bottom: 0;
+          border-bottom:none;
         }
       }
     }
@@ -112,7 +120,7 @@ const Styles = styled.div`
       border-right: 1px solid #e2e8f0;
       height: 2.5rem;
       .stat-cell {
-        padding:1rem !important;
+        padding:0 1rem !important;
         height: 50px;
         font-weight: 600;
         font-size: 1.10rem;
@@ -136,11 +144,7 @@ const Styles = styled.div`
       position: sticky;
       top: 0;
       z-index: 2;
-      :last-child {
-        border-bottom: 1px solid #e2e8f0;
-      }
-      :first-child {
-      }
     }
+   
   }
 `

@@ -18,15 +18,15 @@ const memoizedData = moize(arr => {
   }))
 })
 
-const WorldMap = () => {
-  const {data, isLoading} = useQuery(queryKeys.ALL_COUNTRIES, fetchAllCountries)
+const WorldMap = ({data}) => {
+
   const filteredData = memoizedData(data);
   return (
     <Wrapper className="w-100 h-100">
     <ResponsiveChoropleth
         data={filteredData || []}
         features={worldCountries.features}
-        margin={{ top: isMobileOnly ? -100:50, right: 0, bottom: 0, left: 0 }}
+        margin={{ top: isMobileOnly ? -100:60, right: 0, bottom: 0, left: isMobileOnly ?0 : 50 }}
         colors="YlOrBr"
         domain={[ 0, filteredData?.[0]?.value || 500000 ]}
         unknownColor="#666666"

@@ -20,7 +20,7 @@ const Stats = () => {
                     tag="h6"
                     className="text-uppercase text-muted mb-2"
                   >
-                    Umumiy Yuqtirganlar
+                    Yuqtirganlar
                   </CardTitle>
                   <div className="d-flex align-items-center">
                     <span className="h3 font-weight-bold mb-0">{numberWithCommas(data?.cases || 0)}</span>
@@ -40,7 +40,7 @@ const Stats = () => {
                     tag="h6"
                     className="text-uppercase text-muted mb-2"
                   >
-                    Davolanayotganlar
+                    Aktivlar
                   </CardTitle>
                   <div className="d-flex align-items-center">
                     <span className="h3 font-weight-bold mb-0">{numberWithCommas(data?.active || 0)}</span>
@@ -114,5 +114,13 @@ const StyledContainer = styled(Container)`
     border-radius: 0.5rem;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
+  }
+  .row > div {
+    :first-child {
+      padding-left: 0px;
+    }
+    :last-child {
+      padding-right: 0px;
+    }
   }
 `;
