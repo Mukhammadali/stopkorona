@@ -1,11 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `StopKorona`,
+    title: `STOPKORONA`,
     description: `Koronavirusga oid statistika va ma'lumotlar`,
     author: `@mukhammadali`,
   },
   plugins: [
-    
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/countries/*`] },
+    },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {

@@ -3,6 +3,7 @@ import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchAllCountries } from 'src/lib/api';
 import Table from 'src/components/Table';
 import { useQuery } from 'react-query';
+import {navigate} from 'gatsby'
 import moize from 'moize';
 import {GoSearch} from 'react-icons/go';
 import {IoMdClose} from 'react-icons/io';
@@ -92,7 +93,11 @@ const CountriesTable = () => {
     if(!query) return data;
     return data?.filter(el => el?.country?.toLowerCase().includes(query.toLowerCase()));
   }, [query, data]);
-  console.log('searchResult:', searchResult)
+  const onNavigate = (data) => {
+    navigate(`/countries/${data?.country}`, {
+      country: data
+    })
+  }
   return (
     <Styled>
       <div className="table-toolbox mb-2">
@@ -106,7 +111,7 @@ const CountriesTable = () => {
           {/* <IoMdClose /> */}
         </div>
       </div>
-      <Table columns={TableColumns} data={searchResult || []} initialState={{
+      <Table onClickListItem={onNavigate} columns={TableColumns} data={searchResult || []} initialState={{
           sortBy: [
             {
               id: 'cases',
@@ -115,7 +120,7 @@ const CountriesTable = () => {
           ]
         }} />
       {!searchResult?.length && (
-        <p className="text-center">Topilmadi 😔</p>
+        <p className="text-center">Ma'lumot topilmadi 😔</p>
       )}
     </Styled>
   )

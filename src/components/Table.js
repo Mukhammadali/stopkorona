@@ -12,7 +12,7 @@ const getBgClassName = (col) => {
 }
 
 
-function Table({ columns, data, initialState }) {
+function Table({ onClickListItem, columns, data, initialState }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -63,7 +63,7 @@ function Table({ columns, data, initialState }) {
             (row, i) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr onClick={() => onClickListItem(row?.original)} {...row.getRowProps()}>
                   {row.cells.map(cell =>  (
                       <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )
@@ -89,17 +89,7 @@ const Styles = styled.div`
     width: 100%;
     tr {
       transition: 0.2s all ease-in;
-      
-      td:first-child{
-        width: 25%;
-      }
-      /* td:not(:first-child){
-        width: 160px;
-      } */
-      &:first-child {
-        font-size: 1.015rem;
-      }
-      &:hover {
+      :hover {
         background-color: #edf2f7;
         cursor: pointer;
         transition: 0.2s all ease-out;
@@ -110,8 +100,6 @@ const Styles = styled.div`
         }
       }
     }
-
-
     th,
     td {
       margin: 0;
@@ -140,6 +128,10 @@ const Styles = styled.div`
       }
       :first-child {
         border-left: 1px solid #e2e8f0;
+      }
+      &:first-child {
+        font-size: 1.015rem;
+        width: 25%;
       }
     }
     th {
