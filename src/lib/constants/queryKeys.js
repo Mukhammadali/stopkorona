@@ -1,7 +1,8 @@
 const queryKeys = {
   COUNTRY_HISTORICAL: 'COUNTRY_HISTORICAL',
   ALL_COUNTRIES: 'ALL_COUNTRIES',
-  TOTAL: 'TOTAL'
+  TOTAL: 'TOTAL',
+  ALL_HISTORICAL: 'ALL_HISTORICAL'
 };
 
 export default queryKeys;

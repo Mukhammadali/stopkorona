@@ -40,13 +40,29 @@ const renderRow = ({row, column}) => {
   )
 }
 
-
 const TableColumns = [
   {
-    Header: 'Davlat',
+    Header: "Country",
     Cell: renderCustomCell,
     accessor: 'country',
-    sortDescFirst: false
+    sortDescFirst: false,
+    disableSortBy: true,
+    Filter: function DefaultColumnFilter({
+      column: { filterValue, preFilteredRows, setFilter }
+    }) {
+      const count = preFilteredRows.length;
+      return (
+        <input
+          value={filterValue || ""}
+          onChange={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+          }}
+          placeholder="Qidiruv"
+        />
+      );
+    }
   },
   {
     Header: 'Yuqtirganlar',
@@ -55,7 +71,7 @@ const TableColumns = [
     Cell: renderRow
   },
   {
-    Header: 'Aktiv',
+    Header: 'Davolanayotganlar',
     accessor: 'active',
     sortDescFirst: true,
     Cell: renderRow
@@ -72,13 +88,8 @@ const TableColumns = [
     sortDescFirst: true,
     Cell: renderRow
   },
-  {
-    Header: 'Jiddiy ahvolda',
-    accessor: 'critical',
-    sortDescFirst: true,
-    Cell: renderRow
-  },
 ];
+
 
 
 const CountriesTable = () => {
@@ -89,7 +100,6 @@ const CountriesTable = () => {
   }, 50), []);
 
   const searchResult = useMemo(() => {
-    console.log('filtered');
     if(!query) return data;
     return data?.filter(el => el?.country?.toLowerCase().includes(query.toLowerCase()));
   }, [query, data]);
@@ -98,30 +108,24 @@ const CountriesTable = () => {
       country: data
     })
   }
+ 
   return (
     <Styled>
-      <div className="table-toolbox mb-2">
-        <div>
-          <span className="font-weight-bold">Koronavirus aniqlangan davlatlar soni: </span>
-          <span>{data?.length}</span>
-        </div>
-        <div className="table-search">
-          <GoSearch className="mx-2"/>
-          <input placeholder="Qidiruv"  onChange={({target}) => onChange(target?.value)} />
-          {/* <IoMdClose /> */}
-        </div>
-      </div>
-      <Table onClickListItem={onNavigate} columns={TableColumns} data={searchResult || []} initialState={{
+      {/* <div className="table-toolbox mb-2">
+        <span className="font-weight-bold">Koronavirus aniqlangan davlatlar soni: </span>
+        <span>{data?.length}</span>
+      </div> */}
+      <Table
+        onClickListItem={onNavigate} columns={TableColumns} data={searchResult || []}
+        initialState={{
           sortBy: [
             {
               id: 'cases',
               desc: true,
             }
           ]
-        }} />
-      {!searchResult?.length && (
-        <p className="text-center">Ma'lumot topilmadi 😔</p>
-      )}
+        }}
+      />
     </Styled>
   )
 };
@@ -133,15 +137,5 @@ const Styled = styled.div`
     display: flex;
     flex: 1;
     justify-content: space-between;
-    .table-search {
-      border-radius: 5px;
-      min-width: 300px;
-      border: 1px solid #cecece;
-      padding: 2px;
-      input {
-        outline: none;
-        border: none;
-      }
-    }
   }
 `;

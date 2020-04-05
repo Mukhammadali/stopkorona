@@ -15,7 +15,7 @@ const Stats = () => {
           <Col md="6" xl="3" className="mb-3">
             <Card className="card-stats">
               <CardBody>
-                <div className="flex-col h-100 justify-content-between">
+                <div className="flex-col h-100">
                   <CardTitle
                     tag="h6"
                     className="text-uppercase text-muted mb-2"
@@ -23,10 +23,12 @@ const Stats = () => {
                     Yuqtirganlar
                   </CardTitle>
                   <div className="d-flex align-items-center">
-                    <span className="h3 font-weight-bold mb-0">{numberWithCommas(data?.cases || 0)}</span>
-                    <span className="text-success ml-2">
-                      +343
-                    </span>
+                    <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.cases || 0)}</span>
+                  {data?.todayCases && (
+                      <span className="text-success ml-2">
+                        +{numberWithCommas(data?.todayCases || 0)}
+                      </span>
+                  )}
                   </div>
                 </div>
               </CardBody>
@@ -42,12 +44,16 @@ const Stats = () => {
                   >
                     Aktivlar
                   </CardTitle>
-                  <div className="d-flex align-items-center">
-                    <span className="h3 font-weight-bold mb-0">{numberWithCommas(data?.active || 0)}</span>
-                    <span className="text-success ml-2">
-                      +343
-                    </span>
-                  </div>
+                    <div className="d-flex align-items-center">
+                      <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.active)}</span>
+                    {
+                      data?.todayActive && (
+                      <span className="text-success ml-2">
+                        +{numberWithCommas(data.todayActive)}
+                      </span>
+                      )
+                    }
+                    </div>
                 </div>
               </CardBody>
             </Card>
@@ -63,10 +69,12 @@ const Stats = () => {
                     Tuzalganlar
                   </CardTitle>
                   <div className="d-flex align-items-center">
-                    <span className="h3 font-weight-bold mb-0">{numberWithCommas(data?.recovered || 0)}</span>
-                    <span className="text-success ml-2">
-                      +343
-                    </span>
+                    <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.recovered || 0)}</span>
+                    {data?.todayRecovered && (
+                        <span className="text-success ml-2">
+                          +{numberWithCommas(data?.todayRecovered)}
+                        </span>
+                      )}
                   </div>
                 </div>
               </CardBody>
@@ -83,10 +91,12 @@ const Stats = () => {
                     Vafot etganlar
                   </CardTitle>
                   <div className="d-flex align-items-center">
-                    <span className="h3 font-weight-bold mb-0">{numberWithCommas(data?.deaths || 0)}</span>
-                    <span className="text-success ml-2">
-                      +343
-                    </span>
+                    <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.deaths || 0)}</span>
+                    {data?.todayDeaths && (
+                      <span className="text-success ml-2">
+                        +{numberWithCommas(data.todayDeaths)}
+                      </span>
+                    )}
                   </div>
                 </div>
               </CardBody>
@@ -102,7 +112,7 @@ export default Stats;
 
 const StyledContainer = styled(Container)`
   .card-stats .card-body {
-    padding: 1rem 1.5rem;
+    padding: 1rem;
   }
   .flex-col {
     display: flex;
@@ -114,13 +124,5 @@ const StyledContainer = styled(Container)`
     border-radius: 0.5rem;
     box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
-  }
-  .row > div {
-    :first-child {
-      padding-left: 0px;
-    }
-    :last-child {
-      padding-right: 0px;
-    }
   }
 `;

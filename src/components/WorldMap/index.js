@@ -6,7 +6,7 @@ import { isMobileOnly } from 'react-device-detect';
 import styled, {css } from 'styled-components';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchAllCountries } from 'src/lib/api';
-import worldCountries from 'src/assets/data/world_countries.json'
+import worldCountries from 'src/static/data/world_countries.json'
 import getCountryISO2 from 'src/lib/utils/getCountryISO2';
 
 const memoizedData = moize(arr => {

@@ -4,7 +4,7 @@ import styled, {css } from 'styled-components';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchAllCountries } from 'src/lib/api';
 import {VectorMap} from 'react-jvectormap';
-// import worldCountries from 'src/assets/data/world_countries.json'
+// import worldCountries from 'src/static/data/world_countries.json'
 // import 'flag-css/css/flag-css.css'
 
 const mapData = {

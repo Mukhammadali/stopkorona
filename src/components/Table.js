@@ -1,6 +1,6 @@
 import React from 'react'
+import { useTable, useSortBy, useFilters} from 'react-table'
 import styled from 'styled-components'
-import { useTable, useSortBy } from 'react-table'
 import { IoMdArrowRoundUp, IoMdArrowRoundDown } from 'react-icons/io';
 
 const getBgClassName = (col) => {
@@ -26,7 +26,8 @@ function Table({ onClickListItem, columns, data, initialState }) {
       initialState: initialState || {},
       disableSortRemove: true
     },
-    useSortBy
+    useFilters,
+    useSortBy,
   )
 
   // We don't want to render all 2000 rows for this example, so cap
@@ -40,12 +41,12 @@ function Table({ onClickListItem, columns, data, initialState }) {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => {
+                console.log('column:', column)
                 return(
                 // Add the sorting props to control sorting. For this example
                 // we can add them into the header props
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  {/* Add a sort direction indicator */}
+                  {(column.Filter && column.canFilter) ? column.render("Filter") : column.render('Header')}
                   <span>
                     {column.isSorted
                       ? column.isSortedDesc
@@ -81,11 +82,14 @@ export default Table
 
 const Styles = styled.div`
   overflow-y: scroll;
-  max-height: 500px;
-  border-bottom: 1px solid #e2e8f0;
+  height: 500px;
+  /* border: 2px solid #e2e8f0; */
+  /* .table-wrapper {
+    border-bottom: 1px solid #e2e8f0;
+  } */
   table {
-    border-spacing: 0;
     border-radius: 5px;
+    border-spacing: 0;
     width: 100%;
     tr {
       transition: 0.2s all ease-in;
@@ -96,7 +100,7 @@ const Styles = styled.div`
       }
       :last-child {
         td {
-          border-bottom:none;
+          /* border-bottom:none; */
         }
       }
     }
