@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryHistorical, fetchAllHistorical } from 'src/lib/api';
 import { useQuery } from 'react-query';
+import { numberWithCommas } from 'src/lib/utils';
 const uzLocale = {
   "name": "uz",
   "options": {
@@ -49,7 +50,9 @@ const HistoryBarChart3 = () => {
     </div>
      <Chart
         options={{
-            
+            legend: {
+              position: 'top'
+            },
             tooltip: {
               x: {
                 format: "d MMMM"
@@ -99,8 +102,14 @@ const HistoryBarChart3 = () => {
               // min: new Date("2 Mar 2020").getTime(),
               // max: new Date("27 Feb 2013").getTime()
             },
+            yaxis: {
+              labels: {
+                formatter: function (value) {
+                  return numberWithCommas(value);
+                }
+              },
+            },
             selection: 'one_year',
-            
         }}
         series={[
           {

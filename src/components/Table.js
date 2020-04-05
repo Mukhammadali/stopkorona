@@ -82,6 +82,7 @@ export default Table
 
 const Styles = styled.div`
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   height: 500px;
   /* border: 2px solid #e2e8f0; */
   /* .table-wrapper {
