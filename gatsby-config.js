@@ -5,6 +5,7 @@ module.exports = {
     author: `@mukhammadali`,
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
@@ -25,7 +26,7 @@ module.exports = {
       resolve: `gatsby-plugin-create-client-paths`,
       options: { prefixes: [`/countries/*`] },
     },
-    `gatsby-plugin-styled-components`,
+    
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

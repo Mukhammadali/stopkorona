@@ -23,7 +23,6 @@ const mapData = {
 
 const WorldMap2 = () => {
   const {data, isLoading} = useQuery(queryKeys.ALL_COUNTRIES, fetchAllCountries)
-  console.log('data2:', data)
   const filteredData = useMemo(()=>{
     if(!Array.isArray(data)) return [];
     return data.map(el => ({
@@ -32,7 +31,6 @@ const WorldMap2 = () => {
       value: el?.cases || 0
     }))
   },[data])
-  console.log('filteredData:', filteredData)
   return (
     <Wrapper>
       <VectorMap

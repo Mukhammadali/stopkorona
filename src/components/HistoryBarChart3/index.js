@@ -5,6 +5,8 @@ import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryHistorical, fetchAllHistorical } from 'src/lib/api';
 import { useQuery } from 'react-query';
 import { numberWithCommas } from 'src/lib/utils';
+import { useMemo } from 'react';
+import { isBrowser } from 'react-device-detect';
 const uzLocale = {
   "name": "uz",
   "options": {
@@ -28,27 +30,34 @@ const uzLocale = {
 
 const HistoryBarChart3 = () => {
   const [] = useState();
-  const { data, status } = useQuery(queryKeys.ALL_HISTORICAL, fetchAllHistorical);
+  const { data, status } = useQuery(queryKeys.ALL_HISTORICAL, fetchAllHistorical, {
+    refetchOnWindowFocus: false
+  });
   const [image, setImage] = useState(null)
   const chartRef = useRef();
   useEffect(() => {
+    console.log('MOUNTED')
     // if(chartRef.current?.chart) {
     //   chartRef.current.chart.dataURI().then(({ imgURI, blob }) => {
     //     console.log('imgURI:', imgURI)
     //     setImage(imgURI);
     //     // console.log('blob:', blob)
     //     // console.log('imgURI:', imgURI)
-  }, [data])
+    return () => {
+      console.log('UNMOUNTED');
+    }
+  }, [])
  
   
-  return (
-    <div>
-      <div>
+  return useMemo( () => (
+    <div className="my-3" style={{height: isBrowser ? 450 : 'auto'}}>
+      {/* <div>
         <button>Hammasi</button>
         <button>1 Oylik</button>
         <button>3 Oylik</button>
-    </div>
+    </div> */}
      <Chart
+        height={isBrowser ? 450 : 'auto'}
         options={{
             legend: {
               position: 'top'
@@ -65,6 +74,20 @@ const HistoryBarChart3 = () => {
               }],
             },
             chart: {
+              height: 350,
+              animations: {
+                  enabled: true,
+                  // easing: 'easeinout',
+                  // speed: 100,
+                  animateGradually: {
+                      enabled: true,
+                      // delay: 100
+                  },
+                  dynamicAnimation: {
+                      enabled: true,
+                      // speed: 100
+                  }
+              },
               locales:[
                 uzLocale
               ],
@@ -89,7 +112,7 @@ const HistoryBarChart3 = () => {
               curve: 'smooth'
             },
             dataLabels: {
-              enabled: false
+              enabled: false,
             },
             markers: {
               size: 0,
@@ -98,9 +121,15 @@ const HistoryBarChart3 = () => {
             xaxis: {
               type: 'datetime',
               categories: Object.keys(data?.cases || {}),
-              tickAmount: 20,
+              // tickAmount: 10,
+              tickAmount: 10,
               // min: new Date("2 Mar 2020").getTime(),
-              // max: new Date("27 Feb 2013").getTime()
+              max: new Date().getTime(),
+              // format: 'dd MMMM'
+              labels: {
+                format: 'd MMMM'
+              }
+              // range: 20
             },
             yaxis: {
               labels: {
@@ -108,8 +137,9 @@ const HistoryBarChart3 = () => {
                   return numberWithCommas(value);
                 }
               },
+              // max: Object.values(data?.cases || {}).pop()
             },
-            selection: 'one_year',
+            // selection: 'one_year',
         }}
         series={[
           {
@@ -130,7 +160,7 @@ const HistoryBarChart3 = () => {
         ref={chartRef}
       />
     </div>
-  )
+  ), [data])
 }
 
 export default HistoryBarChart3

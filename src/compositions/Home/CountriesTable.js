@@ -53,6 +53,7 @@ const TableColumns = [
       const count = preFilteredRows.length;
       return (
         <input
+          className="table-search"
           value={filterValue || ""}
           onChange={e => {
             e.preventDefault();
@@ -88,6 +89,12 @@ const TableColumns = [
     sortDescFirst: true,
     Cell: renderRow
   },
+  // {
+  //   Header: 'Jiddiy ahvolda',
+  //   accessor: 'critical',
+  //   sortDescFirst: true,
+  //   Cell: renderRow
+  // },
 ];
 
 
@@ -111,10 +118,10 @@ const CountriesTable = () => {
  
   return (
     <Styled>
-      {/* <div className="table-toolbox mb-2">
+      <div className="mb-2">
         <span className="font-weight-bold">Koronavirus aniqlangan davlatlar soni: </span>
         <span>{data?.length}</span>
-      </div> */}
+      </div>
       <Table
         onClickListItem={onNavigate} columns={TableColumns} data={searchResult || []}
         initialState={{
@@ -137,5 +144,11 @@ const Styled = styled.div`
     display: flex;
     flex: 1;
     justify-content: space-between;
+  }
+  .table-search {
+    outline: none;
+    border: none;
+    padding: 0px 5px;
+    max-width: 100%;
   }
 `;

@@ -8,8 +8,6 @@ import { fetchCountryHistorical } from 'src/lib/api';
 
 const HistoryBarChart = () => {
   const {data, status} = useQuery([queryKeys.COUNTRY_HISTORICAL, { country: 'Italy' }], fetchCountryHistorical);
-  console.log('data:', data)
-  console.log('status:', status)
   const casesArray = useMemo(() => {
       const cases = data?.timeline?.cases || {};
       if(isEmpty(cases)) return [];
@@ -20,7 +18,6 @@ const HistoryBarChart = () => {
           value: cases[el]
         }))
     }, [data])
-console.log('casesArray:', casesArray)
 return (
   <ResponsiveBar
       data={casesArray || []}

@@ -12,7 +12,7 @@ const Stats = () => {
   return (
     <StyledContainer>
         <Row className="d-flex align-items-stretch">
-          <Col md="6" xl="3" className="mb-3">
+          <Col xs="6" md="3" xl="3" className="card-wrapper mb-3">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100">
@@ -22,7 +22,7 @@ const Stats = () => {
                   >
                     Yuqtirganlar
                   </CardTitle>
-                  <div className="d-flex align-items-center">
+                  <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.cases || 0)}</span>
                   {data?.todayCases && (
                       <span className="text-success ml-2">
@@ -34,7 +34,7 @@ const Stats = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col sm="6" md="6" xl="3" className="mb-3">
+          <Col xs="6" md="3" xl="3" className="card-wrapper mb-3">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100 justify-content-between">
@@ -42,9 +42,9 @@ const Stats = () => {
                     tag="h6"
                     className="text-uppercase text-muted mb-2"
                   >
-                    Aktivlar
+                    Davolanayotganlar
                   </CardTitle>
-                    <div className="d-flex align-items-center">
+                    <div className="stat d-flex align-items-center">
                       <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.active)}</span>
                     {
                       data?.todayActive && (
@@ -58,7 +58,7 @@ const Stats = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col sm="6" md="6" xl="3" className="mb-3">
+          <Col xs="6" md="3" xl="3" className="card-wrapper mb-3">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100 justify-content-between">
@@ -68,7 +68,7 @@ const Stats = () => {
                   >
                     Tuzalganlar
                   </CardTitle>
-                  <div className="d-flex align-items-center">
+                  <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.recovered || 0)}</span>
                     {data?.todayRecovered && (
                         <span className="text-success ml-2">
@@ -80,7 +80,7 @@ const Stats = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col  sm="6" xl="3" className="mb-3">
+          <Col xs="6"  md="3" xl="3" className="card-wrapper mb-3">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100 justify-content-between">
@@ -90,7 +90,7 @@ const Stats = () => {
                   >
                     Vafot etganlar
                   </CardTitle>
-                  <div className="d-flex align-items-center">
+                  <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.deaths || 0)}</span>
                     {data?.todayDeaths && (
                       <span className="text-success ml-2">
@@ -118,11 +118,23 @@ const StyledContainer = styled(Container)`
     display: flex;
     flex-direction: column;
   }
-  .card-stats {
-    height: 100%;
-    border: none;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+  .card-wrapper {
+    padding: 0px;
+    padding-right: 10px;
+    :last-child {
+      padding-right: 0px;
+    }
+    .card-stats {
+      height: 100%;
+      border: none;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  @media only screen and (max-width: 980px) {
+    .stat {
+      flex-direction: column;
+    }
   }
 `;

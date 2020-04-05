@@ -41,19 +41,24 @@ function Table({ onClickListItem, columns, data, initialState }) {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => {
-                console.log('column:', column)
                 return(
                 // Add the sorting props to control sorting. For this example
                 // we can add them into the header props
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {(column.Filter && column.canFilter) ? column.render("Filter") : column.render('Header')}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? <IoMdArrowRoundDown className="ml-2"  />
-                        : <IoMdArrowRoundUp className="ml-2" />
-                      : <IoMdArrowRoundUp className="invisible ml-2" />}
-                  </span>
+                  <div className="table-head">
+                    {(column.Filter && column.canFilter) ? column.render("Filter") : column.render('Header')}
+                    {
+                      column.isSorted && (
+                      <span>
+                          {
+                            column.isSortedDesc
+                              ? <IoMdArrowRoundDown className="ml-2"  />
+                              : <IoMdArrowRoundUp className="ml-2" />
+                          }
+                      </span>
+                      )
+                    }
+                  </div>
                 </th>
               )})}
             </tr>
@@ -84,10 +89,6 @@ const Styles = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   height: 500px;
-  /* border: 2px solid #e2e8f0; */
-  /* .table-wrapper {
-    border-bottom: 1px solid #e2e8f0;
-  } */
   table {
     border-radius: 5px;
     border-spacing: 0;
@@ -99,11 +100,6 @@ const Styles = styled.div`
         cursor: pointer;
         transition: 0.2s all ease-out;
       }
-      :last-child {
-        td {
-          /* border-bottom:none; */
-        }
-      }
     }
     th,
     td {
@@ -114,7 +110,6 @@ const Styles = styled.div`
       height: 2.5rem;
       .stat-cell {
         padding:0 1rem !important;
-        /* height: 50px; */
         font-weight: 600;
         font-size: 1.10rem;
         .today-stat {
@@ -135,8 +130,9 @@ const Styles = styled.div`
         border-left: 1px solid #e2e8f0;
       }
       &:first-child {
-        font-size: 1.015rem;
-        width: 25%;
+        font-size: 1rem;
+        width: 10rem;
+        max-width: 10rem;
       }
     }
     th {
@@ -145,6 +141,10 @@ const Styles = styled.div`
       position: sticky;
       top: 0;
       z-index: 2;
+      .table-head {
+        display: flex;
+        align-items: center;
+      }
     }
    
   }
