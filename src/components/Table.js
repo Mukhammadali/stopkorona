@@ -111,7 +111,7 @@ const Styles = styled.div`
       height: 2.5rem;
       .stat-cell {
         padding:0 1rem !important;
-        font-family: "ProximaNova SemiBold";
+        font-family: "ProximaNova Semibold";
         font-size: 1.10rem;
         .today-stat {
           font-size: 0.95rem;
