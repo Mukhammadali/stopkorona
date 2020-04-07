@@ -12,6 +12,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'flag-icon-css/css/flag-icon.min.css'
+import 'src/static/fonts/fonts.css';
 import "./layout.css"
 import { Container } from 'reactstrap';
 
@@ -34,6 +35,7 @@ const Layout = ({ children }) => {
         style={{
           margin: `0 auto`,
           maxWidth: 960,
+          fontFamily: "ProximaNova",
           padding: `0 1.0875rem 1.45rem`,
         }}
       >

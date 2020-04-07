@@ -23,7 +23,7 @@ const Stats = () => {
                     Yuqtirganlar
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
-                    <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.cases || 0)}</span>
+                    <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.cases || 0)}</span>
                   {data?.todayCases && (
                       <span className="text-success ml-2">
                         +{numberWithCommas(data?.todayCases || 0)}
@@ -45,7 +45,7 @@ const Stats = () => {
                     Davolanayotganlar
                   </CardTitle>
                     <div className="stat d-flex align-items-center">
-                      <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.active)}</span>
+                      <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.active)}</span>
                     {
                       data?.todayActive && (
                       <span className="text-success ml-2">
@@ -69,7 +69,7 @@ const Stats = () => {
                     Tuzalganlar
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
-                    <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.recovered || 0)}</span>
+                    <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.recovered || 0)}</span>
                     {data?.todayRecovered && (
                         <span className="text-success ml-2">
                           +{numberWithCommas(data?.todayRecovered)}
@@ -91,7 +91,7 @@ const Stats = () => {
                     Vafot etganlar
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
-                    <span className="h4 font-weight-bold mb-0">{numberWithCommas(data?.deaths || 0)}</span>
+                    <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.deaths || 0)}</span>
                     {data?.todayDeaths && (
                       <span className="text-success ml-2">
                         +{numberWithCommas(data.todayDeaths)}

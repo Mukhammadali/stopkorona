@@ -1,5 +1,5 @@
 html {
-  font-family: "Nova Regular";
+  font-family: "ProximaNova";
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -7,4 +7,8 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.font-weight-semibold {
+  font-family: "ProximaNova SemiBold";
 }

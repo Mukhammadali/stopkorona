@@ -48,6 +48,24 @@ const HistoryBarChart3 = () => {
     }
   }, [])
  
+  // const cases = useMemo(() => {
+  //   if(!data?.cases) return {
+  //     values: [],
+  //     keys: []
+  //   };
+  //   const values = [];
+  //   const keys = [];
+  //   Object.keys(data?.cases)?.forEach(el => {
+  //     const parsed = el?.split('/');
+  //     values.push(data?.cases[el]);
+  //     keys.push([parsed[1],parsed[0], parsed[2]].join('/'));
+  //   });
+  //   return {
+  //     values,
+  //     keys
+  //   }
+  // }, [data?.cases])
+  // console.log('cases:', cases)
   
   return useMemo( () => (
     <div className="my-3" style={{height: isBrowser ? 450 : 'auto'}}>
@@ -127,7 +145,13 @@ const HistoryBarChart3 = () => {
               max: new Date().getTime(),
               // format: 'dd MMMM'
               labels: {
-                format: 'd MMMM'
+                format: 'd MMMM',
+                datetimeFormatter: {
+                  year: 'yyyy',
+                  month: "d MMMM",
+                  day: 'd MMMM',
+                  hour: 'HH:mm',
+                },
               }
               // range: 20
             },
@@ -144,7 +168,7 @@ const HistoryBarChart3 = () => {
         series={[
           {
             name: "Yuqtirganlar",
-            data: Object.values(data?.cases || {})
+            data:  Object.values(data?.cases || {})
           },
           {
             name: "Tuzalganlar",

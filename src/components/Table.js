@@ -45,7 +45,7 @@ function Table({ onClickListItem, columns, data, initialState }) {
                 // Add the sorting props to control sorting. For this example
                 // we can add them into the header props
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  <div className="table-head">
+                  <div className="table-head font-weight-semibold">
                     {(column.Filter && column.canFilter) ? column.render("Filter") : column.render('Header')}
                     {
                       column.isSorted && (
@@ -68,8 +68,9 @@ function Table({ onClickListItem, columns, data, initialState }) {
           {rows.map(
             (row, i) => {
               prepareRow(row);
+              // onClick={() => onClickListItem(row?.original)}
               return (
-                <tr onClick={() => onClickListItem(row?.original)} {...row.getRowProps()}>
+                <tr {...row.getRowProps()}>
                   {row.cells.map(cell =>  (
                       <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )
@@ -110,7 +111,7 @@ const Styles = styled.div`
       height: 2.5rem;
       .stat-cell {
         padding:0 1rem !important;
-        font-weight: 600;
+        font-family: "ProximaNova SemiBold";
         font-size: 1.10rem;
         .today-stat {
           font-size: 0.95rem;
@@ -131,8 +132,12 @@ const Styles = styled.div`
       }
       &:first-child {
         font-size: 1rem;
-        width: 10rem;
-        max-width: 10rem;
+        width: 15rem;
+        max-width: 15rem;
+        @media only screen and (max-width: 980px) {
+          width: 10rem;
+          max-width: 10rem;
+        }
       }
     }
     th {
@@ -141,7 +146,7 @@ const Styles = styled.div`
       position: sticky;
       top: 0;
       z-index: 2;
-      .table-head {
+      .table-head font-weight-semibold {
         display: flex;
         align-items: center;
       }

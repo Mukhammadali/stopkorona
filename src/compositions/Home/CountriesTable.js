@@ -53,7 +53,7 @@ const TableColumns = [
       const count = preFilteredRows.length;
       return (
         <input
-          className="table-search"
+          className="table-search w-100"
           value={filterValue || ""}
           onChange={e => {
             e.preventDefault();
@@ -119,7 +119,7 @@ const CountriesTable = () => {
   return (
     <Styled>
       <div className="mb-2">
-        <span className="font-weight-bold">Koronavirus aniqlangan davlatlar soni: </span>
+        <span className="font-weight-semibold">Koronavirus aniqlangan davlatlar soni: </span>
         <span>{data?.length}</span>
       </div>
       <Table
@@ -146,6 +146,7 @@ const Styled = styled.div`
     justify-content: space-between;
   }
   .table-search {
+    font-family: "ProximaNova Light";
     outline: none;
     border: none;
     padding: 0px 5px;
