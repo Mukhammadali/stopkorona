@@ -3,22 +3,15 @@ import { Link } from "gatsby"
 import { Router } from "@reach/router"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import SingleCountry from 'src/compositions/SingleCountry'
+import Home from 'src/compositions/Home'
 
-const Content = ({country}) => {
-  return(
-  <>
-  <h1>Hi {country}</h1>
-  <p>Welcome to page 2</p>
-  <Link to="/">Go back to the homepage</Link>
-  </>
-)
-}
 
 const SecondPage = () => (
   <Layout>
-    <SEO title="Page two" />
     <Router>
-      <Content path="/countries/:country" />
+      <SingleCountry path="/countries/:country" />
+      <Home default />
     </Router>
   </Layout>
 )

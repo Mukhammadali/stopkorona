@@ -10,3 +10,6 @@ export const fetchAllCountries = () =>
 
 export const fetchTotal = () =>
   axiosInstance.get('/all').then(res => res?.data)
+
+export const fetchCountryTotal = ({country}) =>
+  axiosInstance.get(`/countries/${country}`).then(res => res?.data)

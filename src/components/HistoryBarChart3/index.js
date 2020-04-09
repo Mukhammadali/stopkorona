@@ -29,7 +29,6 @@ const uzLocale = {
 }
 
 const HistoryBarChart3 = () => {
-  const [] = useState();
   const { data, status } = useQuery(queryKeys.ALL_HISTORICAL, fetchAllHistorical, {
     refetchOnWindowFocus: false
   });
@@ -67,7 +66,7 @@ const HistoryBarChart3 = () => {
   // }, [data?.cases])
   // console.log('cases:', cases)
   
-  return useMemo( () => (
+  return (
     <div className="my-3" style={{height: isBrowser ? 450 : 'auto'}}>
       {/* <div>
         <button>Hammasi</button>
@@ -184,7 +183,7 @@ const HistoryBarChart3 = () => {
         ref={chartRef}
       />
     </div>
-  ), [data])
+  )
 }
 
 export default HistoryBarChart3

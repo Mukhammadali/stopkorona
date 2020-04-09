@@ -4,6 +4,9 @@ import Charts from './Charts'
 import CountriesTable from './CountriesTable'
 // import HistoryBarChart3 from '';
 import Loadable from 'react-loadable';
+import { useQuery } from 'react-query';
+import queryKeys from 'src/lib/constants/queryKeys';
+import { fetchTotal } from 'src/lib/api';
 // import Loading from './my-loading-component';
 
 const HistoryBarChart3 = Loadable({
@@ -11,14 +14,17 @@ const HistoryBarChart3 = Loadable({
   loading:  () => <div>Loading...</div>,
 });
 
-const Home = () => (
+const Home = () => {
+  const { data } = useQuery([queryKeys.TOTAL], fetchTotal)
+  return (
     <div>
-        <Stats />
-        <Charts />
-        <HistoryBarChart3 />
-        <CountriesTable />
+      <Stats data={data} />
+      <Charts />
+      <HistoryBarChart3 />
+      <CountriesTable />
     </div>
-);
+  );
+}
 
 
 export default Home;

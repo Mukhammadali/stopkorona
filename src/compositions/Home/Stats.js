@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useQuery } from 'react-query'
 import queryKeys from 'src/lib/constants/queryKeys'
 import {numberWithCommas} from 'src/lib/utils';
@@ -7,8 +7,8 @@ import { FaArrowUp, FaArrowDown } from 'react-icons/fa'
 import styled from 'styled-components'
 import { Container, Row, Col, Card, CardBody, CardTitle } from 'reactstrap'
 
-const Stats = () => {
-  const {data} = useQuery([queryKeys.TOTAL], fetchTotal)
+
+const Stats = ({ data }) => {
   return (
     <StyledContainer>
         <Row className="d-flex align-items-stretch">
@@ -24,11 +24,11 @@ const Stats = () => {
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.cases || 0)}</span>
-                  {data?.todayCases && (
+                  {data?.todayCases ? (
                       <span className="text-success ml-2">
                         +{numberWithCommas(data?.todayCases || 0)}
                       </span>
-                  )}
+                  ):null}
                   </div>
                 </div>
               </CardBody>
@@ -47,11 +47,11 @@ const Stats = () => {
                     <div className="stat d-flex align-items-center">
                       <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.active)}</span>
                     {
-                      data?.todayActive && (
+                      data?.todayActive ? (
                       <span className="text-success ml-2">
                         +{numberWithCommas(data.todayActive)}
                       </span>
-                      )
+                      ) : null
                     }
                     </div>
                 </div>
@@ -70,11 +70,11 @@ const Stats = () => {
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.recovered || 0)}</span>
-                    {data?.todayRecovered && (
+                    {data?.todayRecovered ? (
                         <span className="text-success ml-2">
                           +{numberWithCommas(data?.todayRecovered)}
                         </span>
-                      )}
+                      ): null}
                   </div>
                 </div>
               </CardBody>
@@ -92,11 +92,11 @@ const Stats = () => {
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.deaths || 0)}</span>
-                    {data?.todayDeaths && (
+                    {data?.todayDeaths ? (
                       <span className="text-success ml-2">
                         +{numberWithCommas(data.todayDeaths)}
                       </span>
-                    )}
+                    ): null}
                   </div>
                 </div>
               </CardBody>
@@ -107,7 +107,7 @@ const Stats = () => {
   )
 }
 
-export default Stats;
+export default memo(Stats);
 
 
 const StyledContainer = styled(Container)`

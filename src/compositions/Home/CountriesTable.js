@@ -110,9 +110,12 @@ const CountriesTable = () => {
     if(!query) return data;
     return data?.filter(el => el?.country?.toLowerCase().includes(query.toLowerCase()));
   }, [query, data]);
+
   const onNavigate = (data) => {
     navigate(`/countries/${data?.country}`, {
-      country: data
+     state: {
+       country: data,
+     }
     })
   }
  

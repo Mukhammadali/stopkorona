@@ -68,9 +68,9 @@ function Table({ onClickListItem, columns, data, initialState }) {
           {rows.map(
             (row, i) => {
               prepareRow(row);
-              // onClick={() => onClickListItem(row?.original)}
+              
               return (
-                <tr {...row.getRowProps()}>
+                <tr {...row.getRowProps()} onClick={() => onClickListItem(row?.original)}>
                   {row.cells.map(cell =>  (
                       <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                     )
