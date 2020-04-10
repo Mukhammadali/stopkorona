@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: `https://stopkorona.uz`,
   },
   plugins: [
+    'gatsby-plugin-netlify',
     'gatsby-plugin-zeit-now',
     'gatsby-plugin-sitemap',
     {
