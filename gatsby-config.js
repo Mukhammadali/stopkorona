@@ -3,8 +3,11 @@ module.exports = {
     title: `STOPKORONA`,
     description: `Koronavirusga oid statistika va ma'lumotlar`,
     author: `@mukhammadali`,
+    siteUrl: `https://stopkorona.uz`,
   },
   plugins: [
+    'gatsby-plugin-zeit-now',
+    'gatsby-plugin-sitemap',
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
