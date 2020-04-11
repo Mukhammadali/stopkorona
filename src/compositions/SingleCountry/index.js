@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal } from 'src/lib/api';
 import SEO from 'src/components/seo';
+import CountryTitle from 'src/components/CountryTitle';
 
 const SingleCountry = ({ country, location }) => {
   const passedCountry = location?.state?.country;
@@ -13,10 +14,7 @@ const SingleCountry = ({ country, location }) => {
   return (
     <Styles>
       <SEO title={country} />
-      <div className="d-flex align-items-center mb-3">
-        <span className={`country-flag mr-2 flag-icon flag-icon-${state?.countryInfo?.iso2?.toLowerCase()} `}></span>
-        <h3 className="mb-0">{state?.country}</h3>
-      </div>
+      <CountryTitle country={state} />
       <Stats data={state} />
     </Styles>
   )

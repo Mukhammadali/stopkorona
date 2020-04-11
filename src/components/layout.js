@@ -8,13 +8,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { Container } from 'reactstrap';
 
 import Header from "./header"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'flag-icon-css/css/flag-icon.min.css'
 import 'src/static/fonts/fonts.css';
 import "./layout.css"
-import { Container } from 'reactstrap';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -41,9 +41,8 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
       </Container>
-      <footer className="d-flex justify-content-center">
-        © {new Date().getFullYear()}, Made by
-        <a className="ml-1" href="https://www.gatsbyjs.org">Muhammad Ali</a>
+      <footer className="d-flex justify-content-center font-light">
+        © {new Date().getFullYear()}. <span className="ml-2 font-weight-bold">Made in Uzbekistan</span>
       </footer>
     </>
   )

@@ -13,3 +13,11 @@ body {
 .font-weight-semibold {
   font-family: "ProximaNova Semibold";
 }
+
+.font-light {
+  font-family: "ProximaNova Light";
+}
+
+.font-info  {
+  color: #6c707d;
+}

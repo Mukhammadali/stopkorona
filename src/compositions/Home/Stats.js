@@ -18,7 +18,7 @@ const Stats = ({ data }) => {
                 <div className="flex-col h-100">
                   <CardTitle
                     tag="h6"
-                    className="text-uppercase text-muted mb-2"
+                    className="text-uppercase text-muted mb-2  font-weight-semibold"
                   >
                     Yuqtirganlar
                   </CardTitle>
@@ -40,7 +40,7 @@ const Stats = ({ data }) => {
                 <div className="flex-col h-100 justify-content-between">
                   <CardTitle
                     tag="h6"
-                    className="text-uppercase text-muted mb-2"
+                    className="text-uppercase text-muted mb-2  font-weight-semibold"
                   >
                     Davolanayotganlar
                   </CardTitle>
@@ -64,7 +64,7 @@ const Stats = ({ data }) => {
                 <div className="flex-col h-100 justify-content-between">
                   <CardTitle
                     tag="h6"
-                    className="text-uppercase text-muted mb-2"
+                    className="font-weight-semibold text-uppercase text-muted mb-2"
                   >
                     Tuzalganlar
                   </CardTitle>
@@ -86,7 +86,7 @@ const Stats = ({ data }) => {
                 <div className="flex-col h-100 justify-content-between">
                   <CardTitle
                     tag="h6"
-                    className="text-uppercase text-muted mb-2"
+                    className="text-uppercase text-muted mb-2  font-weight-semibold"
                   >
                     Vafot etganlar
                   </CardTitle>
