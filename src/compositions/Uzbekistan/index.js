@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import CountryTitle from 'src/components/CountryTitle';
-import TotalCasesChart from 'src/components/charts/TotalCasesChart'
+// import TotalCasesChart from ''
+import Loadable from 'react-loadable';
 import Stats from '../Home/Stats'
+
+const TotalCasesChart = Loadable({
+  loader: () => import('src/components/charts/TotalCasesChart'),
+  loading:  () => <div>Loading...</div>,
+});
 
 const Uzbekistan = () => {
   const { data: total } = useCountryTotal({countryName: 'Uzbekistan'})
