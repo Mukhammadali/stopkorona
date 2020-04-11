@@ -102,6 +102,40 @@ const Stats = ({ data }) => {
               </CardBody>
             </Card>
           </Col>
+          <Col xs="6"  md="3" xl="3" className="card-wrapper mb-3">
+            <Card className="card-stats">
+              <CardBody>
+                <div className="flex-col h-100 justify-content-between">
+                  <CardTitle
+                    tag="h6"
+                    className="text-uppercase text-muted mb-2  font-weight-semibold"
+                  >
+                    Jiddiy Ahvoldagilar
+                  </CardTitle>
+                  <div className="stat d-flex align-items-center">
+                    <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.critical || 0)}</span>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xs="6"  md="3" xl="3" className="card-wrapper mb-3">
+            <Card className="card-stats">
+              <CardBody>
+                <div className="flex-col h-100 justify-content-between">
+                  <CardTitle
+                    tag="h6"
+                    className="text-uppercase text-muted mb-2  font-weight-semibold"
+                  >
+                    Test Topshirganlar
+                  </CardTitle>
+                  <div className="stat d-flex align-items-center">
+                    <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.tests || 0)}</span>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
         </Row>
     </StyledContainer>
   )
