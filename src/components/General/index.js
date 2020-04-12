@@ -15,20 +15,7 @@ const HistoryBarChart3 = () => {
     refetchOnWindowFocus: false
   });
   const [image, setImage] = useState(null)
-  const chartRef = useRef();
-  useEffect(() => {
-    console.log('MOUNTED')
-    // if(chartRef.current?.chart) {
-    //   chartRef.current.chart.dataURI().then(({ imgURI, blob }) => {
-    //     console.log('imgURI:', imgURI)
-    //     setImage(imgURI);
-    //     // console.log('blob:', blob)
-    //     // console.log('imgURI:', imgURI)
-    return () => {
-      console.log('UNMOUNTED');
-    }
-  }, [])
- 
+  const chartRef = useRef(); 
   // const cases = useMemo(() => {
   //   if(!data?.cases) return {
   //     values: [],

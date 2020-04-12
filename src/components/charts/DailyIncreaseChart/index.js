@@ -97,6 +97,11 @@ const DailyIncreaseChart = ({ data, total }) => {
                 },
               },
             },
+            tooltip: {
+              x: {
+                format: "d MMMM"
+              },
+            },  
             dataLabels: {
               enabled: true,
               offsetY: -20,
@@ -111,19 +116,16 @@ const DailyIncreaseChart = ({ data, total }) => {
               labels: {
                 datetimeUTC: false,
                 formatter:  function(val, timestamp) {
-                  console.log('timestamp:', timestamp)
-                  console.log('val:', val)
-                  const date = moment(new Date(timestamp)).locale('uzb').format('D MMMM');
-                  console.log('date:', date)
+                  const date = moment(new Date(val)).locale('uzb').format('D MMMM');
                   return date;
                 },
-                // format: 'd MMMM',
-                // datetimeFormatter: {
-                //   year: 'yyyy',
-                //   month: "d MMMM",
-                //   day: 'd MMMM',
-                //   hour: 'HH:mm',
-                // },
+                format: 'd MMMM',
+                datetimeFormatter: {
+                  year: 'yyyy',
+                  month: "d MMMM",
+                  day: 'd MMMM',
+                  hour: 'HH:mm',
+                },
               }
             },
             yaxis: {
