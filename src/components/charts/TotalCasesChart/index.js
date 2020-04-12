@@ -57,9 +57,6 @@ const TotalCasesChart = ({ data, total }) => {
         <button>1 Oylik</button>
         <button>3 Oylik</button>
     </div> */}
-    <div>
-      <h3>Umumiy</h3>
-    </div>
      <Chart
         height={isBrowser ? 420 : 'auto'}
         options={{

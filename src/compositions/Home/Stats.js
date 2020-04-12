@@ -155,9 +155,9 @@ const StyledContainer = styled(Container)`
   .card-wrapper {
     padding: 0px;
     padding-right: 10px;
-    :last-child {
+    /* :last-child {
       padding-right: 0px;
-    }
+    } */
     .card-stats {
       height: 100%;
       border: none;

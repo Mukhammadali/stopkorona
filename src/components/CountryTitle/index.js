@@ -8,7 +8,7 @@ const CountryTitle = ({ country }) => {
     <Styles className="d-flex align-items-end mb-3">
       <div className="font-weight-semibold d-flex align-items-center">
         <span className={`country-flag mr-2 flag-icon flag-icon-${country?.countryInfo?.iso2?.toLowerCase()} `} />
-        <h3 className="mb-0">{country?.country}</h3>
+        <h3 className="mb-0">O'zbekiston</h3>
       </div>
       <span className="ml-3 mb-1 font-info">Yangilangan vaqti: {format(country?.updated, 'HH:mm')}</span>
     </Styles>

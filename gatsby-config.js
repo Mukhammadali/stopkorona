@@ -46,8 +46,8 @@ module.exports = {
         name: `StopKorona.uz`,
         short_name: `StopKorona`,
         start_url: `/`,
-        background_color: `#ED3C43`,
-        theme_color: `#ED3C43`,
+        background_color: `#fff`,
+        theme_color: `#fff`,
         display: `standalone`,
         icon: `src/static/images/logo.png`, // This path is relative to the root of the site.
       },

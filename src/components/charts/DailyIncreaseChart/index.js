@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from 'react'
 import Chart from "react-apexcharts";
 import moment from "moment";
+import { isMobileOnly } from 'react-device-detect';
 import { numberWithCommas } from 'src/lib/utils'
 
 import { isBrowser } from 'react-device-detect';
@@ -25,47 +26,35 @@ const DailyIncreaseChart = ({ data, total }) => {
     const slicedLabels = Object.keys(data?.cases).slice(lastLeadingZeroIndex)
     const slicedCases = Object.values(data?.cases).slice(lastLeadingZeroIndex)
     const newCases = slicedCases.map((el, idx) => idx === 0 ? [slicedLabels[idx], el] : [slicedLabels[idx], el - slicedCases[idx -1]]);
-    // const slicedRecovered = Object.values(data?.recovered).slice(lastLeadingZeroIndex).map((el, idx) => [slicedLabels[idx], el]);
-    // const slicedDeaths = Object.values(data?.deaths).slice(lastLeadingZeroIndex).map((el, idx) => [slicedLabels[idx], el]);
     if (total) {
       const lastDate = slicedLabels[slicedLabels.length - 1];
       const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
       if(lastDate !== latestDate){
         slicedLabels.push(latestDate);
         newCases.push([latestDate, total?.cases - slicedCases[slicedCases?.length - 1]]);
-        // slicedRecovered.push([latestDate,total?.recovered]);
-        // slicedDeaths.push([latestDate, total?.deaths]);
       }
     }
     return {
-      cases: newCases,
-      // recovered: slicedRecovered,
-      // deaths: slicedDeaths
+      cases: isMobileOnly ? newCases.slice(newCases?.length - 10) : newCases,
     };
   }, [data, total])
   
   return (
     <div className="my-3" style={{height: isBrowser ? 450 : 'auto'}}>
-      {/* <div>
-        <button>Hammasi</button>
-        <button>1 Oylik</button>
-        <button>3 Oylik</button>
-    </div> */}
-    <div>
-      <h3>Kunlik o'sish</h3>
-    </div>
      <Chart
         height={isBrowser ? 420 : 'auto'}
         options={{
             plotOptions: {
               bar: {
                 dataLabels: {
-                  position: 'top', // top, center, bottom
+                  position: 'top',
                 },
-                // columnWidth: '45%',
-                // distributed: true
               }
             },
+            responsive: [{
+              breakpoint: '300',
+              options: {},
+            }],
             colors: ['#2E93fA'],
             legend: {
               show: false,
@@ -74,15 +63,11 @@ const DailyIncreaseChart = ({ data, total }) => {
               height: 350,
               animations: {
                   enabled: true,
-                  // easing: 'easeinout',
-                  // speed: 100,
                   animateGradually: {
                       enabled: true,
-                      // delay: 100
                   },
                   dynamicAnimation: {
                       enabled: true,
-                      // speed: 100
                   }
               },
               locales:[
