@@ -10,7 +10,9 @@ const CountryTitle = ({ country }) => {
         <span className={`country-flag mr-2 flag-icon flag-icon-${country?.countryInfo?.iso2?.toLowerCase()} `} />
         <h3 className="mb-0">O'zbekiston</h3>
       </div>
-      <span className="ml-3 mb-1 font-info">Yangilangan vaqti: {format(country?.updated, 'HH:mm')}</span>
+      {country?.updated && (
+        <span className="ml-3 mb-1 font-info">Yangilangan vaqti: {format(country.updated, 'HH:mm')}</span>
+      )}
     </Styles>
   )
 }

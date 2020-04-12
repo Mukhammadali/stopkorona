@@ -41,8 +41,8 @@ const Uzbekistan = () => {
 
   return (
     <div>
-      <CountryTitle country={total} />
-      <Stats data={total || mockData} />
+      <CountryTitle country={total || mockData} />
+      <Stats data={total} />
       <div>
         <h3>Umumiy</h3>
         <TotalCasesChart data={historical?.timeline} total={total} />

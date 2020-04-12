@@ -13,8 +13,6 @@ const DailyIncreaseChart = ({ data, total }) => {
   const chartRef = useRef();
   useEffect(() => {
     moment.locale('uz-latn');
-    var currentLocaleData = moment.localeData();
-    console.log('currentLocaleData:', currentLocaleData)
   }, [])
   const transformed = useMemo(() => {
     const labels=[];
