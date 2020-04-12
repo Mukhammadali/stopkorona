@@ -15,6 +15,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'flag-icon-css/css/flag-icon.min.css'
 import 'src/static/fonts/fonts.css';
 import "./layout.css"
+import 'moment/locale/uz-latn';
+import moment from 'moment';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`

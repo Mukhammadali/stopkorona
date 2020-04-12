@@ -1,8 +1,9 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useEffect } from 'react'
 import Chart from "react-apexcharts";
 import moment from "moment";
 import { isMobileOnly } from 'react-device-detect';
 import { numberWithCommas } from 'src/lib/utils'
+
 
 import { isBrowser } from 'react-device-detect';
 import { uzLocale } from 'src/lib/config/apexCharts'
@@ -10,6 +11,11 @@ import { uzLocale } from 'src/lib/config/apexCharts'
 
 const DailyIncreaseChart = ({ data, total }) => {
   const chartRef = useRef();
+  useEffect(() => {
+    moment.locale('uz-latn');
+    var currentLocaleData = moment.localeData();
+    console.log('currentLocaleData:', currentLocaleData)
+  }, [])
   const transformed = useMemo(() => {
     const labels=[];
     const cases=[];
@@ -25,17 +31,20 @@ const DailyIncreaseChart = ({ data, total }) => {
     const lastLeadingZeroIndex = Object.values(data?.cases).findIndex(el => el > 0);
     const slicedLabels = Object.keys(data?.cases).slice(lastLeadingZeroIndex)
     const slicedCases = Object.values(data?.cases).slice(lastLeadingZeroIndex)
-    const newCases = slicedCases.map((el, idx) => idx === 0 ? [slicedLabels[idx], el] : [slicedLabels[idx], el - slicedCases[idx -1]]);
+    const newCases = slicedCases.map((el, idx) => idx === 0 ? el : el - slicedCases[idx -1]);
     if (total) {
       const lastDate = slicedLabels[slicedLabels.length - 1];
       const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
       if(lastDate !== latestDate){
         slicedLabels.push(latestDate);
-        newCases.push([latestDate, total?.cases - slicedCases[slicedCases?.length - 1]]);
+        newCases.push(total?.cases - slicedCases[slicedCases?.length - 1]);
       }
     }
+    const finalLabels = isMobileOnly ? slicedLabels.slice(slicedLabels?.length - 10) : slicedLabels;
+    const finalCases = isMobileOnly ? newCases.slice(newCases?.length - 10) : newCases;
     return {
-      cases: isMobileOnly ? newCases.slice(newCases?.length - 10) : newCases,
+      labels: finalLabels,
+      cases: finalCases
     };
   }, [data, total])
   
@@ -99,16 +108,24 @@ const DailyIncreaseChart = ({ data, total }) => {
               }
             },
             xaxis: {
-              type: 'datetime',
+              // type: 'datetime',
+              categories: transformed?.labels || [],
               labels: {
                 datetimeUTC: false,
-                format: 'd MMMM',
-                datetimeFormatter: {
-                  year: 'yyyy',
-                  month: "d MMMM",
-                  day: 'd MMMM',
-                  hour: 'HH:mm',
+                formatter:  function(val, timestamp) {
+                  console.log('timestamp:', timestamp)
+                  console.log('val:', val)
+                  const date = moment(new Date(timestamp)).locale('uzb').format('D MMMM');
+                  console.log('date:', date)
+                  return date;
                 },
+                // format: 'd MMMM',
+                // datetimeFormatter: {
+                //   year: 'yyyy',
+                //   month: "d MMMM",
+                //   day: 'd MMMM',
+                //   hour: 'HH:mm',
+                // },
               }
             },
             yaxis: {

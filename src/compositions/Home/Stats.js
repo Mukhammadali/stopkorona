@@ -102,7 +102,7 @@ const Stats = ({ data }) => {
               </CardBody>
             </Card>
           </Col>
-          <Col xs="6"  md="3" xl="3" className="card-wrapper mb-3">
+          {/* <Col xs="6"  md="3" xl="3" className="card-wrapper mb-3">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100 justify-content-between">
@@ -135,7 +135,7 @@ const Stats = ({ data }) => {
                 </div>
               </CardBody>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
     </StyledContainer>
   )
