@@ -6,6 +6,7 @@ import Loadable from 'react-loadable';
 import Stats from '../Home/Stats'
 import { Row } from 'reactstrap';
 import { isMobileOnly } from 'react-device-detect';
+import GenderPieChart from './components/GenderPieChart';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -55,6 +56,7 @@ const Uzbekistan = () => {
         )}
         <DailyCasesChart data={historical?.timeline} total={total} />
       </div>
+      {/* <GenderPieChart /> */}
     </div>
   )
 }

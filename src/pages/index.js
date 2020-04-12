@@ -10,7 +10,7 @@ import Uzbekistan from 'src/compositions/Uzbekistan'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="O'zbekiston koronavirus statistikasi" />
     <Uzbekistan />
   </Layout>
 )

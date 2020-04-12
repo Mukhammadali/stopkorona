@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `STOPKORONA`,
-    description: `Koronavirusga oid statistika va ma'lumotlar`,
+    title: `stopkorona.uz`,
+    description: `Koronavirusga oid so'ngi statistika va ma'lumotlar`,
     author: `@mukhammadali`,
     siteUrl: `https://stopkorona.uz`,
   },
@@ -43,8 +43,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `StopKorona.uz`,
-        short_name: `StopKorona`,
+        name: `stopkorona.uz`,
+        short_name: `stopkorona.uz`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#fff`,
