@@ -5,9 +5,10 @@ import { useQuery } from 'react-query';
 import isEmpty from 'lodash/isEmpty';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryHistorical } from 'src/lib/api';
+import { useCountryHistorical } from 'src/hooks/stats';
 
 const HistoryBarChart = () => {
-  const {data, status} = useQuery([queryKeys.COUNTRY_HISTORICAL, { country: 'Italy' }], fetchCountryHistorical);
+  const {data, status} = useCountryHistorical({ countryName: 'Uzbekistan' });
   const casesArray = useMemo(() => {
       const cases = data?.timeline?.cases || {};
       if(isEmpty(cases)) return [];
@@ -91,7 +92,7 @@ return (
                   }
               ]
           }
-      ]}
+ 
       animate={true}
       motionStiffness={90}
       motionDamping={15}

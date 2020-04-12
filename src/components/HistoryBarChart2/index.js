@@ -1,13 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Line } from "react-chartjs-2"
+import {  Bar } from "react-chartjs-2"
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryHistorical } from 'src/lib/api';
 import { useQuery } from 'react-query';
 // import 'chartjs-plugin-crosshair';
 import colors from 'src/lib/theme/colors';
+import { useCountryHistorical } from 'src/hooks/stats';
 
 const HistoryBarChart2 = () => {
-  const {data, status} = useQuery([queryKeys.COUNTRY_HISTORICAL, { country: 'USA' }], fetchCountryHistorical);
+  const {data, status} = useCountryHistorical({countryName: 'Uzbekistan'});
   const [chartData, setChartData] = useState([]);
   console.log('data:', chartData)
   const [href, setHref]=useState("");
@@ -51,7 +52,7 @@ const HistoryBarChart2 = () => {
   return (
     <>
       <div>
-        <Line data={chartData} />
+        <Bar data={chartData} />
       </div>
       </>
   )
