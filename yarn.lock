@@ -5956,6 +5956,36 @@ gatsby-react-router-scroll@^2.1.24:
     scroll-behavior "^0.9.10"
     warning "^3.0.0"
 
+gatsby-source-custom-api@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/gatsby-source-custom-api/-/gatsby-source-custom-api-2.1.4.tgz#6999497feede30f69bc298582ec1564738be4496"
+  integrity sha512-ZYw2zxwmgMZA6Q9I2YyEM8ZQUtDlY+jNeL66i7a7n9WzIqiR4WoMYYoj9OJlr6Y1AwSSrfuJqRtgLJhA5zvu1Q==
+  dependencies:
+    gatsby-source-filesystem "^2.0.29"
+    node-fetch "^2.3.0"
+    uuid "^3.3.2"
+
+gatsby-source-filesystem@^2.0.29:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.2.2.tgz#9ecbc9e64fedd1c30b4d21f7e148016353b2dc17"
+  integrity sha512-uHHCiTp8/q9JF0Yr14Q5aJZ07jUJSV6HJSnrSVnEIF4PfRQkVJG5FHQULmxJUXWQhIoy17EGuzqVjxMsFY69QA==
+  dependencies:
+    "@babel/runtime" "^7.8.7"
+    better-queue "^3.8.10"
+    bluebird "^3.7.2"
+    chokidar "3.3.1"
+    file-type "^12.4.2"
+    fs-extra "^8.1.0"
+    gatsby-core-utils "^1.1.1"
+    got "^9.6.0"
+    md5-file "^3.2.3"
+    mime "^2.4.4"
+    pretty-bytes "^5.3.0"
+    progress "^2.0.3"
+    read-chunk "^3.2.0"
+    valid-url "^1.0.9"
+    xstate "^4.8.0"
+
 gatsby-source-filesystem@^2.1.56:
   version "2.1.56"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.56.tgz#52e96ac7ea64846699662b9bcf34caf8a3a3f603"
@@ -8797,7 +8827,7 @@ node-fetch@2.1.2:
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
   integrity sha1-q4hOjn5X44qUR1POxwb3iNF2i7U=
 
-node-fetch@2.6.0, node-fetch@^2.6.0:
+node-fetch@2.6.0, node-fetch@^2.3.0, node-fetch@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==

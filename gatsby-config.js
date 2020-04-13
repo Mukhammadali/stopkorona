@@ -52,6 +52,21 @@ module.exports = {
         icon: `src/static/images/logo.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "gatsby-source-custom-api",
+      options: {
+        url: "https://corona.lmao.ninja/countries/Uzbekistan",
+        rootKey: 'total'
+      },
+    },
+    {
+      resolve: "gatsby-source-custom-api",
+      options: {
+        url: "https://corona.lmao.ninja/v2/historical/Uzbekistan?lastdays=all",
+        rootKey: 'historical'
+      }
+    }
+    // 'source_rest',
     // {
     //   resolve: `gatsby-plugin-offline`,
     //   options: {
