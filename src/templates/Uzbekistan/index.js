@@ -40,47 +40,20 @@ const mockData = {
   }
 }
 
-const query = graphql`
-  query MyQuery {
-    total {
-      active
-      cases
-      country
-      countryInfo {
-        iso2
-        iso3
-      }
-      deaths
-      tests
-      recovered
-      todayCases
-      todayDeaths
-      updated
-    }
-  }
-`;
-
 const Uzbekistan = ({ historical }) => {
-  const {total} = useStaticQuery(query)
-  const { data: fetchedTotal } = useQuery([queryKeys.TOTAL_COUNTRY, { countryName: 'Uzbekistan' }], fetchCountryTotal)
-  const { data: fetchedHistorical } = useQuery([queryKeys.COUNTRY_HISTORICAL, { countryName: 'Uzbekistan' }], fetchCountryHistorical)
-  // const data = fetchedTotal || total;
-  // const historicalData = fetchedHistorical || historical;
-  // const { data: fetchedTotal } = useQuery([queryKeys.TOTAL_COUNTRY, { countryName: 'Uzbekistan' }], fetchCountryTotal)
-  // const { data: fetchedHistorical } = useQuery([queryKeys.COUNTRY_HISTORICAL, { countryName: 'Uzbekistan' }], fetchCountryHistorical)
-  // const data =  fetchedTotal;
-  // const historicalData =  fetchedHistorical
+  const { data: fetchedTotal } = useCountryTotal({countryName: 'Uzbekistan'})
+  const { data: fetchedHistorical } = useCountryHistorical({countryName: 'Uzbekistan'})
   return (
     <div>
       <CountryTitle country={fetchedTotal || mockData} />
       <Stats data={fetchedTotal} />
       <div>
         {isMobileOnly ? (
-          <h3>Oxirgi 10 kunlik o'sish</h3>
+          <h3>7 kunlik o'sish</h3>
         ):(
           <h3>Kunlik o'sish</h3>
         )}
-        <DailyCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
+        <DailyCasesChart limit={isMobileOnly ? 7 : null} data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </div>
       <div>
         <h3>Umumiy o'sish</h3>

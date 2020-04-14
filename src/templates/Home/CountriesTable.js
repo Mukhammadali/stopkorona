@@ -10,11 +10,12 @@ import {IoMdClose} from 'react-icons/io';
 import debounce from 'lodash/debounce';
 import { numberWithCommas } from 'src/lib/utils';
 import styled from 'styled-components';
+import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 
 const renderCustomCell = ({row}) => (
     <div className="country-cell">
       <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span>
-      <span>{row?.original?.country}</span>
+      <span>{getCountryUzbekName(row?.original?.countryInfo?.iso2) || row?.original?.country}</span>
     </div>
 )
 

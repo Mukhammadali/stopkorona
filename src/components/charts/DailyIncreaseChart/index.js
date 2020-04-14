@@ -9,7 +9,7 @@ import { isBrowser } from 'react-device-detect';
 import { uzLocale } from 'src/lib/config/apexCharts'
 
 
-const DailyIncreaseChart = ({ data, total }) => {
+const DailyIncreaseChart = ({ data, limit, total }) => {
   const chartRef = useRef();
   useEffect(() => {
     moment.locale('uz-latn');
@@ -38,8 +38,8 @@ const DailyIncreaseChart = ({ data, total }) => {
         newCases.push(total?.cases - slicedCases[slicedCases?.length - 1]);
       }
     }
-    const finalLabels = isMobileOnly ? slicedLabels.slice(slicedLabels?.length - 10) : slicedLabels;
-    const finalCases = isMobileOnly ? newCases.slice(newCases?.length - 10) : newCases;
+    const finalLabels = limit ? slicedLabels.slice(slicedLabels?.length - limit) : slicedLabels;
+    const finalCases = limit ? newCases.slice(newCases?.length - limit) : newCases;
     return {
       labels: finalLabels,
       cases: finalCases
@@ -106,8 +106,11 @@ const DailyIncreaseChart = ({ data, total }) => {
               enabled: true,
               offsetY: -20,
               style: {
-                fontSize: '12px',
+                fontSize: '11px',
                 colors: ["#304758"]
+              },
+              formatter (value) {
+                return numberWithCommas(value);
               }
             },
             xaxis: {
@@ -117,6 +120,9 @@ const DailyIncreaseChart = ({ data, total }) => {
                 datetimeUTC: false,
                 formatter:  function(val, timestamp) {
                   const date = moment(new Date(val)).locale('uzb').format('D MMMM');
+                  // if(moment(new Date(val)).isSame(moment(), 'date')){
+                  //   return 'Bugun'
+                  // }
                   return date;
                 },
                 format: 'd MMMM',
@@ -128,13 +134,6 @@ const DailyIncreaseChart = ({ data, total }) => {
                 },
               }
             },
-            yaxis: {
-              labels: {
-                formatter (value) {
-                  return numberWithCommas(value);
-                }
-              },
-            }
         }}
         series={[
           {
@@ -148,6 +147,10 @@ const DailyIncreaseChart = ({ data, total }) => {
       />
     </div>
   )
+}
+
+DailyIncreaseChart.defaultProps = {
+  limit: null
 }
 
 export default DailyIncreaseChart

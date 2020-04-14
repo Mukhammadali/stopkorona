@@ -6,7 +6,7 @@
 
 // You can delete this file if you're not using it
 
-// const path = require('path');
+const path = require('path');
 // const axios = require('axios');
 
 // const axiosInstance = axios.create({

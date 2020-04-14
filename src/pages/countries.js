@@ -7,7 +7,9 @@ import SingleCountry from 'src/templates/SingleCountry'
 import Home from 'src/templates/Home'
 
 
-const SecondPage = () => (
+const Countries = (props) => {
+  console.log('rendered', props)
+  return(
   <Layout>
     <Router>
       <SingleCountry path="/countries/:country" />
@@ -15,5 +17,6 @@ const SecondPage = () => (
     </Router>
   </Layout>
 )
+  }
 
-export default SecondPage
+export default Countries

@@ -1,13 +1,23 @@
 import React from 'react'
-import Stats from './Stats'
 import Charts from './Charts'
 import CountriesTable from './CountriesTable'
 // import HistoryBarChart3 from '';
 import Loadable from 'react-loadable';
 import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
-import { fetchTotal } from 'src/lib/api';
+import { fetchTotal, fetchAllHistorical } from 'src/lib/api';
+import Stats from './Stats';
+import { isMobileOnly } from 'react-device-detect';
 // import Loading from './my-loading-component';
+const TotalCasesChart = Loadable({
+  loader: () => import('src/components/charts/TotalCasesChart'),
+  loading: () => <></>,
+});
+
+const DailyCasesChart = Loadable({
+  loader: () => import('src/components/charts/DailyIncreaseChart'),
+  loading:  () => <></>,
+});
 
 const HistoryBarChart3 = Loadable({
   loader: () => import('src/components/HistoryBarChart3'),
@@ -15,12 +25,24 @@ const HistoryBarChart3 = Loadable({
 });
 
 const Home = () => {
-  const { data } = useQuery([queryKeys.TOTAL], fetchTotal)
+  const { data: fetchedTotal } = useQuery([queryKeys.TOTAL], fetchTotal)
+  const { data: fetchedHistorical} = useQuery([queryKeys.ALL_HISTORICAL], fetchAllHistorical)
   return (
     <div>
-      <Stats data={data} />
-      <Charts />
-      <HistoryBarChart3 />
+      <Stats data={fetchedTotal} />
+      
+        <div>
+          {isMobileOnly ? (
+            <h3>7 kunlik o'sish</h3>
+          ):(
+            <h3>20 kunlik o'sish</h3>
+          )}
+          <DailyCasesChart limit={isMobileOnly ? 7 : 20} data={fetchedHistorical} total={fetchedTotal} />
+        </div>
+        <div>
+          <h3>Umumiy o'sish</h3>
+          <TotalCasesChart data={fetchedHistorical} total={fetchedTotal} />
+        </div>
       <CountriesTable />
     </div>
   );
