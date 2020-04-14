@@ -11,9 +11,9 @@ const Countries = (props) => {
   console.log('rendered', props)
   return(
   <Layout>
-    <Router>
+    <Router basepath="/countries">
       <SingleCountry path="/countries/:country" />
-      <Home default />
+      <Home path="/" />
     </Router>
   </Layout>
 )
