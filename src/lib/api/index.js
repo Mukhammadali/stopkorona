@@ -12,4 +12,4 @@ export const fetchTotal = () =>
   axiosInstance.get('/all').then(res => res?.data)
 
 export const fetchCountryTotal = ({countryName}) =>
-  axiosInstance.get(`/countries/${countryName}`).then(res => res?.data)
+  axiosInstance.get(`/v2/countries/${countryName}`).then(res => res?.data)
