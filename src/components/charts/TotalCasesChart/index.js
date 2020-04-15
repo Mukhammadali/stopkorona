@@ -32,16 +32,17 @@ const TotalCasesChart = ({ data, total }) => {
       const today = moment().format('MM/DD/YY');
       if(lastDate !== latestDate){
         const lastCase = slicedCases[slicedCases.length - 1];
+        const timestamp = moment(lastDate, 'MM/DD/YY').add(1, 'days').format('MM/DD/YY')
         if(lastCase[1] <= total?.cases){
-          slicedLabels.push(latestDate);
-          slicedCases.push([latestDate, total?.cases]);
-          slicedRecovered.push([latestDate,total?.recovered]);
-          slicedDeaths.push([latestDate, total?.deaths]);
+          slicedLabels.push(timestamp);
+          slicedCases.push([timestamp, total?.cases]);
+          slicedRecovered.push([timestamp,total?.recovered]);
+          slicedDeaths.push([timestamp, total?.deaths]);
         } else {
-          slicedLabels.push(latestDate);
-          slicedCases.push([latestDate, data.cases[lastDate]]);
-          slicedRecovered.push([latestDate, data.recovered[lastDate]]);
-          slicedDeaths.push([latestDate, data.deaths[lastDate]]);
+          slicedLabels.push(timestamp);
+          slicedCases.push([timestamp, data.cases[lastDate]]);
+          slicedRecovered.push([timestamp, data.recovered[lastDate]]);
+          slicedDeaths.push([timestamp, data.deaths[lastDate]]);
         }
       }
       // if(latestDate !== today){
@@ -97,15 +98,15 @@ const TotalCasesChart = ({ data, total }) => {
             chart: {
               height: 350,
               animations: {
-                  enabled: true,
+                  enabled: false,
                   // easing: 'easeinout',
                   // speed: 100,
                   animateGradually: {
-                      enabled: true,
+                      enabled: false,
                       // delay: 100
                   },
                   dynamicAnimation: {
-                      enabled: true,
+                      enabled: false,
                       // speed: 100
                   }
               },

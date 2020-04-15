@@ -24,7 +24,9 @@ function Table({ onClickListItem, columns, data, initialState }) {
       columns,
       data,
       initialState: initialState || {},
-      disableSortRemove: true
+      disableSortRemove: true,
+      autoResetSortBy: false,
+      autoResetFilters: false
     },
     useFilters,
     useSortBy,

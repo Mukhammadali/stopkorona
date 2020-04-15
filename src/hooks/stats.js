@@ -8,6 +8,8 @@ export const useCountryHistorical = ({countryName}) => {
   });
 }
 
-export const useCountryTotal = ({ countryName }) => {
-  return useQuery([queryKeys.TOTAL_COUNTRY, { countryName }], fetchCountryTotal)
+export const useCountryTotal = ({ countryName, initialData }) => {
+  return useQuery([queryKeys.TOTAL_COUNTRY, { countryName }], fetchCountryTotal, {
+    initialData
+  })
 }

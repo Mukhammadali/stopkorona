@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { graphql, useStaticQuery } from "gatsby"
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import CountryTitle from 'src/components/CountryTitle';
 import Loader from 'react-loader-spinner';
@@ -7,7 +6,7 @@ import Loadable from 'react-loadable';
 import Stats from '../Home/Stats'
 import { Row } from 'reactstrap';
 import { isMobileOnly } from 'react-device-detect';
-import GenderPieChart from './components/GenderPieChart';
+// import GenderPieChart from './components/GenderPieChart';
 import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal, fetchCountryHistorical } from 'src/lib/api';

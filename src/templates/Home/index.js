@@ -26,11 +26,15 @@ const HistoryBarChart3 = Loadable({
 });
 
 const Home = () => {
-  const { data: fetchedTotal } = useQuery([queryKeys.TOTAL], fetchTotal)
-  const { data: fetchedHistorical} = useQuery([queryKeys.ALL_HISTORICAL], fetchAllHistorical)
+  const { data: fetchedTotal } = useQuery([queryKeys.TOTAL], fetchTotal, {
+    refetchOnMount: false
+  })
+  const { data: fetchedHistorical} = useQuery([queryKeys.ALL_HISTORICAL], fetchAllHistorical, {
+    refetchOnMount: false
+  })
   return (
     <div>
-      <SEO title="Dunyo koronavirus  statistikasi" description="Butun "/>
+      <SEO title="Dunyo koronavirus statistikasi" description="Butun Jahon koronavirus statistikasi"/>
       <Stats data={fetchedTotal} />
         <div>
           {isMobileOnly ? (

@@ -29,8 +29,7 @@ const DailyCasesChart = Loadable({
 
 const SingleCountry = ({ country, location }) => {
   const passedCountry = location?.state?.country;
-  console.log('passedCountry:', passedCountry)
-  const { data: fetchedTotal } = useCountryTotal({countryName: passedCountry?.country})
+  const { data: fetchedTotal } = useCountryTotal({countryName: passedCountry?.country, initialData: passedCountry})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: passedCountry?.country})
   const countryName = getCountryUzbekName(passedCountry?.countryInfo?.iso2)  || passedCountry?.country;
   return (

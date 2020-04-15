@@ -1,8 +1,8 @@
 import React, { useMemo, memo, useState, useCallback } from 'react';
 import queryKeys from 'src/lib/constants/queryKeys';
-import { fetchAllCountries } from 'src/lib/api';
+import { fetchAllCountries, fetchCountryHistorical } from 'src/lib/api';
 import Table from 'src/components/Table';
-import { useQuery } from 'react-query';
+import { useQuery, queryCache } from 'react-query';
 import {navigate} from 'gatsby'
 import moize from 'moize';
 import {GoSearch} from 'react-icons/go';
@@ -113,6 +113,7 @@ const CountriesTable = () => {
     })), [data]);
 
   const onNavigate = (data) => {
+    queryCache.prefetchQuery([queryKeys.COUNTRY_HISTORICAL, { countryName:  data?.country }], fetchCountryHistorical);
     navigate(`/countries/${data?.country}`, {
      state: {
        country: data,

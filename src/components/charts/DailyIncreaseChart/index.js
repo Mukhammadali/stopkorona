@@ -29,13 +29,13 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
     const lastLeadingZeroIndex = Object.values(data?.cases).findIndex(el => el > 0);
     const slicedLabels = Object.keys(data?.cases).slice(lastLeadingZeroIndex)
     const slicedCases = Object.values(data?.cases).slice(lastLeadingZeroIndex)
-    const newCases = slicedCases.map((el, idx) => idx === 0 ? el : el - slicedCases[idx -1]);
+    const newCases = slicedCases.map((el, idx) => idx === 0 ? el : el - slicedCases[idx -1] >= 0 ? el - slicedCases[idx -1] : slicedCases[idx -1] - slicedCases[idx -2] );
     if (total) {
       const lastDate = slicedLabels[slicedLabels.length - 1];
       const lastCase = slicedCases[slicedCases?.length - 1];
       const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
       if(lastDate !== latestDate){
-        slicedLabels.push(latestDate);
+        slicedLabels.push(moment(lastDate, 'MM/DD/YY').add(1, 'days').format('MM/DD/YY'));
         newCases.push(total?.todayCases);
       }
     }
