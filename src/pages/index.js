@@ -60,7 +60,7 @@ const MainPage = () => {
 const IndexPage = ({pageContext}) => {
   return (
     <Layout>
-      <SEO title="O'zbekiston koronavirus statistikasi" />
+      <SEO title="Koronavirus statistikasi" description="O'zbekiston va Butun Jahon to'liq statistikasi. Koronavirus kunlik o'sishini kuzatishingiz mumkin" />
       <MainPage />
     </Layout>
   )

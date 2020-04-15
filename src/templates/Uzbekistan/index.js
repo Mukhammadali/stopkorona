@@ -11,6 +11,7 @@ import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal, fetchCountryHistorical } from 'src/lib/api';
 import styled from 'styled-components';
+import SEO from 'src/components/seo';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -46,6 +47,7 @@ const Uzbekistan = ({ historical }) => {
   return (
     <Styles>
       {/* <CountryTitle country={fetchedTotal || mockData} /> */}
+      <SEO title="O'zbekiston koronavirus statistikasi" />
       <Stats data={fetchedTotal} />
       <div>
         {isMobileOnly ? (
