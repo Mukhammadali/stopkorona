@@ -10,6 +10,7 @@ import SEO from 'src/components/seo';
 import CountryTitle from 'src/components/CountryTitle';
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import { isMobileOnly } from 'react-device-detect';
+import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
     <Loader type="TailSpin" color="#00BFFF" height={80} width={80}/>
@@ -31,9 +32,10 @@ const SingleCountry = ({ country, location }) => {
   console.log('passedCountry:', passedCountry)
   const { data: fetchedTotal } = useCountryTotal({countryName: passedCountry?.country})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: passedCountry?.country})
+  const countryName = getCountryUzbekName(passedCountry?.countryInfo?.iso2)  || passedCountry?.country;
   return (
     <Styles>
-      <SEO title={fetchedTotal?.country} />
+      <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
       <CountryTitle country={fetchedTotal} />
       <Stats data={fetchedTotal} />
       <div>

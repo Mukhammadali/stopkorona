@@ -15,7 +15,7 @@ import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 const renderCustomCell = ({row}) => (
     <div className="country-cell">
       <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span>
-      <span>{getCountryUzbekName(row?.original?.countryInfo?.iso2) || row?.original?.country}</span>
+      <span>{row?.original?.uzName}</span>
     </div>
 )
 
@@ -45,7 +45,7 @@ const TableColumns = [
   {
     Header: "Country",
     Cell: renderCustomCell,
-    accessor: 'country',
+    accessor: 'uzName',
     sortDescFirst: false,
     disableSortBy: true,
     Filter: function DefaultColumnFilter({
@@ -107,10 +107,10 @@ const CountriesTable = () => {
     setQuery(value)
   }, 50), []);
 
-  const searchResult = useMemo(() => {
-    if(!query) return data;
-    return data?.filter(el => el?.country?.toLowerCase().includes(query.toLowerCase()));
-  }, [query, data]);
+  const searchResult = useMemo(() => data?.map(el => ({
+      ...el,
+      uzName: getCountryUzbekName(el?.countryInfo?.iso2) || el?.country,
+    })), [data]);
 
   const onNavigate = (data) => {
     navigate(`/countries/${data?.country}`, {
