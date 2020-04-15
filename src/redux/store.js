@@ -23,7 +23,7 @@ export const resetReduxPersist = () => purgeStoredState(persistConfig);
 export let reduxPersistor = null;
 
 // eslint-disable-next-line no-undef
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 const enhancers = [];
 const middlewares = [thunk, promise];
 const middlewareEnhancer = applyMiddleware(...middlewares);
