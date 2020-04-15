@@ -154,6 +154,9 @@ const Styled = styled.div`
     outline: none;
     border: none;
     padding: 0px 5px;
-    max-width: 100%;
+    /* max-width: 100%; */
+    height: 30px;
+    /* width: 300px; */
+    border-radius: 2px;
   }
 `;

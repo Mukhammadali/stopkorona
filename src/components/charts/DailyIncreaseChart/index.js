@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect } from 'react'
+import React, { useRef, useMemo, useEffect, memo } from 'react'
 import Chart from "react-apexcharts";
 import moment from "moment";
 import { isMobileOnly } from 'react-device-detect';
@@ -32,10 +32,11 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
     const newCases = slicedCases.map((el, idx) => idx === 0 ? el : el - slicedCases[idx -1]);
     if (total) {
       const lastDate = slicedLabels[slicedLabels.length - 1];
+      const lastCase = slicedCases[slicedCases?.length - 1];
       const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
       if(lastDate !== latestDate){
         slicedLabels.push(latestDate);
-        newCases.push(total?.cases - slicedCases[slicedCases?.length - 1]);
+        newCases.push(total?.todayCases);
       }
     }
     const finalLabels = limit ? slicedLabels.slice(slicedLabels?.length - limit) : slicedLabels;
@@ -69,12 +70,12 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
             chart: {
               height: 350,
               animations: {
-                  enabled: true,
+                  enabled: false,
                   animateGradually: {
-                      enabled: true,
+                      enabled: false,
                   },
                   dynamicAnimation: {
-                      enabled: true,
+                      enabled: false,
                   }
               },
               locales:[
@@ -153,4 +154,4 @@ DailyIncreaseChart.defaultProps = {
   limit: null
 }
 
-export default DailyIncreaseChart
+export default memo(DailyIncreaseChart)

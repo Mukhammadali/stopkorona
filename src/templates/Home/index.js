@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Charts from './Charts'
 import CountriesTable from './CountriesTable'
 // import HistoryBarChart3 from '';
@@ -8,6 +8,7 @@ import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchTotal, fetchAllHistorical } from 'src/lib/api';
 import Stats from './Stats';
 import { isMobileOnly } from 'react-device-detect';
+import SEO from 'src/components/seo';
 // import Loading from './my-loading-component';
 const TotalCasesChart = Loadable({
   loader: () => import('src/components/charts/TotalCasesChart'),
@@ -29,8 +30,8 @@ const Home = () => {
   const { data: fetchedHistorical} = useQuery([queryKeys.ALL_HISTORICAL], fetchAllHistorical)
   return (
     <div>
+      <SEO title="Dunyo koronavirus  statistikasi" description="Butun "/>
       <Stats data={fetchedTotal} />
-      
         <div>
           {isMobileOnly ? (
             <h3>7 kunlik o'sish</h3>
@@ -49,4 +50,4 @@ const Home = () => {
 }
 
 
-export default Home;
+export default memo(Home);

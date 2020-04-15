@@ -145,6 +145,7 @@ export default memo(Stats);
 
 
 const StyledContainer = styled(Container)`
+  margin-top: 1rem;
   .card-stats .card-body {
     padding: 1rem;
   }
@@ -153,11 +154,7 @@ const StyledContainer = styled(Container)`
     flex-direction: column;
   }
   .card-wrapper {
-    padding: 0px;
-    padding-right: 10px;
-    /* :last-child {
-      padding-right: 0px;
-    } */
+     padding: 0px 5px;
     .card-stats {
       height: 100%;
       border: none;

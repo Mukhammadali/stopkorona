@@ -11,6 +11,7 @@ import GenderPieChart from './components/GenderPieChart';
 import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal, fetchCountryHistorical } from 'src/lib/api';
+import styled from 'styled-components';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -44,25 +45,32 @@ const Uzbekistan = ({ historical }) => {
   const { data: fetchedTotal } = useCountryTotal({countryName: 'Uzbekistan'})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: 'Uzbekistan'})
   return (
-    <div>
-      <CountryTitle country={fetchedTotal || mockData} />
+    <Styles>
+      {/* <CountryTitle country={fetchedTotal || mockData} /> */}
       <Stats data={fetchedTotal} />
       <div>
         {isMobileOnly ? (
-          <h3>7 kunlik o'sish</h3>
+          <h3 className="font-semibold">7 kunlik o'sish</h3>
         ):(
           <h3>Kunlik o'sish</h3>
         )}
         <DailyCasesChart limit={isMobileOnly ? 7 : null} data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </div>
       <div>
-        <h3>Umumiy o'sish</h3>
+        <h3 className="font-semibold">Umumiy o'sish</h3>
         <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </div>
       {/* <GenderPieChart /> */}
-    </div>
+    </Styles>
   )
 }
 
 export default Uzbekistan
+
+
+const Styles = styled.div`
+  /* h3 {
+    font-size: 1.3rem;
+  } */
+`;
 

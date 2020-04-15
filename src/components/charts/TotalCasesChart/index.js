@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, memo } from 'react'
 import Chart from "react-apexcharts";
 import moment from "moment";
 import { numberWithCommas } from 'src/lib/utils'
@@ -31,17 +31,36 @@ const TotalCasesChart = ({ data, total }) => {
       const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
       const today = moment().format('MM/DD/YY');
       if(lastDate !== latestDate){
-        slicedLabels.push(latestDate);
-        slicedCases.push([latestDate, total?.cases]);
-        slicedRecovered.push([latestDate,total?.recovered]);
-        slicedDeaths.push([latestDate, total?.deaths]);
+        const lastCase = slicedCases[slicedCases.length - 1];
+        if(lastCase[1] <= total?.cases){
+          slicedLabels.push(latestDate);
+          slicedCases.push([latestDate, total?.cases]);
+          slicedRecovered.push([latestDate,total?.recovered]);
+          slicedDeaths.push([latestDate, total?.deaths]);
+        } else {
+          slicedLabels.push(latestDate);
+          slicedCases.push([latestDate, data.cases[lastDate]]);
+          slicedRecovered.push([latestDate, data.recovered[lastDate]]);
+          slicedDeaths.push([latestDate, data.deaths[lastDate]]);
+        }
       }
-      if(latestDate !== today){
-        slicedLabels.push(latestDate);
-        slicedCases.push([latestDate, total?.cases]);
-        slicedRecovered.push([latestDate,total?.recovered]);
-        slicedDeaths.push([latestDate, total?.deaths]);
-      }
+      // if(latestDate !== today){
+      //   const lastCase = slicedCases[slicedCases.length - 1];
+      //   console.log('lastCase:', lastCase)
+      //   console.log('total?.cases:', total?.cases)
+      //   if(lastCase <= total?.cases){
+      //     slicedLabels.push(latestDate);
+      //     slicedCases.push([latestDate, total?.cases]);
+      //     slicedRecovered.push([latestDate,total?.recovered]);
+      //     slicedDeaths.push([latestDate, total?.deaths]);
+      //   } else {
+      //     slicedLabels.push(latestDate);
+      //     slicedCases.push([latestDate, lastCase]);
+      //     slicedRecovered.push([latestDate, slicedRecovered[slicedRecovered.length - 1]]);
+      //     slicedDeaths.push([latestDate, slicedDeaths[slicedDeaths.length - 1]]);
+      //   }
+        
+      // }
     }
     return {
       cases:slicedCases ,
@@ -170,4 +189,4 @@ const TotalCasesChart = ({ data, total }) => {
   )
 }
 
-export default TotalCasesChart
+export default memo(TotalCasesChart)

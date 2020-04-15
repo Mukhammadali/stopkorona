@@ -133,10 +133,10 @@ const Styles = styled.div`
       &:first-child {
         font-size: 1rem;
         width: 15rem;
-        max-width: 15rem;
+        /* max-width: 15rem; */
         @media only screen and (max-width: 980px) {
-          width: 10rem;
-          max-width: 10rem;
+          min-width: 13rem;
+          /* max-width: 10rem; */
         }
       }
     }
