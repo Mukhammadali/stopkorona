@@ -59,7 +59,7 @@ const Uzbekistan = ({ historical }) => {
         <h3 className="font-semibold">Umumiy o'sish</h3>
         <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </div>
-      <GenderPieChart />
+      {/* <GenderPieChart /> */}
     </Styles>
   )
 }
