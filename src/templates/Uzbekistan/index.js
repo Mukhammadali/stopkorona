@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import CountryTitle from 'src/components/CountryTitle';
-import Loader from 'react-loader-spinner';
 import Loadable from 'react-loadable';
 import Stats from '../Home/Stats'
 import { Row } from 'reactstrap';
 import { isMobileOnly } from 'react-device-detect';
-// import GenderPieChart from './components/GenderPieChart';
+import GenderPieChart from './components/GenderPieChart';
 import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal, fetchCountryHistorical } from 'src/lib/api';
@@ -15,7 +14,7 @@ import SEO from 'src/components/seo';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
-    <Loader type="TailSpin" color="#00BFFF" height={80} width={80}/>
+    <div class="spinner-border text-secondary" style={{height: '3rem', width: '3rem'}}  role="status" />
   </div>
 )
 
@@ -46,7 +45,6 @@ const Uzbekistan = ({ historical }) => {
   const { data: fetchedHistorical } = useCountryHistorical({countryName: 'Uzbekistan'})
   return (
     <Styles>
-      {/* <CountryTitle country={fetchedTotal || mockData} /> */}
       <SEO title="O'zbekiston koronavirus statistikasi" />
       <Stats data={fetchedTotal} />
       <div>
@@ -61,7 +59,7 @@ const Uzbekistan = ({ historical }) => {
         <h3 className="font-semibold">Umumiy o'sish</h3>
         <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </div>
-      {/* <GenderPieChart /> */}
+      <GenderPieChart />
     </Styles>
   )
 }

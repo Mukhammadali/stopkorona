@@ -6,10 +6,10 @@ export const fetchAllHistorical = () =>
   axiosInstance.get('v2/historical/all?lastdays=all').then(res => res?.data)
 
 export const fetchAllCountries = () =>
-  axiosInstance.get('countries').then(res => res?.data)
+  axiosInstance.get('v2/countries?sort=cases').then(res => res?.data)
 
 export const fetchTotal = () =>
-  axiosInstance.get('/all').then(res => res?.data)
+  axiosInstance.get('/v2/all').then(res => res?.data)
 
 export const fetchCountryTotal = ({countryName}) =>
   axiosInstance.get(`/v2/countries/${countryName}`).then(res => res?.data)

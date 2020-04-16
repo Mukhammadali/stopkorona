@@ -5,15 +5,15 @@ import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal } from 'src/lib/api';
 import Loadable from "react-loadable";
-import Loader from 'react-loader-spinner';
 import SEO from 'src/components/seo';
 import CountryTitle from 'src/components/CountryTitle';
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import { isMobileOnly } from 'react-device-detect';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
+
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
-    <Loader type="TailSpin" color="#00BFFF" height={80} width={80}/>
+    <div class="spinner-border text-secondary" style={{height: '3rem', width: '3rem'}}  role="status" />
   </div>
 )
 
@@ -29,9 +29,9 @@ const DailyCasesChart = Loadable({
 
 const SingleCountry = ({ country, location }) => {
   const passedCountry = location?.state?.country;
-  const { data: fetchedTotal } = useCountryTotal({countryName: passedCountry?.country, initialData: passedCountry})
-  const { data: fetchedHistorical } = useCountryHistorical({countryName: passedCountry?.country})
-  const countryName = getCountryUzbekName(passedCountry?.countryInfo?.iso2)  || passedCountry?.country;
+  const { data: fetchedTotal } = useCountryTotal({countryName: country, initialData: passedCountry})
+  const { data: fetchedHistorical } = useCountryHistorical({countryName: country})
+  const countryName = getCountryUzbekName(fetchedTotal?.countryInfo?.iso2)  || fetchedTotal?.country || country;
   return (
     <Styles>
       <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />

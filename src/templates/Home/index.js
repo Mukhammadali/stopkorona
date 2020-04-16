@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import Charts from './Charts'
 import CountriesTable from './CountriesTable'
-// import HistoryBarChart3 from '';
 import Loadable from 'react-loadable';
 import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
@@ -9,21 +8,23 @@ import { fetchTotal, fetchAllHistorical } from 'src/lib/api';
 import Stats from './Stats';
 import { isMobileOnly } from 'react-device-detect';
 import SEO from 'src/components/seo';
-// import Loading from './my-loading-component';
+
+const Loading = () => (
+  <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
+    <div class="spinner-border text-secondary" style={{height: '3rem', width: '3rem'}}  role="status" />
+  </div>
+)
+
 const TotalCasesChart = Loadable({
   loader: () => import('src/components/charts/TotalCasesChart'),
-  loading: () => <></>,
+  loading: Loading,
 });
 
 const DailyCasesChart = Loadable({
   loader: () => import('src/components/charts/DailyIncreaseChart'),
-  loading:  () => <></>,
+loading:  Loading,
 });
 
-const HistoryBarChart3 = Loadable({
-  loader: () => import('src/components/HistoryBarChart3'),
-  loading:  () => <div>Loading...</div>,
-});
 
 const Home = () => {
   const { data: fetchedTotal } = useQuery([queryKeys.TOTAL], fetchTotal, {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTable, useSortBy, useFilters} from 'react-table'
 import styled from 'styled-components'
 import { IoMdArrowRoundUp, IoMdArrowRoundDown } from 'react-icons/io';
@@ -86,12 +86,12 @@ function Table({ onClickListItem, columns, data, initialState }) {
   )
 }
 
-export default Table
+export default memo(Table)
 
 const Styles = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  height: 500px;
+  /* height: 500px; */
   table {
     border-radius: 5px;
     border-spacing: 0;
@@ -146,7 +146,7 @@ const Styles = styled.div`
       background-color: #edf2f7;
       padding: 0.5rem;
       position: sticky;
-      top: 0;
+      position: -webkit-sticky;
       z-index: 2;
       .table-head font-weight-semibold {
         display: flex;

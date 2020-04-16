@@ -1,11 +1,11 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Link } from "gatsby"
 import 'rc-tabs/assets/index.css';
 import { GoGlobe } from 'react-icons/go'
 import Layout from "src/components/layout"
 import SEO from "src/components/seo"
 import Uzbekistan from 'src/templates/Uzbekistan'
-import Home from 'src/templates/Home'
+// import Home from 'src/templates/Home'
 import Tabs, { TabPane } from 'rc-tabs';
 import TabContent from 'rc-tabs/lib/TabContent';
 import InkTabBar from 'rc-tabs/lib/InkTabBar';
@@ -16,8 +16,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTabAction } from 'src/redux/global/globalActions';
 
+const Home = React.lazy(() => import('src/templates/Home'))
+
 const MainPage = () => {
-  // const [activeTab, setActiveTab] = useState('uzbekistan')
   const dispatch = useDispatch();
   const activeTab = useSelector(store => store.global.activeTab)
   const updateTab = key => dispatch(updateTabAction(key));
@@ -33,7 +34,7 @@ const MainPage = () => {
             data-extra="tabbar"
           />
         }
-        renderTabContent={() => <TabContent />}
+        renderTabContent={() => <TabContent animated={false} />}
         activeKey={activeTab}
       >
         <TabPane tab={(
@@ -44,13 +45,19 @@ const MainPage = () => {
         )} data-extra="tabpane" key="uzbekistan">
           <Uzbekistan />
         </TabPane>
-        <TabPane forceRender tab={(
+        <TabPane  tab={(
           <div className="font-weight-semibold d-flex align-items-center">
           <GoGlobe className="mr-1 globe-icon" />
           <h5 className="mb-0 font-semibold">Global</h5>
         </div>
         )} data-extra="tabpane" key="world">
-          <Home />
+          <Suspense fallback={(
+            <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
+              <div class="spinner-border text-secondary" style={{height: '3rem', width: '3rem'}}  role="status" />
+            </div>
+          )}>
+            <Home />
+          </Suspense>
         </TabPane>
       </Tabs>
     </Styles>

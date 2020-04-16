@@ -12,12 +12,15 @@ import { numberWithCommas } from 'src/lib/utils';
 import styled from 'styled-components';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 
-const renderCustomCell = ({row}) => (
+const renderCustomCell = ({row, ...props}) => {
+  return(
     <div className="country-cell">
+      <span className="mr-1" style={{width: 30}}>{row.index + 1}.</span>
       <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span>
       <span>{row?.original?.uzName}</span>
     </div>
-)
+  )
+}
 
 const renderRow = ({row, column}) => {
   if(column?.id === 'cases' && row?.original?.todayCases) {
@@ -101,13 +104,12 @@ const TableColumns = [
 
 
 const CountriesTable = () => {
-  const { data, isLoading } = useQuery(queryKeys.ALL_COUNTRIES, fetchAllCountries)
-  const [query, setQuery] = useState('');
-  const onChange = useCallback(debounce(value => {
-    setQuery(value)
-  }, 50), []);
+  const { data, isLoading } = useQuery(queryKeys.ALL_COUNTRIES, fetchAllCountries, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false
+  })
 
-  const searchResult = useMemo(() => data?.map(el => ({
+  const transformedData = useMemo(() => data?.map(el => ({
       ...el,
       uzName: getCountryUzbekName(el?.countryInfo?.iso2) || el?.country,
     })), [data]);
@@ -128,21 +130,16 @@ const CountriesTable = () => {
         <span>{data?.length}</span>
       </div>
       <Table
-        onClickListItem={onNavigate} columns={TableColumns} data={searchResult || []}
-        initialState={{
-          sortBy: [
-            {
-              id: 'cases',
-              desc: true,
-            }
-          ]
-        }}
+        onClickListItem={onNavigate}
+        columns={TableColumns}
+        data={transformedData || []}
+        // initialState={}
       />
     </Styled>
   )
 };
 
-export default CountriesTable;
+export default memo(CountriesTable);
 
 const Styled = styled.div`
   .table-toolbox {

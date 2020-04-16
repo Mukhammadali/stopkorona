@@ -35,6 +35,10 @@ const Header = ({ siteTitle }) => {
             <ReactLogo width="200" height="50" />
             {/* {siteTitle} */}
           </Link>
+          {/* <Link to="/page2" >Page 2</Link>
+          <Link to="/page3" >Page 3</Link>
+          <Link to="/countries" >Global</Link>
+          <Link to="/countries/USA" >USA</Link> */}
           
           
         </div>

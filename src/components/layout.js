@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
       </Container>
-      <footer className="d-flex justify-content-center font-light">
+      <footer className="my-5 d-flex justify-content-center font-light">
         © {new Date().getFullYear()}. <span className="ml-2 font-weight-bold">Made in Uzbekistan</span>
       </footer>
     </>
