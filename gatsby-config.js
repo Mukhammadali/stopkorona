@@ -6,9 +6,9 @@ module.exports = {
     siteUrl: `https://stopkorona.uz`,
   },
   plugins: [
-    'gatsby-plugin-netlify',
     'gatsby-plugin-zeit-now',
     'gatsby-plugin-sitemap',
+    // `gatsby-plugin-transition-link`,
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -21,7 +21,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
         trackingId: "UA-159324585-2",
       },
     },
@@ -52,21 +51,6 @@ module.exports = {
         icon: `src/static/images/logo.png`, // This path is relative to the root of the site.
       },
     },
-    // {
-    //   resolve: "gatsby-source-custom-api",
-    //   options: {
-    //     url: "https://corona.lmao.ninja/v2/countries/Uzbekistan?yesterday=true",
-    //     rootKey: 'total'
-    //   },
-    // },
-    // {
-    //   resolve: "gatsby-source-custom-api",
-    //   options: {
-    //     url: "https://corona.lmao.ninja/v2/historical/Uzbekistan?lastdays=all",
-    //     rootKey: 'historical'
-    //   }
-    // }
-    // 'source_rest',
     // {
     //   resolve: `gatsby-plugin-offline`,
     //   options: {

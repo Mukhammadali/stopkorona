@@ -18,6 +18,7 @@ function Table({ onClickListItem, columns, data, initialState }) {
     getTableBodyProps,
     headerGroups,
     rows,
+    columns: tColumns,
     prepareRow,
   } = useTable(
     {
@@ -35,6 +36,7 @@ function Table({ onClickListItem, columns, data, initialState }) {
   // We don't want to render all 2000 rows for this example, so cap
   // it at 20 for this use case
   // const firstPageRows = rows.slice(0, 20)
+  console.log({tColumns})
 
   return (
     <Styles>
@@ -69,16 +71,15 @@ function Table({ onClickListItem, columns, data, initialState }) {
         <tbody {...getTableBodyProps()}>
           {rows.map(
             (row, i) => {
-              prepareRow(row);
-              
-              return (
-                <tr {...row.getRowProps()} onClick={() => onClickListItem(row?.original)}>
-                  {row.cells.map(cell =>  (
-                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    )
-                  )}
-                </tr>
-              )}
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()} onClick={() => onClickListItem(row?.original)}>
+                {row.cells.map(cell =>  (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  )
+                )}
+              </tr>
+            )}
           )}
         </tbody>
       </table>
@@ -89,9 +90,7 @@ function Table({ onClickListItem, columns, data, initialState }) {
 export default memo(Table)
 
 const Styles = styled.div`
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  /* height: 500px; */
+  overflow-x: scroll;
   table {
     border-radius: 5px;
     border-spacing: 0;
@@ -135,24 +134,25 @@ const Styles = styled.div`
       &:first-child {
         font-size: 1rem;
         width: 15rem;
-        /* max-width: 15rem; */
         @media only screen and (max-width: 980px) {
           min-width: 13rem;
-          /* max-width: 10rem; */
         }
       }
     }
     th {
       background-color: #edf2f7;
       padding: 0.5rem;
-      position: sticky;
-      position: -webkit-sticky;
       z-index: 2;
-      .table-head font-weight-semibold {
+      .table-head {
         display: flex;
         align-items: center;
       }
     }
-   
+    thead {
+      position: sticky;
+      top: 0;
+      left:0;
+      right: 0;
+    }
   }
 `

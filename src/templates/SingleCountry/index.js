@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components';
-import Stats from '../Home/Stats';
+import Stats from 'src/components/Stats';
 import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal } from 'src/lib/api';
@@ -35,7 +35,7 @@ const SingleCountry = ({ country, location }) => {
   return (
     <Styles>
       <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
-      <CountryTitle country={fetchedTotal} />
+      <CountryTitle goBack country={fetchedTotal} />
       <Stats data={fetchedTotal} />
       <div>
         {isMobileOnly ? (

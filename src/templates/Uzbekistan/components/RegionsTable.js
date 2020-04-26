@@ -1,0 +1,102 @@
+import React, { useEffect, useState, useMemo } from 'react'
+import styled from 'styled-components'
+import rawData from 'src/static/data/regions.json';
+
+const RegionsTable = () => {
+  const regions = useMemo(() => {
+    return rawData.data?.sort((a,b) => b.cases - a.cases) || [];
+  }, [])
+ 
+  return (
+    <Styles>
+      <span className="mb-1 font-semibold">Jadval yangilangan sana: </span><span>25-Aprel</span>
+      <div className="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Viloyat nomi</th>
+            <th>Yuqtirganlar</th>
+            <th>Tuzalganlar</th>
+            <th>Vafot etganlar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            regions?.map((region, idx) => (
+              <tr>
+                <td className="country-cell">{idx + 1}. {region?.name}</td>
+                <td className="stat-cell">{region?.cases}</td>
+                <td className="stat-cell">{region?.recovered || '-'}</td>
+                <td className="stat-cell">{region?.deaths || '-'}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      </div>
+    </Styles>
+  )
+}
+
+export default RegionsTable
+
+const Styles = styled.div`
+  .table-wrapper{
+    overflow-x: auto;
+  }
+  table {
+    border-radius: 5px;
+    border-spacing: 0;
+    width: 100%;
+    cursor: pointer;
+    tr {
+      .country-cell {
+        height: 100%;
+        align-items: center;
+        padding-left: 10px;
+        font-size: 1.10rem;
+      }
+      .stat-cell {
+        padding:0 1rem !important;
+        font-family: "ProximaNova Semibold";
+        font-size: 1.10rem;
+      }
+    }
+    th,
+    td {
+      margin: 0;
+      padding: 0px;
+      border-bottom: 1px solid #e2e8f0;
+      border-right: 1px solid #e2e8f0;
+      height: 2.5rem;
+      :last-child {
+        border-right: 1px solid #e2e8f0;
+      }
+      :first-child {
+        border-left: 1px solid #e2e8f0;
+      }
+      &:first-child {
+        font-size: 1rem;
+        width: 15rem;
+        @media only screen and (max-width: 980px) {
+          min-width: 13rem;
+        }
+      }
+    }
+    th {
+      background-color: #edf2f7;
+      padding: 0.5rem;
+      z-index: 2;
+      .table-head {
+        display: flex;
+        align-items: center;
+      }
+    }
+    thead {
+      position: sticky;
+      top: 0;
+      left:0;
+      right: 0;
+    }
+  }
+`

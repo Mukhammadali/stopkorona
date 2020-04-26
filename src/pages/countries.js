@@ -1,22 +1,27 @@
-import React from "react"
-import { Link } from "gatsby"
-import { Router } from "@reach/router"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import SingleCountry from 'src/templates/SingleCountry'
-import Home from 'src/templates/Home'
-import CountriesTable from 'src/templates/Home/CountriesTable'
+import React, { memo } from 'react'
+import SEO from 'src/components/seo';
+import CountriesTable from 'src/components/CountriesTable';
+import Layout from 'src/components/Layout';
+import { Router } from '@reach/router';
+import SingleCountry from 'src/templates/SingleCountry';
 
 
-const Countries = (props) => {
-  return(
+
+const Countries = () => {
+  return (
     <Layout>
-      <Router basepath="/countries">
-        <SingleCountry path="/:country" />
-        <CountriesTable path="/" />
-      </Router>
+      <SEO title="Davlatlar Koronavirus statistikasi" description="Butun dunyo davlatlarining koronavirus statistikasi jadvali"/>
+      <div style={{
+        overflowX: 'hidden'
+      }}>
+        <Router basepath="/countries">
+          <SingleCountry  path="/:country" />
+          <CountriesTable path="/" />
+        </Router>
+      </div>
     </Layout>
-  )
+  );
 }
 
-export default Countries
+
+export default memo(Countries);

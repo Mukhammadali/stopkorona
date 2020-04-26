@@ -4,10 +4,8 @@ import moment from "moment";
 import { isMobileOnly } from 'react-device-detect';
 import { numberWithCommas } from 'src/lib/utils'
 
-
 import { isBrowser } from 'react-device-detect';
 import { uzLocale } from 'src/lib/config/apexCharts'
-
 
 const DailyIncreaseChart = ({ data, limit, total }) => {
   const chartRef = useRef();
@@ -48,9 +46,9 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
   }, [data, total])
   
   return (
-    <div className="my-3" style={{height: isBrowser ? 450 : 'auto'}}>
+    <div className="my-3" style={{height: isBrowser ? 450 : 300}}>
      <Chart
-        height={isBrowser ? 420 : 'auto'}
+        height={isBrowser ? 420 : 300}
         options={{
             plotOptions: {
               bar: {
@@ -70,13 +68,7 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
             chart: {
               height: 350,
               animations: {
-                  enabled: false,
-                  animateGradually: {
-                      enabled: false,
-                  },
-                  dynamicAnimation: {
-                      enabled: false,
-                  }
+                enabled: false,
               },
               locales:[
                 uzLocale
@@ -108,22 +100,18 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
               offsetY: -20,
               style: {
                 fontSize: '11px',
-                colors: ["#304758"]
+                colors: ["#304758"],
               },
               formatter (value) {
                 return numberWithCommas(value);
               }
             },
             xaxis: {
-              // type: 'datetime',
               categories: transformed?.labels || [],
               labels: {
                 datetimeUTC: false,
                 formatter:  function(val, timestamp) {
                   const date = moment(new Date(val)).locale('uzb').format('D MMMM');
-                  // if(moment(new Date(val)).isSame(moment(), 'date')){
-                  //   return 'Bugun'
-                  // }
                   return date;
                 },
                 format: 'd MMMM',
@@ -144,7 +132,6 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
         ]}
         type="bar"
         width="100%"
-        ref={chartRef}
       />
     </div>
   )
@@ -154,4 +141,4 @@ DailyIncreaseChart.defaultProps = {
   limit: null
 }
 
-export default memo(DailyIncreaseChart)
+export default DailyIncreaseChart

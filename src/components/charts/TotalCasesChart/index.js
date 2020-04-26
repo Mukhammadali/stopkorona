@@ -8,13 +8,11 @@ import { uzLocale } from 'src/lib/config/apexCharts'
 
 
 const TotalCasesChart = ({ data, total }) => {
-  const chartRef = useRef();
   const transformed = useMemo(() => {
     const labels=[];
     const cases=[];
     const recovered=[];
     const deaths=[];
-    
     if(!data?.cases) return {
       labels,
       cases,
@@ -45,23 +43,6 @@ const TotalCasesChart = ({ data, total }) => {
           slicedDeaths.push([timestamp, data.deaths[lastDate]]);
         }
       }
-      // if(latestDate !== today){
-      //   const lastCase = slicedCases[slicedCases.length - 1];
-      //   console.log('lastCase:', lastCase)
-      //   console.log('total?.cases:', total?.cases)
-      //   if(lastCase <= total?.cases){
-      //     slicedLabels.push(latestDate);
-      //     slicedCases.push([latestDate, total?.cases]);
-      //     slicedRecovered.push([latestDate,total?.recovered]);
-      //     slicedDeaths.push([latestDate, total?.deaths]);
-      //   } else {
-      //     slicedLabels.push(latestDate);
-      //     slicedCases.push([latestDate, lastCase]);
-      //     slicedRecovered.push([latestDate, slicedRecovered[slicedRecovered.length - 1]]);
-      //     slicedDeaths.push([latestDate, slicedDeaths[slicedDeaths.length - 1]]);
-      //   }
-        
-      // }
     }
     return {
       cases:slicedCases ,
@@ -71,7 +52,7 @@ const TotalCasesChart = ({ data, total }) => {
   }, [data, total])
   
   return (
-    <div className="my-3" style={{height: isBrowser ? 450 : 'auto'}}>
+    <div className="my-3 no-webkit-scroll" style={{height: isBrowser ? 450 : 'auto', overlowY: 'hidden'}}>
       {/* <div>
         <button>Hammasi</button>
         <button>1 Oylik</button>
@@ -184,7 +165,6 @@ const TotalCasesChart = ({ data, total }) => {
         ]}
         type="area"
         width="100%"
-        ref={chartRef}
       />
     </div>
   )

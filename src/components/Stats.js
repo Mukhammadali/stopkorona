@@ -12,7 +12,7 @@ const Stats = ({ data }) => {
   return (
     <StyledContainer>
         <Row className="d-flex align-items-stretch">
-          <Col xs="6" md="3" xl="3" className="card-wrapper mb-3">
+          <Col xs="6" md="3" xl="3" className="card-wrapper">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100">
@@ -34,7 +34,7 @@ const Stats = ({ data }) => {
               </CardBody>
             </Card>
           </Col>
-          <Col xs="6" md="3" xl="3" className="card-wrapper mb-3">
+          <Col xs="6" md="3" xl="3" className="card-wrapper">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100 justify-content-between">
@@ -58,7 +58,7 @@ const Stats = ({ data }) => {
               </CardBody>
             </Card>
           </Col>
-          <Col xs="6" md="3" xl="3" className="card-wrapper mb-3">
+          <Col xs="6" md="3" xl="3" className="card-wrapper">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100 justify-content-between">
@@ -80,7 +80,7 @@ const Stats = ({ data }) => {
               </CardBody>
             </Card>
           </Col>
-          <Col xs="6"  md="3" xl="3" className="card-wrapper mb-3">
+          <Col xs="6"  md="3" xl="3" className="card-wrapper">
             <Card className="card-stats">
               <CardBody>
                 <div className="flex-col h-100 justify-content-between">
@@ -146,6 +146,7 @@ export default memo(Stats);
 
 const StyledContainer = styled(Container)`
   margin-top: 1rem;
+  padding-bottom: 10px;
   .card-stats .card-body {
     padding: 1rem;
   }
@@ -155,6 +156,7 @@ const StyledContainer = styled(Container)`
   }
   .card-wrapper {
      padding: 0px 5px;
+     margin-top: 10px;
     .card-stats {
       height: 100%;
       border: none;

@@ -6,6 +6,7 @@
     url("./ProximaNova-Thin.ttf") format("truetype"), /* Safari, Android, iOS */
     url("./ProximaNova-Thin.woff") format("woff"), /* Modern Browsers */
     url("./ProximaNova-Thin.woff2") format("woff2"); /* Modern Browsers */
+  font-display: swap;
 }
 
 @font-face {
@@ -16,6 +17,7 @@
     url("./ProximaNova-Semibold.ttf") format("truetype"), /* Safari, Android, iOS */
     url("./ProximaNova-Semibold.woff") format("woff"), /* Modern Browsers */
     url("./ProximaNova-Semibold.woff2") format("woff2"); /* Modern Browsers */
+  font-display: swap;
 }
 
 @font-face {
@@ -26,6 +28,7 @@
     url("./ProximaNova-Light.ttf") format("truetype"), /* Safari, Android, iOS */
     url("./ProximaNova-Light.woff") format("woff"), /* Modern Browsers */
     url("./ProximaNova-Light.woff2") format("woff2"); /* Modern Browsers */
+  font-display: swap;
 }
 
 @font-face {
@@ -38,4 +41,5 @@
     url("./ProximaNova-Regular.woff2") format("woff2"); /* Modern Browsers */
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }

@@ -1,0 +1,56 @@
+
+html {
+  font-family: ProximaNova Regular;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+}
+
+
+#___gatsby, #gatsby-focus-wrapper {
+  height:100% !important;
+}
+@media only screen and (max-width: 600px) {
+  body, html {
+    overflow: auto;
+    /* background-color: blue; */
+  }
+  #___gatsby, #gatsby-focus-wrapper {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.font-weight-semibold {
+  font-family: "ProximaNova Semibold";
+}
+.font-regular {
+  font-family: "ProximaNova Regular";
+}
+
+.font-semibold {
+  font-family: "ProximaNova Semibold";
+}
+
+.font-light {
+  font-family: "ProximaNova Light";
+}
+
+.font-info  {
+  color: #6c707d;
+}
+
+.no-webkit-scroll {
+  -webkit-overflow-scrolling: unset;
+  /* touch-action: none; */
+  /* pointer-events: none; */
+  /* overflow: hidden; */
+}

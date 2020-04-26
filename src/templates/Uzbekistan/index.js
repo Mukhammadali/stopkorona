@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import CountryTitle from 'src/components/CountryTitle';
 import Loadable from 'react-loadable';
-import Stats from '../Home/Stats'
+import Stats from 'src/components/Stats'
 import { Row } from 'reactstrap';
 import { isMobileOnly } from 'react-device-detect';
 import GenderPieChart from './components/GenderPieChart';
-import { useQuery } from 'react-query';
+import { useQuery, queryCache } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
-import { fetchCountryTotal, fetchCountryHistorical } from 'src/lib/api';
+import { fetchCountryTotal, fetchCountryHistorical, fetchAllCountries } from 'src/lib/api';
 import styled from 'styled-components';
 import SEO from 'src/components/seo';
+import { useWindowSize } from 'src/hooks/useWindowSize';
+import RegionsTable from './components/RegionsTable';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -43,23 +45,27 @@ const mockData = {
 const Uzbekistan = ({ historical }) => {
   const { data: fetchedTotal } = useCountryTotal({countryName: 'Uzbekistan'})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: 'Uzbekistan'})
+  const size = useWindowSize();
+  useEffect(() => {
+    queryCache.prefetchQuery([queryKeys.ALL_COUNTRIES], fetchAllCountries);
+  }, [])
   return (
     <Styles>
       <SEO title="O'zbekiston koronavirus statistikasi" />
+      <CountryTitle country={fetchedTotal || mockData} />
       <Stats data={fetchedTotal} />
-      <div>
-        {isMobileOnly ? (
-          <h3 className="font-semibold">7 kunlik o'sish</h3>
-        ):(
-          <h3>Kunlik o'sish</h3>
-        )}
-        <DailyCasesChart limit={isMobileOnly ? 7 : null} data={fetchedHistorical?.timeline} total={fetchedTotal} />
-      </div>
-      <div>
-        <h3 className="font-semibold">Umumiy o'sish</h3>
+      <section>
+        <h3>Kunlik o'sish</h3>
+        <DailyCasesChart limit={isMobileOnly ? 10 : null} data={fetchedHistorical?.timeline} total={fetchedTotal} />
+      </section>
+      <section>
+        <h3>Umumiy o'sish</h3>
         <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
-      </div>
-      {/* <GenderPieChart /> */}
+      </section>
+      <section>
+        <h3>Viloyatlar bo'yicha</h3>
+        <RegionsTable />
+      </section>
     </Styles>
   )
 }
@@ -68,8 +74,6 @@ export default Uzbekistan
 
 
 const Styles = styled.div`
-  /* h3 {
-    font-size: 1.3rem;
-  } */
+  overflow-y: hidden;
 `;
 

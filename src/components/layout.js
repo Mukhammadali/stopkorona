@@ -1,51 +1,74 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React from "react"
+import React, { memo } from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import { Container } from 'reactstrap';
+import { useStaticQuery, graphql, Link } from "gatsby"
+import { GoHome, GoGlobe, GoSearch } from 'react-icons/go';
 
 import Header from "./header"
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'flag-icon-css/css/flag-icon.min.css'
-import 'src/static/fonts/fonts.css';
-import "./layout.css"
 import 'moment/locale/uz-latn';
-import moment from 'moment';
+import styled from 'styled-components';
+import { isMobileOnly } from 'react-device-detect';
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+const NavLink = memo(props => (
+  <Link
+    {...props}
+    getProps={({ isCurrent, ...rest }) => {
+      console.log('rest:', rest)
+      return {
+        className: `${props.className} ${isCurrent && 'active'}`,
+        style: {  
+          color: isCurrent ? "#222222" : "#8C8C8C",
+        },
+      };
+    }}
+  />
+));
 
+const Layout = ({ children, withLogo }) => {
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <Container
-        className="h-100"
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          fontFamily: "ProximaNova",
-          // padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-      </Container>
-      <footer className="my-5 d-flex justify-content-center font-light">
-        © {new Date().getFullYear()}. <span className="ml-2 font-weight-bold">Made in Uzbekistan</span>
-      </footer>
+      <Styles >
+        <div className="container">
+          <Header />
+          <DesktopTabbar onTouchMove={event => event.preventDefault()}>
+            <NavLink  to="/" className="menu-item">
+              <GoHome size="1.5rem" />
+              <span>Mahalliy</span>
+            </NavLink>
+            <NavLink to="/global" className="menu-item">
+              <GoGlobe size="1.5rem"  />
+              <span>Global</span>
+            </NavLink>
+            <NavLink to="/countries" className="menu-item">
+              <GoSearch  size="1.5rem" />
+              <span>Davlatlar</span>
+            </NavLink>
+          </DesktopTabbar>
+          <main className="container-content">{children}</main>
+          <footer className="my-5 d-flex justify-content-center font-light">
+            © {new Date().getFullYear()}.
+              <span className="ml-2">
+                Made by
+                <a href="https://www.linkedin.com/in/mukhammadali" target="_blank" className="ml-2 decoration-underline font-weight-bold">
+                  Muhammad Ali
+                </a>
+              </span>
+          </footer>
+        </div>
+      </Styles>
+      <Tabbar onTouchMove={event => event.preventDefault()}>
+        <NavLink  to="/" className="menu-item">
+          <GoHome size="1.5rem" />
+          <span>Mahalliy</span>
+        </NavLink>
+        <NavLink to="/global" className="menu-item">
+          <GoGlobe size="1.5rem"  />
+          <span>Global</span>
+        </NavLink>
+        <NavLink to="/countries" className="menu-item">
+          <GoSearch  size="1.5rem" />
+          <span>Davlatlar</span>
+        </NavLink>
+      </Tabbar>
     </>
   )
 }
@@ -54,4 +77,81 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default memo(Layout)
+
+const DesktopTabbar = styled.div`
+  display: flex !important;
+  /* position: sticky; */
+  top: 0px;
+  background-color: white;
+  z-index: 100;
+  margin-bottom: 20px;
+  justify-content: center;
+  .menu-item {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    /* width: 100px; */
+    margin: 0px 20px;
+    text-decoration: none;
+    padding: 5px 0px;
+    border-bottom: 1px solid white;
+    &.active {
+      border-bottom: 1px solid #222;
+    }
+    span {
+      margin-left: 5px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    display: none !important;
+  }
+`;
+
+const Tabbar = styled.div`
+  display: none !important;
+  @media only screen and (max-width: 600px) {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: none;
+    justify-content: space-around;
+    background-color: #f4f4f4;
+    min-height: 50px;
+    z-index: 16;
+    padding-bottom:env(safe-area-inset-bottom, 0px);
+    .menu-item {
+      display: flex;
+      padding-top: 5px;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      justify-content: center;
+      width: 4rem;
+      height: 100%;
+      color: #8C8C8C;
+      span {
+        font-size: 0.7rem;
+        font-family: ProximaNova Regular;
+      }
+    }
+  }
+`;
+
+const Styles = styled.div`
+  font-family: ProximaNova Regular;
+  @media only screen and (max-width: 600px) {
+    height: 100%;
+    /* overflow-y: auto; */
+  }
+  .container {
+    margin: 0px auto;
+    max-width: 960px;
+    @media only screen and (max-width: 600px) {
+      height: calc(100% - 50px);
+      /* overflow-y: scroll; */
+    }
+  }
+`;

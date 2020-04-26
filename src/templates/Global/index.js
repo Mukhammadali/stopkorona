@@ -1,11 +1,10 @@
 import React, { memo } from 'react'
 import Charts from './Charts'
-import CountriesTable from './CountriesTable'
 import Loadable from 'react-loadable';
 import { useQuery } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchTotal, fetchAllHistorical } from 'src/lib/api';
-import Stats from './Stats';
+import Stats from 'src/components/Stats';
 import { isMobileOnly } from 'react-device-detect';
 import SEO from 'src/components/seo';
 
@@ -26,7 +25,7 @@ loading:  Loading,
 });
 
 
-const Home = () => {
+const Global = () => {
   const { data: fetchedTotal } = useQuery([queryKeys.TOTAL], fetchTotal, {
     refetchOnMount: false
   })
@@ -38,21 +37,16 @@ const Home = () => {
       <SEO title="Dunyo koronavirus statistikasi" description="Butun Jahon koronavirus statistikasi"/>
       <Stats data={fetchedTotal} />
         <div>
-          {isMobileOnly ? (
-            <h3>7 kunlik o'sish</h3>
-          ):(
-            <h3>20 kunlik o'sish</h3>
-          )}
+          <h3>Kunlik o'sish</h3>
           <DailyCasesChart limit={isMobileOnly ? 7 : 20} data={fetchedHistorical} total={fetchedTotal} />
         </div>
         <div>
           <h3>Umumiy o'sish</h3>
           <TotalCasesChart data={fetchedHistorical} total={fetchedTotal} />
         </div>
-      <CountriesTable />
     </div>
   );
 }
 
 
-export default memo(Home);
+export default memo(Global);

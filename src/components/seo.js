@@ -67,7 +67,8 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
-        { name: 'viewport', content: 'user-scalable=no, width=device-width, initial-scale=1.0"'}
+        { name: 'viewport', content: 'user-scalable=no, width=device-width, initial-scale=1.0, viewport-fit=cover'},
+        {name: 'apple-mobile-web-app-capable', content: 'yes'}
       ].concat(meta)}
     />
   )

@@ -16,7 +16,8 @@ const renderCustomCell = ({row, ...props}) => {
   return(
     <div className="country-cell">
       <span className="mr-1" style={{width: 30}}>{row.index + 1}.</span>
-      <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span>
+      {/* <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span> */}
+      <img className="country-flag mr-2" src={row?.original?.countryInfo?.flag} height={18} width={28} />
       <span>{row?.original?.uzName}</span>
     </div>
   )
@@ -46,19 +47,20 @@ const renderRow = ({row, column}) => {
 
 const TableColumns = [
   {
-    Header: "Country",
+    Header: "Davlat nomi",
     Cell: renderCustomCell,
     accessor: 'uzName',
     sortDescFirst: false,
     disableSortBy: true,
     Filter: function DefaultColumnFilter({
-      column: { filterValue, preFilteredRows, setFilter }
+      column: { filterValue, setFilter }
     }) {
-      const count = preFilteredRows.length;
       return (
         <input
-          className="table-search w-100"
+          className="table-search w-100 font-regular"
           value={filterValue || ""}
+          autoComplete={false}
+          type="text"
           onChange={e => {
             e.preventDefault();
             e.stopPropagation();
@@ -142,13 +144,17 @@ const CountriesTable = () => {
 export default memo(CountriesTable);
 
 const Styled = styled.div`
+  .country-flag {
+    border-radius: 2px;
+    border: 1px solid #f4f4f4;
+  }
   .table-toolbox {
     display: flex;
     flex: 1;
     justify-content: space-between;
   }
   .table-search {
-    font-family: "ProximaNova Light";
+    font-family: "ProximaNova Regular";
     outline: none;
     border: none;
     padding: 0px 5px;
