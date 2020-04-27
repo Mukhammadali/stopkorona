@@ -20,11 +20,11 @@ body {
 }
 @media only screen and (max-width: 600px) {
   body, html {
-    overflow: auto;
+    /* overflow: auto; */
     /* background-color: blue; */
   }
   #___gatsby, #gatsby-focus-wrapper {
-    overflow: auto;
+    /* overflow: auto; */
     -webkit-overflow-scrolling: touch;
   }
 }

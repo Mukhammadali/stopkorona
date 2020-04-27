@@ -9,7 +9,7 @@ const RegionsTable = () => {
  
   return (
     <Styles>
-      <span className="mb-1 font-semibold">Jadval yangilangan sana: </span><span>25-Aprel</span>
+      <span className="mb-1 font-semibold">Jadval yangilangan sana: </span><span>26-Aprel</span>
       <div className="table-wrapper">
       <table>
         <thead>

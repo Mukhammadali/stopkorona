@@ -2,50 +2,50 @@
   "data": [
     {
       "name": "Toshkent",
-      "cases": 561,
-      "recovered": 226,
+      "cases": 585,
+      "recovered": 228,
       "deaths": 4
     },
     {
       "name": "Buxoro",
       "cases": 394,
-      "recovered": 178,
+      "recovered": 210,
       "deaths": null
     },
     {
       "name": "Xorazm",
-      "cases": 218,
-      "recovered": 45,
+      "cases": 220,
+      "recovered": 61,
       "deaths": null
     },
     {
       "name": "Andijon",
-      "cases": 148,
+      "cases": 151,
       "recovered": 56,
       "deaths": null
     },
     {
       "name": "Namangan",
-      "cases": 180,
+      "cases": 183,
       "recovered": 57,
       "deaths": 3
     },
     {
       "name": "Farg'ona",
-      "cases": 120,
-      "recovered": 30,
+      "cases": 124,
+      "recovered": 52,
       "deaths": 1
     },
     {
       "name": "Qoraqalpog'iston",
-      "cases": 82,
-      "recovered": 19,
+      "cases": 104,
+      "recovered": 29,
       "deaths": null
     },
     {
       "name": "Surxondaryo",
-      "cases": 30,
-      "recovered": 1,
+      "cases": 33,
+      "recovered": 4,
       "deaths": null
     },
     {
@@ -75,7 +75,7 @@
     {
       "name": "Navoiy",
       "cases": 2,
-      "recovered": null,
+      "recovered": 1,
       "deaths": null
     }
   ]

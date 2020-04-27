@@ -16,8 +16,8 @@ const renderCustomCell = ({row, ...props}) => {
   return(
     <div className="country-cell">
       <span className="mr-1" style={{width: 30}}>{row.index + 1}.</span>
-      {/* <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span> */}
-      <img className="country-flag mr-2" src={row?.original?.countryInfo?.flag} height={18} width={28} />
+      <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span>
+      {/* <img className="country-flag mr-2" src={row?.original?.countryInfo?.flag} height={18} width={28} /> */}
       <span>{row?.original?.uzName}</span>
     </div>
   )

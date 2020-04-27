@@ -82,7 +82,7 @@ export default memo(Layout)
 const DesktopTabbar = styled.div`
   display: flex !important;
   /* position: sticky; */
-  top: 0px;
+  /* top: 0px; */
   background-color: white;
   z-index: 100;
   margin-bottom: 20px;
@@ -143,14 +143,14 @@ const Tabbar = styled.div`
 const Styles = styled.div`
   font-family: ProximaNova Regular;
   @media only screen and (max-width: 600px) {
-    height: 100%;
+    /* height: 100%; */
     /* overflow-y: auto; */
   }
   .container {
     margin: 0px auto;
     max-width: 960px;
     @media only screen and (max-width: 600px) {
-      height: calc(100% - 50px);
+      /* height: calc(100% - 50px); */
       /* overflow-y: scroll; */
     }
   }
