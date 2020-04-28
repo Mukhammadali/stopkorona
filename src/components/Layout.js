@@ -2,7 +2,7 @@ import React, { memo } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { GoHome, GoGlobe, GoSearch } from 'react-icons/go';
-
+import { injectIntl } from 'gatsby-plugin-intl'
 import Header from "./header"
 import 'moment/locale/uz-latn';
 import styled from 'styled-components';
@@ -12,7 +12,6 @@ const NavLink = memo(props => (
   <Link
     {...props}
     getProps={({ isCurrent, ...rest }) => {
-      console.log('rest:', rest)
       return {
         className: `${props.className} ${isCurrent && 'active'}`,
         style: {  
@@ -77,7 +76,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default memo(Layout)
+export default injectIntl(Layout)
 
 const DesktopTabbar = styled.div`
   display: flex !important;

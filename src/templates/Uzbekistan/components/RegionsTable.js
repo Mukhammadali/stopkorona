@@ -23,7 +23,7 @@ const RegionsTable = () => {
         <tbody>
           {
             regions?.map((region, idx) => (
-              <tr>
+              <tr key={region?.name}>
                 <td className="country-cell">{idx + 1}. {region?.name}</td>
                 <td className="stat-cell">{region?.cases}</td>
                 <td className="stat-cell">{region?.recovered || '-'}</td>

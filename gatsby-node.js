@@ -7,6 +7,15 @@
 // You can delete this file if you're not using it
 
 const path = require('path');
+const fs = require("fs-extra")
+
+exports.onPostBuild = () => {
+  console.log("Copying locales")
+  fs.copySync(
+    path.join(__dirname, "/src/locales"),
+    path.join(__dirname, "/public/locales")
+  )
+}
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({

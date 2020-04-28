@@ -13,7 +13,7 @@ import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
-    <div class="spinner-border text-secondary" style={{height: '3rem', width: '3rem'}}  role="status" />
+    <div className="spinner-border text-secondary" style={{height: '3rem', width: '3rem'}}  role="status" />
   </div>
 )
 

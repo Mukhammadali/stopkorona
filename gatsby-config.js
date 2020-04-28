@@ -40,10 +40,23 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: `gatsby-plugin-intl`,
+      options: {
+        // language JSON resource path
+        path: `${__dirname}/src/locales`,
+        // supported language
+        languages: [`en`, `uz`, `ru`],
+        // language file path
+        defaultLanguage: `uz`,
+        // option to redirect to `/ko` when connecting `/`
+        redirect: false,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `stopkorona.uz`,
-        short_name: `Stopkorona`,
+        name: `StopKorona`,
+        short_name: `StopKorona`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#fff`,
@@ -51,6 +64,7 @@ module.exports = {
         icon: `src/static/images/logo.png`, // This path is relative to the root of the site.
       },
     },
+    
     {
       resolve: `gatsby-plugin-offline`,
       options: {
