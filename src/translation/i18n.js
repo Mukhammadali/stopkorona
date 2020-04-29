@@ -26,7 +26,7 @@ i18n
       lookupLocalStorage: 'stopkorona_uz_locale',
     },
 
-    debug: true,
+    debug: false,
 
     interpolation: {
       escapeValue: false, // not needed for react!!
