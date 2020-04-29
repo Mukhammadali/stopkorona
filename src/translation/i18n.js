@@ -1,33 +1,30 @@
 import i18n from "i18next"
 import Backend from "i18next-xhr-backend"
 import LanguageDetector from "i18next-browser-languagedetector"
-import { reactI18nextModule } from "react-i18next"
+import { initReactI18next } from "react-i18next"
+
 
 const resources = {
-  en: {
-    common: {
-      "Welcome to React": "Welcome to React and react-i18next"
-    }
-  }
-  uz: {
-    common: {
-      "Welcome to React": "React va react-i18nextga xush kelibsiz"
-    }
-  }
+  en: require('./locales/en.json'),
+  uz: require('./locales/uz.json'),
+  ru: require('./locales/ru.json'),
 };
 
 
 i18n
-  .use(Backend)
+  // .use(Backend)
   .use(LanguageDetector)
-  .use(reactI18nextModule)
+  .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "en",
-    lng: 'en',
+    fallbackLng: "uz",
+    // lng: 'uz',
     // have a common namespace used around the full app
-    ns: ["common"],
+    // ns: ["common"],
     defaultNS: "common",
+    detection: {
+      lookupLocalStorage: 'stopkorona_uz_locale',
+    },
 
     debug: true,
 

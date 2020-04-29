@@ -1,12 +1,12 @@
-import React, { memo } from "react"
+import React, { memo, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { GoHome, GoGlobe, GoSearch } from 'react-icons/go';
-import { injectIntl } from 'gatsby-plugin-intl'
 import Header from "./header"
 import 'moment/locale/uz-latn';
 import styled from 'styled-components';
 import { isMobileOnly } from 'react-device-detect';
+import i18n from 'src/translation/i18n';
 
 const NavLink = memo(props => (
   <Link
@@ -23,6 +23,11 @@ const NavLink = memo(props => (
 ));
 
 const Layout = ({ children, withLogo }) => {
+  useEffect(() => {
+    if(!localStorage.getItem('stopkorona_uz_locale')){
+      localStorage.setItem('stopkorona_uz_locale', i18n.language);
+    }
+  }, [])
   return (
     <>
       <Styles >
@@ -76,7 +81,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default injectIntl(Layout)
+export default memo(Layout)
 
 const DesktopTabbar = styled.div`
   display: flex !important;

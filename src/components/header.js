@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import React, { useState } from "react"
 import styled from 'styled-components';
 import { Logo } from 'src/static/images';
-import { changeLocale, useIntl, IntlContextConsumer } from 'gatsby-plugin-intl'
+import i18n from 'src/translation/i18n';
 
 const languageName = {
   en: "English",
@@ -12,32 +12,35 @@ const languageName = {
 }
 
 const Language = () => {
+  // i18n.language
+  console.log('i18n.language:', i18n.language)
+  const changeLanguage = (lng) => {
+    console.log('lng:', lng)
+    localStorage.setItem('stopkorona_uz_locale', lng);
+    i18n.changeLanguage(lng);
+  }
   return (
     <div>
-      <IntlContextConsumer>
-        {({ languages, language: currentLocale }) =>
-          languages.map(language => (
-            <Link
+      {
+          ['en', 'uz', 'ru'].map(language => (
+            <span
               key={language}
-              onClick={() => changeLocale(language)}
+              onClick={() => changeLanguage(language)}
               style={{
-                color: currentLocale === language ? `red` : `black`,
+                // color: currentLocale === language ? `red` : `black`,
                 margin: 10,
                 textDecoration: `underline`,
                 cursor: `pointer`,
               }}
             >
               {languageName[language]}
-            </Link>
+            </span>
           ))
-        }
-      </IntlContextConsumer>
+      }
     </div>
   )
 }
 const Header = () => {
-  const { locale } = useIntl()
-  console.log('locale:', locale)
   return (
     <StyledHeader>
       <div style={{ margin: 0, padding: '1.45rem 0rem' }}>

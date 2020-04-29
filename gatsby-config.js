@@ -40,19 +40,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-intl`,
-      options: {
-        // language JSON resource path
-        path: `${__dirname}/src/locales`,
-        // supported language
-        languages: [`en`, `uz`, `ru`],
-        // language file path
-        defaultLanguage: `uz`,
-        // option to redirect to `/ko` when connecting `/`
-        redirect: false,
-      },
-    },
-    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `StopKorona`,
