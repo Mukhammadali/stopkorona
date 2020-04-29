@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React from "react"
 import Layout from "src/components/Layout"
 import SEO from "src/components/seo"
 import Uzbekistan from 'src/templates/Uzbekistan'
@@ -16,4 +16,4 @@ const IndexPage = () => {
   )
 }
 
-export default memo(IndexPage)
+export default IndexPage
