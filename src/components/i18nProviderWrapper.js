@@ -15,7 +15,9 @@ function i18nProviderWrapper({ element, props }) {
     })
     .use(ReactI18next.initReactI18next)
   i18n.init()
-  window.___gatsbyIntl = i18n.language;
+  if(window){
+    window.___gatsbyIntl = i18n.language;
+  }
   return (
     <ReactI18next.I18nextProvider i18n={i18n}>
       <AlternateLinksContext.Provider
