@@ -7,7 +7,48 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-zeit-now',
-    'gatsby-plugin-sitemap',
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: ["/404", "/*/404"],
+        query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+
+          allSitePage {
+            edges {
+              node {
+                path
+                context {
+                  alternateLinks {
+                    language
+                    path
+                  }
+                }
+              }
+            }
+          }
+      }`,
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.edges.map(edge => {
+            return {
+              url: site.siteMetadata.siteUrl + edge.node.path,
+              changefreq: `hourly`,
+              priority: 0.7,
+              links:
+                edge.node.context.alternateLinks &&
+                edge.node.context.alternateLinks.map(link => ({
+                  lang: link.language,
+                  url: site.siteMetadata.siteUrl + link.path,
+                })),
+            }
+          }),
+      },
+    },
     // `gatsby-plugin-transition-link`,
     {
       resolve: "gatsby-plugin-react-svg",
@@ -26,7 +67,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/countries/*`] },
+      options: { prefixes: [`/countries/*`, `/en/countries/*`] },
     },
     
     `gatsby-plugin-react-helmet`,

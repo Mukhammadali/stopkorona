@@ -11,6 +11,7 @@ import "src/style/global.css"
 
 // You can delete this file if you're not using it
 export { default as wrapRootElement } from 'src/components/ProvidersWrapper';
+export { default as wrapPageElement } from 'src/components/i18nProviderWrapper';
 
 export const onServiceWorkerUpdateReady = () => {
   const answer = window.confirm(

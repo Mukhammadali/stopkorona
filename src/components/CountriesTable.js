@@ -59,7 +59,7 @@ const TableColumns = [
         <input
           className="table-search w-100 font-regular"
           value={filterValue || ""}
-          autoComplete={false}
+          autoComplete="false"
           type="text"
           onChange={e => {
             e.preventDefault();

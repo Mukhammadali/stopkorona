@@ -6,7 +6,7 @@ import Header from "./header"
 import 'moment/locale/uz-latn';
 import styled from 'styled-components';
 import { isMobileOnly } from 'react-device-detect';
-import i18n from 'src/translation/i18n';
+// import i18n from 'src/translation/i18n';
 
 const NavLink = memo(props => (
   <Link
@@ -25,7 +25,7 @@ const NavLink = memo(props => (
 const Layout = ({ children, withLogo }) => {
   useEffect(() => {
     if(!localStorage.getItem('stopkorona_uz_locale')){
-      localStorage.setItem('stopkorona_uz_locale', i18n.language);
+      // localStorage.setItem('stopkorona_uz_locale', i18n.language);
     }
   }, [])
   return (

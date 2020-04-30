@@ -3,9 +3,7 @@ import SEO from 'src/components/seo';
 import CountriesTable from 'src/components/CountriesTable';
 import Layout from 'src/components/Layout';
 import { Router } from '@reach/router';
-import SingleCountry from 'src/templates/SingleCountry';
-
-
+import SingleCountry from 'src/containers/SingleCountry';
 
 const Countries = () => {
   return (

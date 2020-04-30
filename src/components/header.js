@@ -1,9 +1,10 @@
-import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React, { useState } from "react"
 import styled from 'styled-components';
 import { Logo } from 'src/static/images';
-import i18n from 'src/translation/i18n';
+import { useTranslation } from 'react-i18next';
+import Link, { changeLocale } from 'src/lib/utils/i18n';
+// import i18n from 'src/translation/i18n';
 
 const languageName = {
   en: "English",
@@ -13,19 +14,20 @@ const languageName = {
 
 const Language = () => {
   // i18n.language
-  console.log('i18n.language:', i18n.language)
-  const changeLanguage = (lng) => {
-    console.log('lng:', lng)
-    localStorage.setItem('stopkorona_uz_locale', lng);
-    i18n.changeLanguage(lng);
-  }
+  // console.log('i18n.language:', i18n)
+  // const { i18n} = useTranslation()
+  // const changeLanguage = (lng) => {
+  //   console.log('lng:', lng)
+  //   localStorage.setItem('stopkorona_uz_locale', lng);
+  //   i18n.changeLanguage(lng);
+  // }
   return (
     <div>
       {
           ['en', 'uz', 'ru'].map(language => (
             <span
               key={language}
-              onClick={() => changeLanguage(language)}
+              onClick={() => changeLocale(language)}
               style={{
                 // color: currentLocale === language ? `red` : `black`,
                 margin: 10,
