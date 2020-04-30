@@ -49,7 +49,7 @@ export const navigate = (to, options) => {
     return
   }
 
-  const { language } = window.___gatsbyIntl
+  const { language } = window?.___gatsbyIntl
  
   const link = getPath(language, to);
   //  routed ? `/${language}${to}` : `${to}`
