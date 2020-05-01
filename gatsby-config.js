@@ -58,7 +58,12 @@ module.exports = {
         }
       }
     },
-    `gatsby-plugin-styled-components`,
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        ssr: false
+      }
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
