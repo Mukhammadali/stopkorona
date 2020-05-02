@@ -11,6 +11,8 @@ import debounce from 'lodash/debounce';
 import { numberWithCommas } from 'src/lib/utils';
 import styled from 'styled-components';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSelectedCountry } from 'src/redux/global/globalActions';
 
 const renderCustomCell = ({row, ...props}) => {
   return(
@@ -111,19 +113,25 @@ const CountriesTable = () => {
     refetchOnWindowFocus: false
   })
 
+  const dispatch = useDispatch();
+  const selectCountry = (country) =>dispatch(updateSelectedCountry(country))
+
   const transformedData = useMemo(() => data?.map(el => ({
       ...el,
       uzName: getCountryUzbekName(el?.countryInfo?.iso2) || el?.country,
     })), [data]);
 
   const onNavigate = (data) => {
+    selectCountry(data);
     queryCache.prefetchQuery([queryKeys.COUNTRY_HISTORICAL, { countryName:  data?.country }], fetchCountryHistorical);
-    navigate(`/countries/${data?.country}`, {
-     state: {
-       country: data,
-     }
-    })
+    // navigate(`/countries/${data?.country}`, {
+    //  state: {
+    //    country: data,
+    //  }
+    // })
   }
+  const selectedCountry = useSelector(store => store.global?.selectedCountry);
+  console.log('selectedCountry:', selectedCountry)
  
   return (
     <Styled>

@@ -10,6 +10,7 @@ import CountryTitle from 'src/components/CountryTitle';
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import { isMobileOnly } from 'react-device-detect';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
+import { useSelector } from 'react-redux';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -32,6 +33,8 @@ const SingleCountry = ({ country, location }) => {
   const { data: fetchedTotal } = useCountryTotal({countryName: country, initialData: passedCountry})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: country})
   const countryName = getCountryUzbekName(fetchedTotal?.countryInfo?.iso2)  || fetchedTotal?.country || country;
+  const selectedCountry = useSelector(store => store?.global?.selectedCountry);
+  console.log('selectedCountry:', selectedCountry)
   return (
     <Styles>
       <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
