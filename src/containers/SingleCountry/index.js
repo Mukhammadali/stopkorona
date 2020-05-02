@@ -37,7 +37,7 @@ const SingleCountry = ({ country, location }) => {
     <Styles>
       <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
       <CountryTitle goBack country={fetchedTotal} />
-      <h1 style={{color: 'red'}}>Test</h1>
+      <h1 className="red">Test</h1>
       <Stats data={fetchedTotal} />
       <div>
         {isMobileOnly ? (
@@ -62,5 +62,8 @@ const Styles = styled.div`
   .country-flag {
     height: 30px;
     width: 50px;
+  }
+  .red {
+    color: red;
   }
 `;
