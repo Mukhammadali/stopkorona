@@ -33,12 +33,11 @@ const SingleCountry = ({ country, location }) => {
   const { data: fetchedTotal } = useCountryTotal({countryName: country, initialData: passedCountry})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: country})
   const countryName = getCountryUzbekName(fetchedTotal?.countryInfo?.iso2)  || fetchedTotal?.country || country;
-  const selectedCountry = useSelector(store => store?.global?.selectedCountry);
-  console.log('selectedCountry:', selectedCountry)
   return (
     <Styles>
       <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
       <CountryTitle goBack country={fetchedTotal} />
+      <h1 style={{color: 'red'}}>Test</h1>
       <Stats data={fetchedTotal} />
       <div>
         {isMobileOnly ? (
