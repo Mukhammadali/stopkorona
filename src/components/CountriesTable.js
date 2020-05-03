@@ -13,6 +13,8 @@ import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 import { useDispatch } from 'react-redux';
 import { updateSelectedCountry } from 'src/redux/global/globalActions';
 import { navigate } from 'src/lib/utils/i18n';
+import SEO from './seo';
+import Layout from './Layout';
 
 const renderCustomCell = ({row, ...props}) => {
   return(
@@ -131,18 +133,21 @@ const CountriesTable = () => {
   }
  
   return (
-    <Styled>
-      <div className="mb-2">
-        <span className="font-weight-semibold">Koronavirus aniqlangan davlatlar soni: </span>
-        <span>{data?.length}</span>
-      </div>
-      <Table
-        onClickListItem={onNavigate}
-        columns={TableColumns}
-        data={transformedData || []}
-        // initialState={}
-      />
-    </Styled>
+    <Layout>
+      <Styled>
+        <SEO title="Davlatlar Koronavirus statistikasi" description="Butun dunyo davlatlarining koronavirus statistikasi jadvali"/>
+        <div className="mb-2">
+          <span className="font-weight-semibold">Koronavirus aniqlangan davlatlar soni: </span>
+          <span>{data?.length}</span>
+        </div>
+        <Table
+          onClickListItem={onNavigate}
+          columns={TableColumns}
+          data={transformedData || []}
+          // initialState={}
+        />
+      </Styled>
+    </Layout>
   )
 };
 

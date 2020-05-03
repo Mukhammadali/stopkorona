@@ -71,11 +71,6 @@ module.exports = {
     //     production: false,
     //   },
     // },
-    {
-      resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/countries/*`, `/en/countries/*`, `/ru/countries/*`, `/kz/countries/*`] },
-    },
-    
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -101,7 +96,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-offline`,
       options: {
-        precachePages: ['/', '/global', '/countries'],
+        precachePages: ['/*'],
       },
     },
     {
@@ -109,6 +104,10 @@ module.exports = {
       options: {
         displayName: true
       }
-    }
+    },
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/countries/*`, `/en/countries/*`, `/ru/countries/*`, `/kz/countries/*`] },
+    },
   ],
 }

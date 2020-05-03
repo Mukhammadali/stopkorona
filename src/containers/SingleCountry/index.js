@@ -11,6 +11,7 @@ import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import { isMobileOnly } from 'react-device-detect';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 import { useSelector } from 'react-redux';
+import Layout from 'src/components/Layout';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -34,24 +35,26 @@ const SingleCountry = ({ country, location }) => {
   const { data: fetchedHistorical } = useCountryHistorical({countryName: country})
   const countryName = getCountryUzbekName(fetchedTotal?.countryInfo?.iso2)  || fetchedTotal?.country || country;
   return (
-    <Styles>
-      <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
-      <CountryTitle goBack country={fetchedTotal} />
-      <h1 className="red">Test</h1>
-      <Stats data={fetchedTotal} />
-      <div>
-        {isMobileOnly ? (
-          <h3>7 kunlik o'sish</h3>
-        ):(
-          <h3>20 Kunlik o'sish</h3>
-        )}
-        <DailyCasesChart limit={isMobileOnly ? 7 : 20} data={fetchedHistorical?.timeline} total={fetchedTotal} />
-      </div>
-      <div>
-        <h3>Umumiy o'sish</h3>
-        <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
-      </div>
-    </Styles>
+    <Layout>
+      <Styles>
+        <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
+        <CountryTitle goBack country={fetchedTotal} />
+        <h1 className="red">Test</h1>
+        <Stats data={fetchedTotal} />
+        <div>
+          {isMobileOnly ? (
+            <h3>7 kunlik o'sish</h3>
+          ):(
+            <h3>20 Kunlik o'sish</h3>
+          )}
+          <DailyCasesChart limit={isMobileOnly ? 7 : 20} data={fetchedHistorical?.timeline} total={fetchedTotal} />
+        </div>
+        <div>
+          <h3>Umumiy o'sish</h3>
+          <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
+        </div>
+      </Styles>
+    </Layout>
   )
 }
 
