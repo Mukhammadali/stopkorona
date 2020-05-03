@@ -4,7 +4,7 @@ import moment from 'moment';
 import {MdArrowBack} from "react-icons/md"
 import getCountryISO2 from 'src/lib/utils/getCountryISO2';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
-import { navigate } from '@reach/router';
+import { navigate } from 'src/lib/utils/i18n';
  
 const CountryTitle = ({ country, goBack }) => {
   if(!country) return null;
@@ -12,7 +12,7 @@ const CountryTitle = ({ country, goBack }) => {
     <Styles className="d-flex align-items-center mb-3">
       {
         goBack && (
-          <div className="goback-button mr-3" onClick={() => navigate(-1)}>
+          <div className="goback-button mr-3" onClick={() => navigate("/countries")}>
             <MdArrowBack color="#3a3a3a" size={30}/>
           </div>
         )

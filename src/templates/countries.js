@@ -8,18 +8,18 @@ import { useTranslation } from 'react-i18next';
 
 const Countries = () => {
   const { i18n } = useTranslation();
-  const path = i18n.language === 'uz' ? 'countries' : `${i18n.language}/countries`
+  const basepath = i18n.language === 'uz' ? '/countries' : `/${i18n.language}/countries`
   return (
     <Layout>
       <SEO title="Davlatlar Koronavirus statistikasi" description="Butun dunyo davlatlarining koronavirus statistikasi jadvali"/>
-      {/* <div style={{
+      <div style={{
         overflowX: 'hidden'
-      }}> */}
-        <Router>
-          <SingleCountry  path={path + '/:country'} />
-          <CountriesTable path={path} />
+      }}>
+        <Router basepath={basepath}>
+          <SingleCountry  path=":country" />
+          <CountriesTable path="/" />
         </Router>
-      {/* </div> */}
+      </div>
     </Layout>
   );
 }

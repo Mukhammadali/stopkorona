@@ -2,8 +2,6 @@ const path = require('path');
 const fs = require("fs-extra")
 const i18next = require("i18next")
 const nodeFsBackend = require("i18next-node-fs-backend")
-// const LanguageDetector = require("i18next-browser-languagedetector")
-
 
 const allLanguages = ["en", "uz", "ru", "kz"]
 const defaultLanguage = 'uz';
@@ -54,7 +52,7 @@ exports.createPages = async ({
         component: template.component,
         context: {},
       }),
-      ["common", "home"],
+      ["common"],
       createPage
     )
   })
@@ -145,32 +143,6 @@ const build404Pages = async createPage => {
     })
   )
 }
-
-// exports.onPostBuild = () => {
-//   console.log("Copying locales")
-//   fs.copySync(
-//     path.join(__dirname, "/src/translation/locales"),
-//     path.join(__dirname, "/public/locales")
-//   )
-// }
-
-// exports.onCreatePage = async ({ page, actions }) => {
-//   const { createPage } = actions
-//   // Only update the `/app` page.
-//   if (page.path.match(/\/countries/)) {
-//     const splittedPage = page.path.split('/countries')
-//     // page.matchPath is a special key that's used for matching pages
-//     // with corresponding routes only on the client.
-//     if(splittedPage.length === 2){
-//       page.matchPath = splittedPage[0] + "/countries/*"
-//     } else {
-//       page.matchPath = "/countries/*"
-//     }
-//     // Update the page.
-//     console.log('page:', page)
-//     createPage(page)
-//   }
-// }
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
