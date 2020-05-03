@@ -45,14 +45,12 @@ exports.createPages = async ({
       });
     }
   }
-  // const homeTemplate = path.resolve(`./src/templates/home.js`)
-  // const globalTemplate = path.resolve(`./src/templates/global.js`)
-  // const countriesTemplate = path.resolve(`./src/templates/countries.js`)
+
   allTemplates.map(async template => {
     await buildI18nPages(
       null,
       (_, language) => ({
-        path: generatePath(template.name, language), // (1)
+        path: generatePath(template.name, language),
         component: template.component,
         context: {},
       }),
@@ -60,31 +58,8 @@ exports.createPages = async ({
       createPage
     )
   })
-  // await buildI18nPages(
-  //   null,
-  //   (_, language) => ({
-  //     path: `/${language}/global`, // (1)
-  //     component: globalTemplate,
-  //     context: {},
-  //   }),
-  //   ["common", "global"],
-  //   createPage
-  // )
-  
-  // await buildI18nPages(
-  //   null,
-  //   (_, language) => ({
-  //     path: `/${language}/countries`, // (1)
-  //     component: countriesTemplate,
-  //     context: {},
-  //   }),
-  //   ["common", "countries"],
-  //   createPage
-  // )
 
   await build404Pages(createPage)
-
-  // createRedirect({ fromPath: "/", toPath: "/en", isPermanent: true })
 
   allLanguages.forEach(language =>
     createRedirect({
