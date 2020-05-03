@@ -179,6 +179,24 @@ const build404Pages = async createPage => {
 //   )
 // }
 
+// exports.onCreatePage = async ({ page, actions }) => {
+//   const { createPage } = actions
+//   // Only update the `/app` page.
+//   if (page.path.match(/\/countries/)) {
+//     const splittedPage = page.path.split('/countries')
+//     // page.matchPath is a special key that's used for matching pages
+//     // with corresponding routes only on the client.
+//     if(splittedPage.length === 2){
+//       page.matchPath = splittedPage[0] + "/countries/*"
+//     } else {
+//       page.matchPath = "/countries/*"
+//     }
+//     // Update the page.
+//     console.log('page:', page)
+//     createPage(page)
+//   }
+// }
+
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
     resolve: {

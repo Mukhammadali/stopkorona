@@ -59,20 +59,21 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-styled-components`,
-      options: {
-        ssr: true
-      }
-    },
-    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-159324585-2",
       },
     },
     {
+      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+      options: {
+        analyzerPort: 3000,
+        production: false,
+      },
+    },
+    {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/countries/*`, `/en/countries/*`] },
+      options: { prefixes: [`/countries/*`, `/en/countries/*`, `/ru/countries/*`, `/kz/countries/*`] },
     },
     
     `gatsby-plugin-react-helmet`,
@@ -103,6 +104,12 @@ module.exports = {
       options: {
         precachePages: ['/', '/global', '/countries'],
       },
+    },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        displayName: true
+      }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

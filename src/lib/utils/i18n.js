@@ -2,12 +2,12 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link as GatsbyLink, navigate as gatsbyNavigate } from "gatsby"
 import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
 
 const Link = ({ to, children, onClick, ...rest }) => {
   const { i18n } = useTranslation();
   const language = i18n.language;
-  const languageLink = language || intl.language
-  const link = language ? `/${languageLink}${to}` : `${to}`
+  const link = language === 'uz' ? to : `/${language}${to}`
 
   const handleClick = e => {
     if (language) {
@@ -49,7 +49,7 @@ export const navigate = (to, options) => {
     return
   }
 
-  const { language } = window?.___gatsbyIntl
+  const language = window.___siteLanguage
  
   const link = getPath(language, to);
   //  routed ? `/${language}${to}` : `${to}`
@@ -57,12 +57,15 @@ export const navigate = (to, options) => {
 }
 
 export const changeLocale = (language, to) => {
+  console.log('language:', language)
   if (typeof window === "undefined") {
     return
   }
+  const currentLang = window.___siteLanguage
+  console.log('currentLang:', currentLang)
 
   const removeLocalePart = pathname => {
-    if (!pathname) {
+    if (!pathname || currentLang === 'uz') {
       return pathname
     }
     const i = pathname.indexOf(`/`, 1)
@@ -76,7 +79,10 @@ export const changeLocale = (language, to) => {
 
   const pathname = removeLocalePart(window.location.pathname)
   // TODO: check slash
-  const link = `/${language}${pathname}${window.location.search}`
+  let link = `/${language}${pathname}${window.location.search}`
+  if(language === 'uz'){
+    link = `${pathname}${window.location.search}`
+  }
   localStorage.setItem("stopkorona_uz_locale", language)
   gatsbyNavigate(link)
 }

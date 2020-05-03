@@ -6,11 +6,15 @@ import { numberWithCommas } from 'src/lib/utils'
 
 import { isBrowser } from 'react-device-detect';
 import { uzLocale } from 'src/lib/config/apexCharts'
+import ruLocale from 'apexcharts/dist/locales/ru.json'
+import enLocale from 'apexcharts/dist/locales/en.json'
+import { useTranslation } from 'react-i18next';
 
 const DailyIncreaseChart = ({ data, limit, total }) => {
+  const { i18n } = useTranslation()
   const chartRef = useRef();
   useEffect(() => {
-    moment.locale('uz-latn');
+    moment.locale(i18n.language === 'uz' ?  'uz-latn' : i18n.language);
   }, [])
   const transformed = useMemo(() => {
     const labels=[];
@@ -71,9 +75,11 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
                 enabled: false,
               },
               locales:[
-                uzLocale
+                uzLocale,
+                enLocale,
+                ruLocale
               ],
-              defaultLocale: 'uz',
+              defaultLocale: i18n.language,
               id: "basic-bar",
               toolbar: {
                 show: false,
@@ -111,7 +117,7 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
               labels: {
                 datetimeUTC: false,
                 formatter:  function(val, timestamp) {
-                  const date = moment(new Date(val)).locale('uzb').format('D MMMM');
+                  const date = moment(new Date(val)).locale(i18n.language).format('D MMMM');
                   return date;
                 },
                 format: 'd MMMM',

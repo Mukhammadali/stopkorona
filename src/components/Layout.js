@@ -1,11 +1,13 @@
 import React, { memo, useEffect } from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import { GoHome, GoGlobe, GoSearch } from 'react-icons/go';
 import Header from "./header"
 import 'moment/locale/uz-latn';
 import styled from 'styled-components';
 import { isMobileOnly } from 'react-device-detect';
+import { useTranslation } from 'react-i18next';
+import Link from 'src/lib/utils/i18n';
 // import i18n from 'src/translation/i18n';
 
 const NavLink = memo(props => (
@@ -23,18 +25,17 @@ const NavLink = memo(props => (
 ));
 
 const Layout = ({ children, withLogo }) => {
+  const {i18n} = useTranslation();
   useEffect(() => {
-    if(!localStorage.getItem('stopkorona_uz_locale')){
-      // localStorage.setItem('stopkorona_uz_locale', i18n.language);
-    }
-  }, [])
+    window.___siteLanguage = i18n.language;
+  }, [i18n.language])
   return (
     <>
       <Styles >
         <div className="container">
           <Header />
           <DesktopTabbar onTouchMove={event => event.preventDefault()}>
-            <NavLink  to="/" className="menu-item">
+            <NavLink to="/" className="menu-item">
               <GoHome size="1.5rem" />
               <span>Mahalliy</span>
             </NavLink>

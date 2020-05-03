@@ -3,7 +3,6 @@ import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchAllCountries, fetchCountryHistorical } from 'src/lib/api';
 import Table from 'src/components/Table';
 import { useQuery, queryCache } from 'react-query';
-import {navigate} from 'gatsby'
 import moize from 'moize';
 import {GoSearch} from 'react-icons/go';
 import {IoMdClose} from 'react-icons/io';
@@ -13,6 +12,7 @@ import styled from 'styled-components';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 import { useDispatch } from 'react-redux';
 import { updateSelectedCountry } from 'src/redux/global/globalActions';
+import { navigate } from 'src/lib/utils/i18n';
 
 const renderCustomCell = ({row, ...props}) => {
   return(

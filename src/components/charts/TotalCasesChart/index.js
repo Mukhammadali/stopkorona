@@ -5,9 +5,12 @@ import { numberWithCommas } from 'src/lib/utils'
 
 import { isBrowser } from 'react-device-detect';
 import { uzLocale } from 'src/lib/config/apexCharts'
-
+import ruLocale from 'apexcharts/dist/locales/ru.json'
+import enLocale from 'apexcharts/dist/locales/en.json'
+import { useTranslation } from 'react-i18next';
 
 const TotalCasesChart = ({ data, total }) => {
+  const { i18n } = useTranslation()
   const transformed = useMemo(() => {
     const labels=[];
     const cases=[];
@@ -92,9 +95,11 @@ const TotalCasesChart = ({ data, total }) => {
                   }
               },
               locales:[
-                uzLocale
+                uzLocale,
+                enLocale,
+                ruLocale
               ],
-              defaultLocale: 'uz',
+              defaultLocale: i18n.language,
               id: "basic-bar",
               toolbar: {
                 show: false,
