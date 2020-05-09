@@ -13,9 +13,6 @@ import { useTranslation } from 'react-i18next';
 const DailyIncreaseChart = ({ data, limit, total }) => {
   const { i18n } = useTranslation()
   const chartRef = useRef();
-  useEffect(() => {
-    moment.locale(i18n.language === 'uz' ?  'uz-latn' : i18n.language);
-  }, [])
   const transformed = useMemo(() => {
     const labels=[];
     const cases=[];
@@ -98,7 +95,9 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
             },
             tooltip: {
               x: {
-                format: "d MMMM"
+                formatter:  function(val, timestamp) {
+                  return moment(new Date(val)).format('D MMMM');
+                },
               },
             },  
             dataLabels: {
@@ -113,20 +112,14 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
               }
             },
             xaxis: {
+              // type: 'datetime',
               categories: transformed?.labels || [],
               labels: {
                 datetimeUTC: false,
                 formatter:  function(val, timestamp) {
-                  const date = moment(new Date(val)).locale(i18n.language).format('D MMMM');
+                  const date = moment(new Date(val)).format('D.MM');
                   return date;
-                },
-                format: 'd MMMM',
-                datetimeFormatter: {
-                  year: 'yyyy',
-                  month: "d MMMM",
-                  day: 'd MMMM',
-                  hour: 'HH:mm',
-                },
+                }
               }
             },
         }}

@@ -56,7 +56,7 @@ const Uzbekistan = ({ historical }) => {
       <Stats data={fetchedTotal} />
       <section>
         <h3>Kunlik o'sish</h3>
-        <DailyCasesChart limit={isMobileOnly ? 10 : null} data={fetchedHistorical?.timeline} total={fetchedTotal} />
+        <DailyCasesChart limit={isMobileOnly ? 10 : 30} data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </section>
       <section>
         <h3>Umumiy o'sish</h3>

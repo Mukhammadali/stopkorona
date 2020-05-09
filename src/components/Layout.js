@@ -4,10 +4,12 @@ import { useStaticQuery, graphql } from "gatsby"
 import { GoHome, GoGlobe, GoSearch } from 'react-icons/go';
 import Header from "./header"
 import 'moment/locale/uz-latn';
+import 'moment/locale/ru';
 import styled from 'styled-components';
 import { isMobileOnly } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 import Link from 'src/lib/utils/i18n';
+import moment from 'moment';
 // import i18n from 'src/translation/i18n';
 
 const NavLink = memo(props => (
@@ -28,6 +30,7 @@ const Layout = ({ children, withLogo }) => {
   const {i18n} = useTranslation();
   useEffect(() => {
     window.___siteLanguage = i18n.language;
+    moment.locale(i18n.language === 'uz' ?  'uz-latn' : i18n.language);
   }, [i18n.language])
   return (
     <>
@@ -49,11 +52,11 @@ const Layout = ({ children, withLogo }) => {
             </NavLink>
           </DesktopTabbar>
           <main className="container-content">{children}</main>
-          <footer className="my-5 d-flex justify-content-center font-light">
+          <footer className="d-flex justify-content-center font-light">
             © {new Date().getFullYear()}.
               <span className="ml-2">
                 Made by
-                <a href="https://www.linkedin.com/in/mukhammadali" target="_blank" className="ml-2 decoration-underline font-weight-bold">
+                <a href="https://twitter.com/_mukhammadali" target="_blank" className="ml-2 decoration-underline font-weight-bold">
                   Muhammad Ali
                 </a>
               </span>
@@ -147,9 +150,16 @@ const Tabbar = styled.div`
 
 const Styles = styled.div`
   font-family: ProximaNova Regular;
+  footer {
+    margin: 20px 0px;
+  }
   @media only screen and (max-width: 600px) {
     /* height: 100%; */
     /* overflow-y: auto; */
+    footer {
+      margin-top: 10px !important;
+      margin-bottom: 80px !important;
+    }
   }
   .container {
     margin: 0px auto;

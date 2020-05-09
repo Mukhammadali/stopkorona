@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 const IndexPage = (props) => {
   console.log('props Home:', props)
-  const {t, ...rest } = useTranslation("home");
+  const {t, ...rest } = useTranslation("common");
   console.log('rest:', rest)
   return (
     <Layout>

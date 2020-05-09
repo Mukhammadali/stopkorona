@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet"
 export const AlternateLinksContext = React.createContext([])
 
 function i18nProviderWrapper({ element, props }) {
+  console.log('props:', props)
   const i18n = i18next
     .createInstance({
       lng: props.pageContext.language,

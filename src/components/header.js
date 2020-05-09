@@ -1,51 +1,106 @@
 import PropTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from 'styled-components';
 import { Logo } from 'src/static/images';
 import { useTranslation } from 'react-i18next';
+import ReactSelect from 'react-select';
 import Link, { changeLocale } from 'src/lib/utils/i18n';
-// import i18n from 'src/translation/i18n';
 
 const languageName = {
   en: "English",
   uz: "O'zbekcha",
   ru: "русский",
 }
+const languageOptions = [
+  {
+    value: 'uz',
+    label: "uz",
+  },
+  {
+    value: 'en',
+    label: "us",
+  },
+  {
+    value: 'ru',
+    label: "ru",
+  },
+]
+
+const CustomOption = ({ innerRef, label, innerProps }) => {
+  return (
+  <span className={`country-flag my-2 flag-icon flag-icon-${label}`} ref={innerRef} {...innerProps}  />)
+}
+
+const CustomSingleValue = (props) => {
+  return (
+  <span className={`country-flag  flag-icon flag-icon-${props?.children || 'uz'}`} />)
+}
 
 const Language = () => {
-  // i18n.language
-  // console.log('i18n.language:', i18n)
-  // const { i18n} = useTranslation()
-  // const changeLanguage = (lng) => {
-  //   console.log('lng:', lng)
-  //   localStorage.setItem('stopkorona_uz_locale', lng);
-  //   i18n.changeLanguage(lng);
-  // }
+  const { i18n } = useTranslation()
+  const [currentLocale, setCurrentLocale] = useState(languageOptions.find(el => el.value === i18n.language) || languageOptions[0])
+  useEffect(() => {
+    if(i18n.language !== currentLocale.value){
+      changeLocale(currentLocale.value)
+    };
+  }, [currentLocale])
   return (
-    <div>
-      {
-          ['en', 'uz', 'ru'].map(language => (
-            <span
-              key={language}
-              onClick={() => changeLocale(language)}
-              style={{
-                // color: currentLocale === language ? `red` : `black`,
-                margin: 10,
-                textDecoration: `underline`,
-                cursor: `pointer`,
-              }}
-            >
-              {languageName[language]}
-            </span>
-          ))
-      }
-    </div>
+      <ReactSelect
+        options={languageOptions}
+        components={{
+          Option: CustomOption,
+          SingleValue: CustomSingleValue
+        }}
+        styles={{
+          container: (provided) => ({
+            ...provided,
+            width: 60,
+            border: 'none',
+            paddingTop: 10
+          }),
+          option: () => ({}),
+          menuList: (provided) => ({
+            // ...provided,
+            display: 'flex',
+            flex: 1,
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 'none'
+          }),
+          menu: (provided) => ({
+            ...provided,
+            width: 40,
+            padding: 5,
+            backgroundColor: '#f4f4f4',
+            border: 'none',
+            boxShadow: '0px 0px 10px 5px 0px rgba(0,0,0,0.3)',
+            cursor: 'pointer'
+          }),
+          control: () => ({
+            display: 'flex',
+            alignItems: 'center',
+            cursor: 'pointer'
+          }),
+          valueContainer: () => ({
+            display: 'flex'
+          }),
+          indicatorSeparator: () => ({
+            display: 'none'
+          })
+        }}
+        isSearchable={false}
+        value={currentLocale}
+        onChange={(lang) => {
+          setCurrentLocale(lang);
+        }}
+      />
   )
 }
 const Header = () => {
   return (
     <StyledHeader>
-      <div style={{ margin: 0, padding: '1.45rem 0rem' }}>
+      <div className="container">
         <Link
           to="/"
           style={{
@@ -55,8 +110,6 @@ const Header = () => {
         >
           <Logo width="200" height="50" />
         </Link> 
-      </div>
-      <div>
         <Language />
       </div>
     </StyledHeader>
@@ -75,5 +128,18 @@ export default Header
 
 
 export const StyledHeader = styled.header`
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .container {
+    margin: 0px;
+    padding: 1.45rem 0rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .country-flag {
+      height: 20px;
+      width: 35px;
+    }
+  }
 `;

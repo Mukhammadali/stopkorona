@@ -136,7 +136,7 @@ const TotalCasesChart = ({ data, total }) => {
               // format: 'dd MMMM'
               labels: {
                 datetimeUTC: false,
-                format: 'd MMMM',
+                format: 'd MMM',
                 datetimeFormatter: {
                   year: 'yyyy',
                   month: "d MMMM",
