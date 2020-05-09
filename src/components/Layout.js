@@ -2,14 +2,12 @@ import React, { memo, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { GoHome, GoGlobe, GoSearch } from 'react-icons/go';
+import { BsTable } from 'react-icons/bs';
 import Header from "./header"
-import 'moment/locale/uz-latn';
-import 'moment/locale/ru';
 import styled from 'styled-components';
 import { isMobileOnly } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 import Link from 'src/lib/utils/i18n';
-import moment from 'moment';
 // import i18n from 'src/translation/i18n';
 
 const NavLink = memo(props => (
@@ -30,8 +28,13 @@ const Layout = ({ children, withLogo }) => {
   const {i18n} = useTranslation();
   useEffect(() => {
     window.___siteLanguage = i18n.language;
-    moment.locale(i18n.language === 'uz' ?  'uz-latn' : i18n.language);
   }, [i18n.language])
+  useEffect(() => {
+    const language = localStorage.getItem('stopkorona_uz_locale');
+    if(language && language !== i18n.language){
+      changeLocale(i18n.language);
+    }
+  }, [])
   return (
     <>
       <Styles >
@@ -47,7 +50,7 @@ const Layout = ({ children, withLogo }) => {
               <span>Global</span>
             </NavLink>
             <NavLink to="/countries" className="menu-item">
-              <GoSearch  size="1.5rem" />
+              <BsTable  size="1.5rem" />
               <span>Davlatlar</span>
             </NavLink>
           </DesktopTabbar>
@@ -73,7 +76,7 @@ const Layout = ({ children, withLogo }) => {
           <span>Global</span>
         </NavLink>
         <NavLink to="/countries" className="menu-item">
-          <GoSearch  size="1.5rem" />
+          <BsTable  size="1.5rem" />
           <span>Davlatlar</span>
         </NavLink>
       </Tabbar>

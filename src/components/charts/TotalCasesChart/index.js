@@ -1,6 +1,5 @@
 import React, { useRef, useMemo, memo } from 'react'
 import Chart from "react-apexcharts";
-import moment from "moment";
 import { numberWithCommas } from 'src/lib/utils'
 
 import { isBrowser } from 'react-device-detect';
@@ -8,6 +7,8 @@ import { uzLocale } from 'src/lib/config/apexCharts'
 import ruLocale from 'apexcharts/dist/locales/ru.json'
 import enLocale from 'apexcharts/dist/locales/en.json'
 import { useTranslation } from 'react-i18next';
+import { formatUnixTime, formatDate } from 'src/lib/utils/date';
+import { addDays } from 'date-fns';
 
 const TotalCasesChart = ({ data, total }) => {
   const { i18n, t } = useTranslation()
@@ -29,11 +30,11 @@ const TotalCasesChart = ({ data, total }) => {
     const slicedDeaths = Object.values(data?.deaths).slice(lastLeadingZeroIndex).map((el, idx) => [slicedLabels[idx], el]);
     if (total) {
       const lastDate = slicedLabels[slicedLabels.length - 1];
-      const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
-      const today = moment().format('MM/DD/YY');
+      const latestDate = formatUnixTime(total?.updated, 'MM/dd/yy');
+      const today = formatDate(new Date(),'MM/dd/yy');
       if(lastDate !== latestDate){
         const lastCase = slicedCases[slicedCases.length - 1];
-        const timestamp = moment(lastDate, 'MM/DD/YY').add(1, 'days').format('MM/DD/YY')
+        const timestamp = formatDate(addDays(new Date(lastDate), 1), 'MM/dd/yy')
         if(lastCase[1] <= total?.cases){
           slicedLabels.push(timestamp);
           slicedCases.push([timestamp, total?.cases]);

@@ -57,12 +57,10 @@ export const navigate = (to, options) => {
 }
 
 export const changeLocale = (language, to) => {
-  console.log('language:', language)
   if (typeof window === "undefined") {
     return
   }
   const currentLang = window.___siteLanguage
-  console.log('currentLang:', currentLang)
 
   const removeLocalePart = pathname => {
     if (!pathname || currentLang === 'uz') {

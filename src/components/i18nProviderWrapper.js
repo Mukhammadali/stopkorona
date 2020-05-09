@@ -1,12 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import i18next from "i18next"
 import * as ReactI18next from "react-i18next"
 import { Helmet } from "react-helmet"
+import { changeLocale } from 'src/lib/utils/i18n'
 
 export const AlternateLinksContext = React.createContext([])
 
 function i18nProviderWrapper({ element, props }) {
-  console.log('props:', props)
   const i18n = i18next
     .createInstance({
       lng: props.pageContext.language,

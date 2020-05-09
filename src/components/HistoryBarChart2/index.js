@@ -10,7 +10,6 @@ import { useCountryHistorical } from 'src/hooks/stats';
 const HistoryBarChart2 = () => {
   const {data, status} = useCountryHistorical({countryName: 'Uzbekistan'});
   const [chartData, setChartData] = useState([]);
-  console.log('data:', chartData)
   const [href, setHref]=useState("");
   const downloadRef = useRef();
   useEffect(() => {

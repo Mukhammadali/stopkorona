@@ -1,11 +1,11 @@
 import React, { useRef, useMemo } from 'react'
 import Chart from "react-apexcharts";
-import moment from "moment";
 import {Bar} from 'react-chartjs-2';
 import { numberWithCommas } from 'src/lib/utils'
 
 import { isBrowser } from 'react-device-detect';
 import { uzLocale } from 'src/lib/config/apexCharts'
+import { formatUnixTime } from 'src/lib/utils/date';
 
 
 const DailyIncreaseChart2 = ({ data, total }) => {
@@ -28,7 +28,7 @@ const DailyIncreaseChart2 = ({ data, total }) => {
     const newCases = slicedCases.map((el, idx) => idx === 0 ? el : el - slicedCases[idx -1]);
     if (total) {
       const lastDate = slicedLabels[slicedLabels.length - 1];
-      const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
+      const latestDate = formatUnixTime(total?.updated, 'MM/dd/yy');
       if(lastDate !== latestDate){
         slicedLabels.push(latestDate);
         newCases.push(total?.cases - slicedCases[slicedCases?.length - 1]);
@@ -40,7 +40,6 @@ const DailyIncreaseChart2 = ({ data, total }) => {
     };
   }, [data, total])
 
-  console.log({transformed})
   
   return (
     <div className="my-3" style={{height: isBrowser ? 450 : 'auto'}}>

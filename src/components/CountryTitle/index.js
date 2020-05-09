@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import moment from 'moment';
 import {MdArrowBack} from "react-icons/md"
 import getCountryISO2 from 'src/lib/utils/getCountryISO2';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
@@ -21,9 +20,6 @@ const CountryTitle = ({ country, goBack }) => {
         <span className={`country-flag mr-2 flag-icon flag-icon-${country?.countryInfo?.iso2?.toLowerCase()} `} />
         <h3 className="mb-0">{getCountryUzbekName(country?.countryInfo?.iso2)}</h3>
       </div>
-      {/* {country?.updated && (
-        <span className="ml-3 mb-1 font-info">{moment(country.updated).toNow(true)} oldin yangilandi</span>
-      )} */}
     </Styles>
   )
 }

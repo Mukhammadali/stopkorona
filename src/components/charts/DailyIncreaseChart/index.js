@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, useEffect, memo } from 'react'
 import Chart from "react-apexcharts";
-import moment from "moment";
+import { addDays, fromUnixTime } from 'date-fns';
 import { isMobileOnly } from 'react-device-detect';
 import { numberWithCommas } from 'src/lib/utils'
 
@@ -9,6 +9,7 @@ import { uzLocale } from 'src/lib/config/apexCharts'
 import ruLocale from 'apexcharts/dist/locales/ru.json'
 import enLocale from 'apexcharts/dist/locales/en.json'
 import { useTranslation } from 'react-i18next';
+import { formatUnixTime, formatDate } from 'src/lib/utils/date';
 
 const DailyIncreaseChart = ({ data, limit, total }) => {
   const { i18n, t } = useTranslation()
@@ -32,9 +33,9 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
     if (total) {
       const lastDate = slicedLabels[slicedLabels.length - 1];
       const lastCase = slicedCases[slicedCases?.length - 1];
-      const latestDate = moment(total?.updated, 'x').format('MM/DD/YY');
+      const latestDate = formatUnixTime(total?.updated, 'MM/dd/yy');
       if(lastDate !== latestDate){
-        slicedLabels.push(moment(lastDate, 'MM/DD/YY').add(1, 'days').format('MM/DD/YY'));
+        slicedLabels.push(formatDate(addDays(new Date(lastDate),1), 'MM/dd/yy'));
         newCases.push(total?.todayCases);
       }
     }
@@ -96,9 +97,7 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
             tooltip: {
               x: {
                 formatter:  function(val, timestamp) {
-                  console.log('timestamp:', timestamp)
-                  console.log('val:', val)
-                  return moment(new Date(val)).format('D MMMM');
+                  return formatDate(new Date(val), 'd MMMM');
                 },
               },
             },  
@@ -120,7 +119,7 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
               labels: {
                 datetimeUTC: false,
                 formatter:  function(val, timestamp) {
-                  const date = moment(new Date(val)).format('D.MM');
+                  const date = formatDate(new Date(val), 'd.MM');
                   return date;
                 },
                 hideOverlappingLabels: false,

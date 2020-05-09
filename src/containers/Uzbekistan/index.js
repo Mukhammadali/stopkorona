@@ -5,7 +5,6 @@ import Loadable from 'react-loadable';
 import Stats from 'src/components/Stats'
 import { Row } from 'reactstrap';
 import { isMobileOnly } from 'react-device-detect';
-import GenderPieChart from './components/GenderPieChart';
 import { useQuery, queryCache } from 'react-query';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchCountryTotal, fetchCountryHistorical, fetchAllCountries } from 'src/lib/api';

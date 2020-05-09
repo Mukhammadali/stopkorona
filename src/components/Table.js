@@ -36,7 +36,6 @@ function Table({ onClickListItem, columns, data, initialState }) {
   // We don't want to render all 2000 rows for this example, so cap
   // it at 20 for this use case
   // const firstPageRows = rows.slice(0, 20)
-  console.log({tColumns})
 
   return (
     <Styles>
