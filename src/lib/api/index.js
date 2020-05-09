@@ -13,3 +13,6 @@ export const fetchTotal = () =>
 
 export const fetchCountryTotal = ({countryName}) =>
   axiosInstance.get(`/v2/countries/${countryName}`).then(res => res?.data)
+
+export const fetchCountryTotalYesterday = ({countryName}) =>
+  axiosInstance.get(`/v2/countries/${countryName}?yesterday=true`).then(res => res?.data)

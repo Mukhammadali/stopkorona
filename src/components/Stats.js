@@ -6,9 +6,13 @@ import { fetchTotal } from 'src/lib/api'
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa'
 import styled from 'styled-components'
 import { Container, Row, Col, Card, CardBody, CardTitle } from 'reactstrap'
+import { useTranslation } from 'react-i18next';
 
 
-const Stats = ({ data }) => {
+const Stats = ({ data, yesterday }) => {
+  const {t} = useTranslation()
+  const todayRecovered = data?.recovered - yesterday?.recovered;
+  const todayActive = data?.active - yesterday?.active;
   return (
     <StyledContainer>
         <Row className="d-flex align-items-stretch">
@@ -20,7 +24,7 @@ const Stats = ({ data }) => {
                     tag="h6"
                     className="text-uppercase text-muted mb-2  font-weight-semibold"
                   >
-                    Yuqtirganlar
+                    {t("Cases")}
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.cases || 0)}</span>
@@ -42,14 +46,14 @@ const Stats = ({ data }) => {
                     tag="h6"
                     className="text-uppercase text-muted mb-2  font-weight-semibold"
                   >
-                    Davolanayotganlar
+                    {t("Active")}
                   </CardTitle>
                     <div className="stat d-flex align-items-center">
                       <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.active)}</span>
                     {
-                      data?.todayActive ? (
-                      <span className="text-success ml-2">
-                        +{numberWithCommas(data.todayActive)}
+                      todayActive ? (
+                      <span className={`text-${todayActive > 0 ? 'success' : 'danger'} ml-2`}>
+                        {todayActive > 0 && '+'}{numberWithCommas(todayActive)}
                       </span>
                       ) : null
                     }
@@ -66,15 +70,17 @@ const Stats = ({ data }) => {
                     tag="h6"
                     className="font-weight-semibold text-uppercase text-muted mb-2"
                   >
-                    Tuzalganlar
+                    {t("Recovered")}
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.recovered || 0)}</span>
-                    {data?.todayRecovered ? (
-                        <span className="text-success ml-2">
-                          +{numberWithCommas(data?.todayRecovered)}
-                        </span>
-                      ): null}
+                    {
+                      todayRecovered ? (
+                      <span className="text-success ml-2">
+                        +{numberWithCommas(todayRecovered)}
+                      </span>
+                      ) : null
+                    }
                   </div>
                 </div>
               </CardBody>
@@ -88,7 +94,7 @@ const Stats = ({ data }) => {
                     tag="h6"
                     className="text-uppercase text-muted mb-2  font-weight-semibold"
                   >
-                    Vafot etganlar
+                    {t("Deaths")}
                   </CardTitle>
                   <div className="stat d-flex align-items-center">
                     <span className="h4 font-weight-semibold mb-0">{numberWithCommas(data?.deaths || 0)}</span>

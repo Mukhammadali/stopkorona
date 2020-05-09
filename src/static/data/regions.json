@@ -2,80 +2,80 @@
   "data": [
     {
       "name": "Toshkent",
-      "cases": 585,
-      "recovered": 228,
-      "deaths": 4
+      "cases": 738,
+      "recovered": 548,
+      "deaths": 5
     },
     {
       "name": "Buxoro",
-      "cases": 394,
-      "recovered": 210,
+      "cases": 440,
+      "recovered": 404,
       "deaths": null
     },
     {
       "name": "Xorazm",
-      "cases": 220,
-      "recovered": 61,
+      "cases": 233,
+      "recovered": 168,
       "deaths": null
     },
     {
       "name": "Andijon",
-      "cases": 151,
-      "recovered": 56,
+      "cases": 166,
+      "recovered": 135,
       "deaths": null
     },
     {
       "name": "Namangan",
-      "cases": 183,
-      "recovered": 57,
-      "deaths": 3
+      "cases": 234,
+      "recovered": 159,
+      "deaths": 4
     },
     {
       "name": "Farg'ona",
-      "cases": 124,
-      "recovered": 52,
+      "cases": 158,
+      "recovered": 131,
       "deaths": 1
     },
     {
       "name": "Qoraqalpog'iston",
-      "cases": 104,
-      "recovered": 29,
+      "cases": 114,
+      "recovered": 101,
       "deaths": null
     },
     {
       "name": "Surxondaryo",
-      "cases": 33,
-      "recovered": 4,
+      "cases": 41,
+      "recovered": 35,
       "deaths": null
     },
     {
       "name": "Samarqand",
-      "cases": 43,
-      "recovered": 4,
+      "cases": 166,
+      "recovered": 70,
       "deaths": null
     },
     {
       "name": "Qashqadaryo",
       "cases": 6,
-      "recovered": 4,
+      "recovered": 6,
       "deaths": null
     },
     {
       "name": "Sirdaryo",
-      "cases": 17,
-      "recovered": null,
+      "cases": 24,
+      "recovered": 13,
       "deaths": null
     },
     {
       "name": "Jizzax",
       "cases": 3,
-      "recovered": 1,
+      "recovered": 3,
       "deaths": null
     },
     {
       "name": "Navoiy",
       "cases": 2,
-      "recovered": 1,
+      "recovered": 2,
       "deaths": null
     }
   ]

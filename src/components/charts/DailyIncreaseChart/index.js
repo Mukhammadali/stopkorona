@@ -11,7 +11,7 @@ import enLocale from 'apexcharts/dist/locales/en.json'
 import { useTranslation } from 'react-i18next';
 
 const DailyIncreaseChart = ({ data, limit, total }) => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const chartRef = useRef();
   const transformed = useMemo(() => {
     const labels=[];
@@ -96,6 +96,8 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
             tooltip: {
               x: {
                 formatter:  function(val, timestamp) {
+                  console.log('timestamp:', timestamp)
+                  console.log('val:', val)
                   return moment(new Date(val)).format('D MMMM');
                 },
               },
@@ -113,19 +115,31 @@ const DailyIncreaseChart = ({ data, limit, total }) => {
             },
             xaxis: {
               // type: 'datetime',
+              // tickPlacement: "on",
               categories: transformed?.labels || [],
               labels: {
                 datetimeUTC: false,
                 formatter:  function(val, timestamp) {
                   const date = moment(new Date(val)).format('D.MM');
                   return date;
-                }
-              }
+                },
+                hideOverlappingLabels: false,
+                rotate: -40,
+                rotateAlways: true,
+                // format: 'D.MM'
+                // format: 'd.MM',
+                // datetimeFormatter: {
+                //   year: 'yyyy',
+                //   month: "d MMMM",
+                //   day: 'd MMMM',
+                //   hour: 'HH:mm',
+                // },
+              },
             },
         }}
         series={[
           {
-            name: "Yuqtirganlar",
+            name: t("Cases"),
             data:  transformed?.cases
           },
         ]}

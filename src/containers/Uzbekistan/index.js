@@ -44,6 +44,7 @@ const mockData = {
 
 const Uzbekistan = ({ historical }) => {
   const { data: fetchedTotal } = useCountryTotal({countryName: 'Uzbekistan'})
+  const { data: fetchedTotalYesterday } = useCountryTotal({countryName: 'Uzbekistan', yesterday: true})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: 'Uzbekistan'})
   const size = useWindowSize();
   useEffect(() => {
@@ -53,10 +54,10 @@ const Uzbekistan = ({ historical }) => {
     <Styles>
       <SEO title="O'zbekiston koronavirus statistikasi" />
       <CountryTitle country={fetchedTotal || mockData} />
-      <Stats data={fetchedTotal} />
+      <Stats data={fetchedTotal}  yesterday={fetchedTotalYesterday} />
       <section>
         <h3>Kunlik o'sish</h3>
-        <DailyCasesChart limit={isMobileOnly ? 10 : 30} data={fetchedHistorical?.timeline} total={fetchedTotal} />
+        <DailyCasesChart limit={isMobileOnly ? 7 : 30} data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </section>
       <section>
         <h3>Umumiy o'sish</h3>

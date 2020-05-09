@@ -1,5 +1,6 @@
 {
-  "common":{
-    "test": "React va react-i18nextga xush kelibsiz"
-  }
+  "Cases": "Yuqtirganlar",
+  "Active": "Davolanayotganlar",
+  "Recovered": "Tuzalganlar",
+  "Deaths": "Vafot etganlar"
 }

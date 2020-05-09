@@ -112,8 +112,8 @@ const createI18nextInstance = async (language, namespaces) => {
     i18n.init(
       {
         lng: language,
-        ns: namespaces,
-        fallbackLng: language,
+        // ns: namespaces,
+        fallbackLng: 'en',
         interpolation: { escapeValue: false },
         backend: { loadPath: `${srcPath}/translation/locales/{{lng}}.json` },
       },

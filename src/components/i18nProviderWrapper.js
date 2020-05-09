@@ -12,6 +12,7 @@ function i18nProviderWrapper({ element, props }) {
       lng: props.pageContext.language,
       interpolation: { escapeValue: false },
       initImmediate: false,
+      ns: "translation",
       resources: props.pageContext.i18nResources,
     })
     .use(ReactI18next.initReactI18next)

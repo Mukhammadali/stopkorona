@@ -1,5 +1,5 @@
 import queryKeys from 'src/lib/constants/queryKeys';
-import { fetchCountryHistorical, fetchCountryTotal } from 'src/lib/api';
+import { fetchCountryHistorical, fetchCountryTotal, fetchCountryTotalYesterday } from 'src/lib/api';
 import { useQuery } from 'react-query';
 
 export const useCountryHistorical = ({countryName}) => {
@@ -8,7 +8,18 @@ export const useCountryHistorical = ({countryName}) => {
   });
 }
 
-export const useCountryTotal = ({ countryName, initialData }) => {
+// export const useCountryTotal = ({ countryName, initialData }) => {
+//   return useQuery([queryKeys.TOTAL_COUNTRY, { countryName }], fetchCountryTotal, {
+//     initialData
+//   })
+// }
+
+export const useCountryTotal = ({ countryName, initialData, yesterday = false }) => {
+  if(yesterday) {
+    return useQuery([queryKeys.TOTAL_COUNTRY_YESTERDAY, { countryName }], fetchCountryTotalYesterday, {
+      initialData
+    })
+  }
   return useQuery([queryKeys.TOTAL_COUNTRY, { countryName }], fetchCountryTotal, {
     initialData
   })

@@ -9,7 +9,7 @@ const RegionsTable = () => {
  
   return (
     <Styles>
-      <span className="mb-1 font-semibold">Jadval yangilangan sana: </span><span>26-Aprel</span>
+      <span className="mb-1 font-semibold">Jadval yangilangan sana: </span><span>8-May</span>
       <div className="table-wrapper">
       <table>
         <thead>
@@ -24,7 +24,7 @@ const RegionsTable = () => {
           {
             regions?.map((region, idx) => (
               <tr key={region?.name}>
-                <td className="country-cell">{idx + 1}. {region?.name}</td>
+                <td className="country-cell">{idx + 1}. {region?.name} {region?.cases === region?.recovered ? '🎉' : ''}</td>
                 <td className="stat-cell">{region?.cases}</td>
                 <td className="stat-cell">{region?.recovered || '-'}</td>
                 <td className="stat-cell">{region?.deaths || '-'}</td>

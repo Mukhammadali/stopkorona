@@ -10,7 +10,7 @@ import enLocale from 'apexcharts/dist/locales/en.json'
 import { useTranslation } from 'react-i18next';
 
 const TotalCasesChart = ({ data, total }) => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const transformed = useMemo(() => {
     const labels=[];
     const cases=[];
@@ -134,6 +134,7 @@ const TotalCasesChart = ({ data, total }) => {
               // min: new Date("2 Mar 2020").getTime(),
               // max: moment().subtract(1, 'd').valueOf(),
               // format: 'dd MMMM'
+              tickPlacement: "on",
               labels: {
                 datetimeUTC: false,
                 format: 'd MMM',
@@ -156,15 +157,15 @@ const TotalCasesChart = ({ data, total }) => {
         }}
         series={[
           {
-            name: "Yuqtirganlar",
+            name: t("Cases"),
             data:  transformed?.cases
           },
           {
-            name: "Tuzalganlar",
+            name: t("Recovered"),
             data: transformed?.recovered
           },
           {
-            name: "Vafot Etganlar",
+            name: t("Deaths"),
             data: transformed?.deaths
           },
         ]}

@@ -33,13 +33,14 @@ const SingleCountry = ({ country, location }) => {
   const passedCountry = location?.state?.country;
   const { data: fetchedTotal } = useCountryTotal({countryName: country, initialData: passedCountry})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: country})
+  const { data: fetchedTotalYesterday } = useCountryTotal({countryName: country, yesterday: true})
   const countryName = getCountryUzbekName(fetchedTotal?.countryInfo?.iso2)  || fetchedTotal?.country || country;
   return (
     <Layout>
       <Styles>
         <SEO title={`${countryName} statistikasi`} description={`${countryName} koronavirus statistikasi`} />
         <CountryTitle goBack country={fetchedTotal} />
-        <Stats data={fetchedTotal} />
+        <Stats data={fetchedTotal} yesterday={fetchedTotalYesterday} />
         <div>
           {isMobileOnly ? (
             <h3>7 kunlik o'sish</h3>
