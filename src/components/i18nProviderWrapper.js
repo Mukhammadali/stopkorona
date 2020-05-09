@@ -2,11 +2,12 @@ import React, { useEffect } from "react"
 import i18next from "i18next"
 import * as ReactI18next from "react-i18next"
 import { Helmet } from "react-helmet"
-import { changeLocale } from 'src/lib/utils/i18n'
+import { changeLocale, navigate } from 'src/lib/utils/i18n'
 
 export const AlternateLinksContext = React.createContext([])
 
 function i18nProviderWrapper({ element, props }) {
+  console.log('props:', props)
   const i18n = i18next
     .createInstance({
       lng: props.pageContext.language,
@@ -17,6 +18,14 @@ function i18nProviderWrapper({ element, props }) {
     })
     .use(ReactI18next.initReactI18next)
   i18n.init()
+  if (typeof window !== `undefined`) {
+    window.___siteLanguage = props.pageContext.language;
+    const language = localStorage.getItem('stopkorona_uz_locale');
+    console.log('language:', language)
+    if(language && language !== props.pageContext.language){
+      changeLocale(language);
+    }
+  }
   return (
     <ReactI18next.I18nextProvider i18n={i18n}>
       <AlternateLinksContext.Provider
