@@ -19,7 +19,7 @@ const Link = ({ to, children, onClick, ...rest }) => {
   }
 
   return (
-    <GatsbyLink {...rest} to={link.replace(/\/$/, "")} onClick={handleClick}>
+    <GatsbyLink {...rest} to={link} onClick={handleClick}>
       {children}
     </GatsbyLink>
   )
@@ -82,5 +82,5 @@ export const changeLocale = (language, to) => {
     link = `${pathname}${window.location.search}`
   }
   localStorage.setItem("stopkorona_uz_locale", language)
-  gatsbyNavigate(link.replace(/\/$/, ""))
+  gatsbyNavigate(link)
 }

@@ -27,7 +27,7 @@ const NavLink = memo(props => (
 const Layout = ({ children, withLogo }) => {
   const {i18n} = useTranslation();
   // useEffect(() => {
-  //   // window.___siteLanguage = i18n.language;
+  //   window.___siteLanguage = i18n.language;
   // }, [i18n.language])
   // useEffect(() => {
   //   const language = localStorage.getItem('stopkorona_uz_locale');
