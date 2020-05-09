@@ -7,7 +7,7 @@ import Header from "./header"
 import styled from 'styled-components';
 import { isMobileOnly } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
-import Link from 'src/lib/utils/i18n';
+import Link, {changeLocale }  from 'src/lib/utils/i18n';
 // import i18n from 'src/translation/i18n';
 
 const NavLink = memo(props => (
