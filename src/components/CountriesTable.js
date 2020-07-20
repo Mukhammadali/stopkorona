@@ -61,12 +61,13 @@ const CountriesTable = () => {
   const transformedData = useMemo(() => data?.map(el => ({
     ...el,
     country: isUzbekLocale ? getCountryUzbekName(el?.countryInfo?.iso2) : el?.country,
+    originalName: el.country,
   })), [data]);
 
 
   const onNavigate = (data) => {
-    queryCache.prefetchQuery([queryKeys.COUNTRY_HISTORICAL, { countryName:  data?.country }], fetchCountryHistorical);
-    navigate(`/countries/${data?.country}`, {
+    queryCache.prefetchQuery([queryKeys.COUNTRY_HISTORICAL, { countryName:  data?.originalName }], fetchCountryHistorical);
+    navigate(`/countries/${data?.originalName}`, {
      state: {
        country: data,
      }
