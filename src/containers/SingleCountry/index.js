@@ -10,8 +10,8 @@ import CountryTitle from 'src/components/CountryTitle';
 import { useCountryTotal, useCountryHistorical } from 'src/hooks/stats';
 import { isMobileOnly } from 'react-device-detect';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
-import { useSelector } from 'react-redux';
 import Layout from 'src/components/Layout';
+import { useTranslation } from 'react-i18next';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -34,7 +34,12 @@ const SingleCountry = ({ country, location }) => {
   const { data: fetchedTotal } = useCountryTotal({countryName: country, initialData: passedCountry})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: country})
   const { data: fetchedTotalYesterday } = useCountryTotal({countryName: country, yesterday: true})
-  const countryName = getCountryUzbekName(fetchedTotal?.countryInfo?.iso2)  || fetchedTotal?.country || country;
+  const {i18n, t} = useTranslation();
+  const isLocaleUzbek = i18n.language === 'uz';
+  console.log('isLocaleUzbek:', isLocaleUzbek)
+  const countryName = isLocaleUzbek ? getCountryUzbekName(fetchedTotal?.countryInfo?.iso2)  : (fetchedTotal?.country || country);
+  console.log('fetchedTotal:', fetchedTotal)
+
   return (
     <Layout>
       <Styles>
@@ -42,15 +47,11 @@ const SingleCountry = ({ country, location }) => {
         <CountryTitle goBack country={fetchedTotal} />
         <Stats data={fetchedTotal} yesterday={fetchedTotalYesterday} />
         <div>
-          {isMobileOnly ? (
-            <h3>7 kunlik o'sish</h3>
-          ):(
-            <h3>20 Kunlik o'sish</h3>
-          )}
+          <h3>{t("Daily Increase")}</h3>
           <DailyCasesChart limit={isMobileOnly ? 7 : 20} data={fetchedHistorical?.timeline} total={fetchedTotal} />
         </div>
         <div>
-          <h3>Umumiy o'sish</h3>
+          <h3>{t("General Increase")}</h3>
           <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
         </div>
       </Styles>

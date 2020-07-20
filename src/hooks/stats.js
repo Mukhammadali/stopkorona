@@ -8,11 +8,6 @@ export const useCountryHistorical = ({countryName}) => {
   });
 }
 
-// export const useCountryTotal = ({ countryName, initialData }) => {
-//   return useQuery([queryKeys.TOTAL_COUNTRY, { countryName }], fetchCountryTotal, {
-//     initialData
-//   })
-// }
 
 export const useCountryTotal = ({ countryName, initialData, yesterday = false }) => {
   if(yesterday) {

@@ -10,19 +10,17 @@ import debounce from 'lodash/debounce';
 import { numberWithCommas } from 'src/lib/utils';
 import styled from 'styled-components';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
-import { useDispatch } from 'react-redux';
-import { updateSelectedCountry } from 'src/redux/global/globalActions';
 import { navigate } from 'src/lib/utils/i18n';
 import SEO from './seo';
 import Layout from './Layout';
+import { useTranslation } from 'react-i18next';
 
 const renderCustomCell = ({row, ...props}) => {
   return(
     <div className="country-cell">
       <span className="mr-1" style={{width: 30}}>{row.index + 1}.</span>
       <span className={`mr-2 flag-icon flag-icon-${row?.original?.countryInfo?.iso2?.toLowerCase()} `}></span>
-      {/* <img className="country-flag mr-2" src={row?.original?.countryInfo?.flag} height={18} width={28} /> */}
-      <span>{row?.original?.uzName}</span>
+      <span>{row?.original?.country}</span>
     </div>
   )
 }
@@ -49,79 +47,22 @@ const renderRow = ({row, column}) => {
   )
 }
 
-const TableColumns = [
-  {
-    Header: "Davlat nomi",
-    Cell: renderCustomCell,
-    accessor: 'uzName',
-    sortDescFirst: false,
-    disableSortBy: true,
-    Filter: function DefaultColumnFilter({
-      column: { filterValue, setFilter }
-    }) {
-      return (
-        <input
-          className="table-search w-100 font-regular"
-          value={filterValue || ""}
-          autoComplete="false"
-          type="text"
-          onChange={e => {
-            e.preventDefault();
-            e.stopPropagation();
-            setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-          }}
-          placeholder="Qidiruv"
-        />
-      );
-    }
-  },
-  {
-    Header: 'Yuqtirganlar',
-    accessor: 'cases',
-    sortDescFirst: true,
-    Cell: renderRow
-  },
-  {
-    Header: 'Davolanayotganlar',
-    accessor: 'active',
-    sortDescFirst: true,
-    Cell: renderRow
-  },
-  {
-    Header: 'Tuzalganlar',
-    accessor: 'recovered',
-    sortDescFirst: true,
-    Cell: renderRow
-  },
-  {
-    Header: 'Vafot etganlar',
-    accessor: 'deaths',
-    sortDescFirst: true,
-    Cell: renderRow
-  },
-  // {
-  //   Header: 'Jiddiy ahvolda',
-  //   accessor: 'critical',
-  //   sortDescFirst: true,
-  //   Cell: renderRow
-  // },
-];
 
 
 
 const CountriesTable = () => {
+  const { i18n, t } = useTranslation();
+  const isUzbekLocale = i18n.language === 'uz';
   const { data, isLoading } = useQuery(queryKeys.ALL_COUNTRIES, fetchAllCountries, {
     refetchOnMount: false,
     refetchOnWindowFocus: false
   })
 
-  const dispatch = useDispatch();
-  const selectCountry = (country) =>dispatch(updateSelectedCountry(country))
-
   const transformedData = useMemo(() => data?.map(el => ({
-      ...el,
-      uzName: getCountryUzbekName(el?.countryInfo?.iso2) || el?.country,
-    })), [data]);
+    ...el,
+    country: isUzbekLocale ? getCountryUzbekName(el?.countryInfo?.iso2) : el?.country,
+  })), [data]);
+
 
   const onNavigate = (data) => {
     queryCache.prefetchQuery([queryKeys.COUNTRY_HISTORICAL, { countryName:  data?.country }], fetchCountryHistorical);
@@ -131,20 +72,72 @@ const CountriesTable = () => {
      }
     })
   }
+
+  const TableColumns = useMemo(() =>[
+    {
+      Header: t("Country name"),
+      Cell: renderCustomCell,
+      accessor: 'country',
+      sortDescFirst: false,
+      disableSortBy: true,
+      Filter: function DefaultColumnFilter({
+        column: { filterValue, setFilter }
+      }) {
+        return (
+          <input
+            className="table-search w-100 font-regular"
+            value={filterValue || ""}
+            autoComplete="false"
+            type="text"
+            onChange={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+            }}
+            placeholder={t("Search")}
+          />
+        );
+      }
+    },
+    {
+      Header: t("Cases"),
+      accessor: 'cases',
+      sortDescFirst: true,
+      Cell: renderRow
+    },
+    {
+      Header: t("Active"),
+      accessor: 'active',
+      sortDescFirst: true,
+      Cell: renderRow
+    },
+    {
+      Header: t("Recovered"),
+      accessor: 'recovered',
+      sortDescFirst: true,
+      Cell: renderRow
+    },
+    {
+      Header: t("Deaths"),
+      accessor: 'deaths',
+      sortDescFirst: true,
+      Cell: renderRow
+    }
+  ], []);
+  
  
   return (
     <Layout>
       <Styled>
         <SEO title="Davlatlar Koronavirus statistikasi" description="Butun dunyo davlatlarining koronavirus statistikasi jadvali"/>
         <div className="mb-2">
-          <span className="font-weight-semibold">Koronavirus aniqlangan davlatlar soni: </span>
+          <span className="font-weight-semibold">{t("Number of countries")}: </span>
           <span>{data?.length}</span>
         </div>
         <Table
           onClickListItem={onNavigate}
           columns={TableColumns}
           data={transformedData || []}
-          // initialState={}
         />
       </Styled>
     </Layout>

@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
 import {MdArrowBack} from "react-icons/md"
-import getCountryISO2 from 'src/lib/utils/getCountryISO2';
 import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 import { navigate } from 'src/lib/utils/i18n';
+import { useTranslation } from 'react-i18next';
  
 const CountryTitle = ({ country, goBack }) => {
   if(!country) return null;
+  const isUzbekistan = country?.countryInfo?.iso2 == 'UZ';
+  const {t, i18n} = useTranslation()
+  const isLocaleUzbek = i18n.language === 'uz'
   return (
     <Styles className="d-flex align-items-center mb-3">
       {
@@ -18,7 +21,7 @@ const CountryTitle = ({ country, goBack }) => {
       }
       <div className="font-weight-semibold d-flex align-items-center">
         <span className={`country-flag mr-2 flag-icon flag-icon-${country?.countryInfo?.iso2?.toLowerCase()} `} />
-        <h3 className="mb-0">{getCountryUzbekName(country?.countryInfo?.iso2)}</h3>
+        <h3 className="mb-0">{isUzbekistan ? t("Uzbekistan") : isLocaleUzbek? getCountryUzbekName(country?.countryInfo?.iso2): (country?.country)}</h3>
       </div>
     </Styles>
   )

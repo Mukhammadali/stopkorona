@@ -7,7 +7,6 @@ import { changeLocale, navigate } from 'src/lib/utils/i18n'
 export const AlternateLinksContext = React.createContext([])
 
 function i18nProviderWrapper({ element, props }) {
-  console.log('props:', props)
   const i18n = i18next
     .createInstance({
       lng: props.pageContext.language,
@@ -21,7 +20,6 @@ function i18nProviderWrapper({ element, props }) {
   if (typeof window !== `undefined`) {
     window.___siteLanguage = props.pageContext.language;
     const language = localStorage.getItem('stopkorona_uz_locale');
-    console.log('language:', language)
     if(language && language !== props.pageContext.language){
       changeLocale(language);
     }

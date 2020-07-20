@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { isMobileOnly } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 import Link, {changeLocale }  from 'src/lib/utils/i18n';
-// import i18n from 'src/translation/i18n';
 
 const NavLink = memo(props => (
   <Link
@@ -25,34 +24,33 @@ const NavLink = memo(props => (
 ));
 
 const Layout = ({ children, withLogo }) => {
-  const {i18n} = useTranslation();
-  // useEffect(() => {
-  //   window.___siteLanguage = i18n.language;
-  // }, [i18n.language])
-  // useEffect(() => {
-  //   const language = localStorage.getItem('stopkorona_uz_locale');
-  //   if(language && language !== i18n.language){
-  //     changeLocale(i18n.language);
-  //   }
-  // }, [])
+  const {i18n, t} = useTranslation();
+  
+  const renderTabs = () => {
+    return (
+      <>
+        <NavLink  to="/" className="menu-item">
+          <GoHome size="1.5rem" />
+          <span>{t("Local")}</span>
+        </NavLink>
+        <NavLink to="/global" className="menu-item">
+          <GoGlobe size="1.5rem"  />
+          <span>{t("Global")}</span>
+        </NavLink>
+        <NavLink to="/countries" className="menu-item">
+          <BsTable  size="1.5rem" />
+          <span>{t("Countries")}</span>
+        </NavLink>
+      </>
+    )
+  }
   return (
     <>
       <Styles >
         <div className="container">
           <Header />
           <DesktopTabbar onTouchMove={event => event.preventDefault()}>
-            <NavLink to="/" className="menu-item">
-              <GoHome size="1.5rem" />
-              <span>Mahalliy</span>
-            </NavLink>
-            <NavLink to="/global" className="menu-item">
-              <GoGlobe size="1.5rem"  />
-              <span>Global</span>
-            </NavLink>
-            <NavLink to="/countries" className="menu-item">
-              <BsTable  size="1.5rem" />
-              <span>Davlatlar</span>
-            </NavLink>
+           {renderTabs()}
           </DesktopTabbar>
           <main className="container-content">{children}</main>
           <footer className="d-flex justify-content-center font-light">
@@ -67,18 +65,7 @@ const Layout = ({ children, withLogo }) => {
         </div>
       </Styles>
       <Tabbar onTouchMove={event => event.preventDefault()}>
-        <NavLink  to="/" className="menu-item">
-          <GoHome size="1.5rem" />
-          <span>Mahalliy</span>
-        </NavLink>
-        <NavLink to="/global" className="menu-item">
-          <GoGlobe size="1.5rem"  />
-          <span>Global</span>
-        </NavLink>
-        <NavLink to="/countries" className="menu-item">
-          <BsTable  size="1.5rem" />
-          <span>Davlatlar</span>
-        </NavLink>
+       {renderTabs()}
       </Tabbar>
     </>
   )

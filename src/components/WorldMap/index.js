@@ -7,7 +7,8 @@ import styled, {css } from 'styled-components';
 import queryKeys from 'src/lib/constants/queryKeys';
 import { fetchAllCountries } from 'src/lib/api';
 import worldCountries from 'src/static/data/world_countries.json'
-import getCountryISO2 from 'src/lib/utils/getCountryISO2';
+import { useTranslation } from 'react-i18next';
+import { getCountryUzbekName } from 'src/lib/utils/getCountryName';
 
 const memoizedData = moize(arr => {
   if(!Array.isArray(arr)) return [];
@@ -21,6 +22,8 @@ const memoizedData = moize(arr => {
 const WorldMap = ({data}) => {
 
   const filteredData = memoizedData(data);
+  const {t, i18n} = useTranslation()
+  const isLocaleUzbek = i18n.language === 'uz';
   return (
     <Wrapper className="w-100 h-100">
     <ResponsiveChoropleth
@@ -41,32 +44,32 @@ const WorldMap = ({data}) => {
         tooltip={function(e){
           const feature = e?.feature;
           const data = e?.feature?.data;
-          const countryName = data?.country || feature?.properties?.name
+          const countryName = isLocaleUzbek ? getCountryUzbekName(data?.countryInfo?.iso2) : (data?.country || feature?.properties?.name)
           return (
             <div className="map-tooltip">
-              <span className={`mr-2 flag-icon flag-icon-${getCountryISO2(feature?.id)} `}></span>
+              <span className={`mr-2 flag-icon flag-icon-${data?.countryInfo?.iso2?.toLowerCase()} `}></span>
               <span className="mb-2 font-weight-bold">{countryName}</span>
               {data? (
                 <div>
                   <div>
-                    <span className="mr-1 text-warning">Yuqtirganlar:</span>
+                    <span className="mr-1 text-warning">{t("Cases")}:</span>
                     <span >{data?.cases}</span>
                   </div>
                   <div>
-                    <span className="mr-1 text-info">Davolanayotganlar:</span>
+                    <span className="mr-1 text-info">{t("Active")}:</span>
                     <span >{data?.active}</span>
                   </div>
                   <div>
-                    <span className="mr-1 text-success">Tuzalganlar:</span>
+                    <span className="mr-1 text-success">{t("Recovered")}:</span>
                     <span>{data?.recovered}</span>
                   </div>
                   <div>
-                    <span className="mr-1 text-danger">O'lganlar:</span>
+                    <span className="mr-1 text-danger">{t("Deaths")}:</span>
                     <span>{data?.deaths}</span>
                   </div>
                 </div>
               ):(
-                <div>Hali kuzatilmagan!</div>
+                <div>Not found!</div>
               )}
             </div>
           )

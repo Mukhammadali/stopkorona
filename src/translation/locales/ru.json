@@ -1,6 +1,18 @@
 {
   "Cases": "Заражений",
-  "Active": "На лечении",
+  "Active": "На побережье",
   "Recovered": "Выздоровлений",
-  "Deaths": "Смертей"
+  "Deaths": "Смертей",
+  "Daily Increase": "Ежедневное увеличение",
+  "General Increase": "Общее увеличение",
+  "Among Regions": "Среди регионов",
+  "Last updated": "Последнее обновление",
+  "Region name": "Название региона",
+  "Countries": "Страны",
+  "Search": "Поиск",
+  "Number of countries": "Количество стран",
+  "Country name": "Название страны",
+  "Local": "Местный",
+  "Global": "Глобал",
+  "Uzbekistan": "Узбекистан"
 }

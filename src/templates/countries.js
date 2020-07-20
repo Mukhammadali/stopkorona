@@ -10,14 +10,12 @@ const Countries = () => {
   const { i18n } = useTranslation();
   const basepath = i18n.language === 'uz' ? '/countries' : `/${i18n.language}/countries`
   return (
-    // <Layout>
-      <div style={{ overflowX: 'hidden' }}>
-        <Router basepath={basepath}>
-          <SingleCountry  path=":country" />
-          <CountriesTable path="/" />
-        </Router>
-      </div>
-    // </Layout>
+    <div style={{ overflowX: 'hidden' }}>
+      <Router basepath={basepath}>
+        <SingleCountry  path=":country" />
+        <CountriesTable path="/" />
+      </Router>
+    </div>
   );
 }
 

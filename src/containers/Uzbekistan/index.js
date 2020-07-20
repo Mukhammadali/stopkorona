@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import SEO from 'src/components/seo';
 import { useWindowSize } from 'src/hooks/useWindowSize';
 import RegionsTable from './components/RegionsTable';
+import { useTranslation } from 'react-i18next';
 
 const Loading = () => (
   <div className="my-3 row justify-content-center align-items-center" style={{height: 450}}>
@@ -45,6 +46,7 @@ const Uzbekistan = ({ historical }) => {
   const { data: fetchedTotal } = useCountryTotal({countryName: 'Uzbekistan'})
   const { data: fetchedTotalYesterday } = useCountryTotal({countryName: 'Uzbekistan', yesterday: true})
   const { data: fetchedHistorical } = useCountryHistorical({countryName: 'Uzbekistan'})
+  const { t } = useTranslation()
   const size = useWindowSize();
   useEffect(() => {
     queryCache.prefetchQuery([queryKeys.ALL_COUNTRIES], fetchAllCountries);
@@ -55,15 +57,15 @@ const Uzbekistan = ({ historical }) => {
       <CountryTitle country={fetchedTotal || mockData} />
       <Stats data={fetchedTotal}  yesterday={fetchedTotalYesterday} />
       <section>
-        <h3>Kunlik o'sish</h3>
+        <h3>{t("Daily Increase")}</h3>
         <DailyCasesChart limit={isMobileOnly ? 7 : 30} data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </section>
       <section>
-        <h3>Umumiy o'sish</h3>
+        <h3>{t("General Increase")}</h3>
         <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </section>
       <section>
-        <h3>Viloyatlar bo'yicha</h3>
+        <h3>{t("Among Regions")}</h3>
         <RegionsTable />
       </section>
     </Styles>

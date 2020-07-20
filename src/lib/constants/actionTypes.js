@@ -1,7 +1,0 @@
-const actionTypes = {
-  RESET_STORE: 'RESET_STORE',
-  UPDATE_TAB_KEY: 'UPDATE_TAB_KEY',
-  UPDATE_SELECTED_COUNTRY: 'UPDATE_SELECTED_COUNTRY'
-};
-
-export default actionTypes;

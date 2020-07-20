@@ -2,5 +2,18 @@
   "Cases": "Cases",
   "Active": "Active",
   "Recovered": "Recovered",
-  "Deaths": "Deaths"
+  "Deaths": "Deaths",
+  "Daily Increase": "Daily Increase",
+  "General Increase": "General Increase",
+  "Among Regions": "Among Regions",
+  "Last updated": "Last updated",
+  "Region name": "Region name",
+  "Countries": "Countries",
+  "Search":"Search",
+  "Number of countries":"Number of countries",
+  "Country name":"Country name",
+  "Local": "Local",
+  "Global": "Global",
+  "Uzbekistan": "Uzbekistan"
+
 }

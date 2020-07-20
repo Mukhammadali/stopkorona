@@ -49,7 +49,6 @@ module.exports = {
           }),
       },
     },
-    // `gatsby-plugin-transition-link`,
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -64,14 +63,6 @@ module.exports = {
         trackingId: "UA-159324585-2",
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-webpack-bundle-analyzer',
-    //   options: {
-    //     analyzerPort: 3000,
-    //     production: false,
-    //     disable: true
-    //   },
-    // },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -108,7 +99,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/countries/*`, `/en/countries/*`, `/ru/countries/*`, `/kz/countries/*`] },
+      options: { prefixes: [`/countries/*`, `/en/countries/*`, `/ru/countries/*`] },
     },
   ],
 }

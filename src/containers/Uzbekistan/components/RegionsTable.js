@@ -1,23 +1,24 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import rawData from 'src/static/data/regions.json';
+import { useTranslation } from 'react-i18next';
 
 const RegionsTable = () => {
   const regions = useMemo(() => {
     return rawData.data?.sort((a,b) => b.cases - a.cases) || [];
   }, [])
- 
+ const {t} = useTranslation()
   return (
     <Styles>
-      <span className="mb-1 font-semibold">Jadval yangilangan sana: </span><span>8-May</span>
+      <span className="mb-1 font-semibold">{t("Last updated")}: </span><span>8 May</span>
       <div className="table-wrapper">
       <table>
         <thead>
           <tr>
-            <th>Viloyat nomi</th>
-            <th>Yuqtirganlar</th>
-            <th>Tuzalganlar</th>
-            <th>Vafot etganlar</th>
+            <th>{t("Region name")}</th>
+            <th>{t("Cases")}</th>
+            <th>{t("Recovered")}</th>
+            <th>{t("Deaths")}</th>
           </tr>
         </thead>
         <tbody>

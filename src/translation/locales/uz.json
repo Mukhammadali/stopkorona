@@ -2,5 +2,17 @@
   "Cases": "Yuqtirganlar",
   "Active": "Davolanayotganlar",
   "Recovered": "Tuzalganlar",
-  "Deaths": "Vafot etganlar"
+  "Deaths": "Vafot etganlar",
+  "Daily Increase": "Kunlik O'sish",
+  "General Increase": "Umumiy O'sish",
+  "Among Regions": "Viloyatlar bo'yicha",
+  "Last updated": "So'ngi yangilangan vati",
+  "Region name": "Viloyat nomi",
+  "Countries": "Davlatlar",
+  "Search":"Qidiruv",
+  "Number of countries":"Davlatlar soni",
+  "Country name":"Davlat nomi",
+  "Local": "Mahalliy",
+  "Global": "Global",
+  "Uzbekistan": "O'zbekiston"
 }
