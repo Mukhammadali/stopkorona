@@ -53,12 +53,15 @@ const Layout = ({ children, withLogo }) => {
            {renderTabs()}
           </DesktopTabbar>
           <main className="container-content">{children}</main>
-          <footer className="d-flex justify-content-center font-light">
+          <footer className="d-flex justify-content-center font-light pb-5">
             © {new Date().getFullYear()}.
               <span className="ml-2">
                 Made by
                 <a href="https://twitter.com/_mukhammadali" target="_blank" className="ml-2 decoration-underline font-weight-bold">
                   Muhammad Ali
+                </a> and
+                <a href="https://twitter.com/yigitali97" target="_blank" className="ml-2 decoration-underline font-weight-bold">
+                  Yigitali
                 </a>
               </span>
           </footer>

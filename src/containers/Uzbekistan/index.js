@@ -64,10 +64,6 @@ const Uzbekistan = ({ historical }) => {
         <h3>{t("General Increase")}</h3>
         <TotalCasesChart data={fetchedHistorical?.timeline} total={fetchedTotal} />
       </section>
-      <section>
-        <h3>{t("Among Regions")}</h3>
-        <RegionsTable />
-      </section>
     </Styles>
   )
 }
