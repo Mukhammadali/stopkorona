@@ -55,15 +55,16 @@ const Layout = ({ children, withLogo }) => {
           <main className="container-content">{children}</main>
           <footer className="d-flex justify-content-center font-light pb-5">
             © {new Date().getFullYear()}.
-              <span className="ml-2">
+            {/*<span className="ml-2">
                 Made by
                 <a href="https://twitter.com/_mukhammadali" target="_blank" className="ml-2 decoration-underline font-weight-bold">
                   Muhammad Ali
-                </a> and
+                </a> 
+and
                 <a href="https://twitter.com/yigitali97" target="_blank" className="ml-2 decoration-underline font-weight-bold">
                   Yigitali
                 </a>
-              </span>
+              </span>*/}
           </footer>
         </div>
       </Styles>
