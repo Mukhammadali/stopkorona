@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `stopkorona.uz`,
+    title: `StopKorona`,
     description: `Koronavirusga oid so'ngi statistika va ma'lumotlar`,
     author: `@mukhammadali`,
-    siteUrl: `https://stopkorona.uz`,
+    siteUrl: `https://stopkorona.netlify.app`,
   },
   plugins: [
     'gatsby-plugin-zeit-now',
