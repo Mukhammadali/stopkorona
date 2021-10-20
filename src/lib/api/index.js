@@ -1,18 +1,18 @@
 import axiosInstance from '../utils/axiosInstance';
 
 export const fetchCountryHistorical = ({countryName}) =>
-  axiosInstance.get(`v2/historical/${countryName}?lastdays=all`).then(res => res?.data)
+  axiosInstance.get(`/historical/${countryName}?lastdays=all`).then(res => res?.data)
 export const fetchAllHistorical = () =>
-  axiosInstance.get('v2/historical/all?lastdays=all').then(res => res?.data)
+  axiosInstance.get('/historical/all?lastdays=all').then(res => res?.data)
 
 export const fetchAllCountries = () =>
-  axiosInstance.get('v2/countries?sort=cases').then(res => res?.data)
+  axiosInstance.get('/countries?sort=cases').then(res => res?.data)
 
 export const fetchTotal = () =>
-  axiosInstance.get('/v2/all').then(res => res?.data)
+  axiosInstance.get('/all').then(res => res?.data)
 
 export const fetchCountryTotal = ({countryName}) =>
-  axiosInstance.get(`/v2/countries/${countryName}`).then(res => res?.data)
+  axiosInstance.get(`/countries/${countryName}`).then(res => res?.data)
 
 export const fetchCountryTotalYesterday = ({countryName}) =>
-  axiosInstance.get(`/v2/countries/${countryName}?yesterday=true`).then(res => res?.data)
+  axiosInstance.get(`/countries/${countryName}?yesterday=true`).then(res => res?.data)
