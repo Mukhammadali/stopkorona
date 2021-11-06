@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Dunya Mart`,
+    title: `StopKorona`,
     description: `Koronavirusga oid so'ngi statistika va ma'lumotlar`,
     author: `@mukhammadali`,
     siteUrl: `https://stopkorona.netlify.app`,
@@ -69,8 +69,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Dunya Mart`,
-        short_name: `Dunya Mart`,
+        name: `StopKorona`,
+        short_name: `StopKorona`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#fff`,
