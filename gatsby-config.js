@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `StopKorona`,
+    title: `Dunya Mart`,
     description: `Koronavirusga oid so'ngi statistika va ma'lumotlar`,
     author: `@mukhammadali`,
     siteUrl: `https://stopkorona.netlify.app`,
