@@ -69,8 +69,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `StopKorona`,
-        short_name: `StopKorona`,
+        name: `Dunya Mart`,
+        short_name: `Dunya Mart`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#fff`,
