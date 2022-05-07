@@ -28,7 +28,7 @@
     "gatsby-transformer-sharp": "^2.3.19",
     "i18next": "^19.4.4",
     "i18next-node-fs-backend": "^2.1.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moize": "^5.4.5",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
